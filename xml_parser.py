@@ -1,5 +1,5 @@
 from lxml import etree
-from pprint import pprint
+from pprint import pprint, pformat
 """ Some functions for __init__() | Start """
 
 
@@ -8,7 +8,6 @@ def get_parcels(root):
     result = {}
     for parcel in root.iter('{*}Parcel'):
         cadastral_number = parcel.attrib['CadastralNumber']
-        print('parcel %s' % (cadastral_number))
         conturs = get_parcel_conturs(parcel)
         result[cadastral_number] = conturs
     return result
@@ -19,10 +18,8 @@ def get_parcel_conturs(parcel):
     returns list of conturs with tuple of coords """
     result = []
     for contur in parcel.iter('{*}SpatialElement'):
-        print('new_contur')
         result.append([])
         for point in contur.iter('{*}Ordinate'):
-            print(point.attrib)
             x = float(point.attrib['X'])
             y = float(point.attrib['Y'])
             result[-1].append((x, y))
@@ -34,7 +31,6 @@ def get_blocks(root):
     result = {}
     for block in root.iter('{*}CadastralBlock'):
         cadastral_number = block.attrib['CadastralNumber']
-        print('block %s' % (cadastral_number))
         conturs = get_block_conturs(block)
         result[cadastral_number] = conturs
     return result
@@ -44,7 +40,6 @@ def get_block_conturs(parcel):
     """ Subfunction for get_blocks function
     returns list of conturs with tuple of coords """
     for contur in parcel.iterchildren('{*}SpatialData'):
-        print('new_contur')
         result = get_parcel_conturs(contur)
     return result
 
@@ -61,6 +56,11 @@ class RRxml():
         self.root = self.tree.getroot()
         self.blocks = get_blocks(self.root)
         self.parcels = get_parcels(self.root)
+
+    def __str__(self):
+        b = pformat(self.blocks)
+        p = pformat(self.parcels)
+        return b + '\n\n' + p
 
 
 if __name__ == '__main__':
