@@ -2,6 +2,7 @@ from lxml import etree
 from pprint import pprint, pformat
 from os import path
 from settings import Settings
+from xml2dxf import RRxml2dxf
 
 """ Some functions for __init__() | Start """
 
@@ -68,9 +69,12 @@ class RRxml():
         return b + '\n\n' + p
 
 
-if __name__ == '__main__':
-    settings = Settings()
+def convert_all_xml2dxf(settings):
+    """ Converts all xml files from settings.xml_folder_path
+    to settings.dxf_folder_path """
     for file in settings.xml_list:
+        print(file)
         xml_file = RRxml(file, settings)
         pprint(xml_file.blocks)
         pprint(xml_file.parcels)
+        RRxml2dxf(xml_file, settings).save_dxf()
