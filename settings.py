@@ -13,6 +13,8 @@ class Settings():
         self.color_iter = 0
         self.my_dxf_file_path = path.abspath(
             'xml\\my_dxf_file\\my_dxf_file.dxf')
+        self.my_dxf_check_path = path.abspath(
+            'xml\\my_dxf_file\\my_dxf_check.txt')
 
     def get_next_color(self):
         self.color_iter += 1
