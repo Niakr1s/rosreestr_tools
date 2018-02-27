@@ -2,20 +2,22 @@ import ezdxf
 from intersection import is_intersect
 from xml_parser import RRxml
 from random import choice
+from os import path
 
 
 class RRxml2dxf():
-    def __init__(self, rrxml):
+    def __init__(self, rrxml, settings):
         self.rrxml = rrxml
+        self.settings = settings
         self.blocks = self.rrxml.blocks
         self.parcels = self.rrxml.parcels
         self.reversed_blocks = reverse_coords(self.blocks)
         self.reversed_parcels = reverse_coords(self.parcels)
         self.dwg = ezdxf.new('R2000')  # create R2000 drawing
         self.msp = self.dwg.modelspace()  # modelspace for dwg
-        self.output_file_path = self.rrxml.file_path.rstrip('xml') + 'dxf'
-        self.draw_conturs()
-        self.save_dxf()
+        self.output_file_path = path.join(
+            self.settings.dxf_folder_path,
+            self.rrxml.basename_file_path.rstrip('xml') + 'dxf')
 
     def draw_contur(self, dic):
         """ Draws iterables from dictionary to modelspace."""
@@ -24,7 +26,7 @@ class RRxml2dxf():
             block_name = k.replace(':', ' ')
             dxf_block = self.dwg.blocks.new(name=block_name)
             # Getting random color for every block
-            color = get_random_color()
+            color = self.settings.get_next_color()
             # Adding parcels polylines
             for contur in v:
                 dxf_block.add_lwpolyline(contur, dxfattribs={'color': color})
@@ -47,6 +49,7 @@ class RRxml2dxf():
         self.draw_contur(self.reversed_parcels)
 
     def save_dxf(self):
+        self.draw_conturs()
         self.dwg.saveas(self.output_file_path)
 
 
@@ -73,12 +76,27 @@ def get_middle_of_contur(v):
         mid_y = (max(list_of_y) - min(list_of_y)) / 2 + min(list_of_y)
     except ValueError:
         return tuple()
-    return mid_x, mid_y
+    return int(mid_x), int(mid_y)
 
 
 def get_random_color():
     colors = range(10, 250, 10)
     return choice(colors)
+
+
+def merge_dxfs(settings):
+    dxf_list = settings.get_dxf_list()
+    # Creating clear dxf file
+    dwg = ezdxf.new('R2000')
+    merged_path = path.join(settings.dxf_folder_path, 'merged.dxf')
+    dwg.saveas(merged_path)
+    # Merging
+    for dxf in dxf_list:
+        source_dwg = ezdxf.readfile(dxf)
+        target_dwg = ezdxf.readfile(merged_path)
+        importer = ezdxf.Importer(source_dwg, target_dwg)
+        importer.import_all()
+        target_dwg.save()
 
 
 if __name__ == '__main__':

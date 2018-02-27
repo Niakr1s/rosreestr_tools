@@ -1,5 +1,8 @@
 from lxml import etree
 from pprint import pprint, pformat
+from os import path
+from settings import Settings
+
 """ Some functions for __init__() | Start """
 
 
@@ -50,8 +53,10 @@ def get_block_conturs(parcel):
 class RRxml():
     """ Class for a single rosreestr xml file """
 
-    def __init__(self, file_path):
+    def __init__(self, file_path, settings):
+        self.settings = settings
         self.file_path = file_path
+        self.basename_file_path = path.basename(file_path)
         self.tree = etree.parse(file_path)
         self.root = self.tree.getroot()
         self.blocks = get_blocks(self.root)
@@ -64,7 +69,8 @@ class RRxml():
 
 
 if __name__ == '__main__':
-    file_path = '21 02 010103.xml'
-    xml = RRxml(file_path)
-    pprint(xml.blocks)
-    pprint(xml.parcels)
+    settings = Settings()
+    for file in settings.xml_list:
+        xml_file = RRxml(file, settings)
+        pprint(xml_file.blocks)
+        pprint(xml_file.parcels)
