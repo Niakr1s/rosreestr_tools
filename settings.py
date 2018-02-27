@@ -11,6 +11,8 @@ class Settings():
         # Colors
         self.colors = (1, 2, 4, 5, 6, 34, 84, 234)
         self.color_iter = 0
+        self.my_dxf_file_path = path.abspath(
+            'xml\\my_dxf_file\\my_dxf_file.dxf')
 
     def get_next_color(self):
         self.color_iter += 1

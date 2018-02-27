@@ -1,6 +1,6 @@
 import ezdxf
 from intersection import is_intersect
-from os import path
+from os import path, remove
 
 
 class RRxml2dxf():
@@ -9,8 +9,8 @@ class RRxml2dxf():
         self.settings = settings
         self.blocks = self.rrxml.blocks
         self.parcels = self.rrxml.parcels
-        self.reversed_blocks = reverse_coords(self.blocks)
-        self.reversed_parcels = reverse_coords(self.parcels)
+        self.reversed_blocks = reverse_dict_coords(self.blocks)
+        self.reversed_parcels = reverse_dict_coords(self.parcels)
         self.output_file_path = path.join(
             self.settings.dxf_folder_path,
             self.rrxml.basename_file_path.replace('.xml', '.dxf'))
@@ -56,15 +56,20 @@ class RRxml2dxf():
         self.dwg.saveas(self.output_file_path)
 
 
-def reverse_coords(dic):
+def reverse_dict_coords(dic):
     """ Getting reverse coords, need for dxf file """
     reversed_result = {}
     for k, v in dic.items():
-        reversed_result[k] = []
-        for contur in v:
-            reversed_result[k].append([])
-            for (x, y) in contur:
-                reversed_result[k][-1].append((y, x))
+        reversed_result[k] = reverse_coords(v)
+    return reversed_result
+
+
+def reverse_coords(v):
+    reversed_result = []
+    for contur in v:
+        reversed_result.append([])
+        for (x, y) in contur:
+            reversed_result[-1].append((y, x))
     return reversed_result
 
 
@@ -96,11 +101,11 @@ def merge_dxfs(settings):
     dwg = ezdxf.new('R2000')
     merged_path = path.join(settings.dxf_folder_path, 'merged.dxf')
     dwg.saveas(merged_path)
+    target_dwg = ezdxf.readfile(merged_path)
     # Merging
     for dxf in dxf_list:
         source_dwg = ezdxf.readfile(dxf)
-        target_dwg = ezdxf.readfile(merged_path)
         importer = ezdxf.Importer(source_dwg, target_dwg)
         importer.import_all()
-        target_dwg.save()
         print('%s added' % (dxf))
+    target_dwg.save()
