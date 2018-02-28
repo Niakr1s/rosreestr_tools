@@ -21,13 +21,13 @@ class Settings():
         self.settings = {
             'color_iter': 0,
             'colors': [1, 2, 4, 5, 6, 34, 84, 234],
-            'dxf_folder_path': path.abspath('xml\\dwg'),
+            'dxf_folder_path': path.abspath('xml\\dxf'),
             'xml_folder_path': path.abspath('xml'),
             'my_dxf_file_path': path.abspath(
                 'xml\\my_dxf_file\\my_dxf_file.dxf'),
             'my_dxf_check_path': path.abspath(
                 'xml\\my_dxf_file\\my_dxf_check.txt'),
-            'merged_dxf_path': path.abspath('xml\\dwg\\merged\\merged.dxf')}
+            'merged_dxf_path': path.abspath('xml\\dxf\\merged\\merged.dxf')}
         # # Some input / output pathes
         # self.settings['xml_folder_path'] = path.abspath('xml')
         # self.settings['dxf_folder_path'] = path.abspath('xml\\dwg')
