@@ -53,10 +53,10 @@ class Settings():
         if not path.exists(self.settings['dxf_folder_path']):
             print('dxf_folder_path created')
             mkdir(self.settings['dxf_folder_path'])
-        if not path.exists(self.settings['my_dxf_check_path']):
+        if not path.exists(path.dirname(self.settings['my_dxf_check_path'])):
             print('my_dxf_check_path created')
             mkdir(path.dirname(self.settings['my_dxf_check_path']))
-        if not path.exists(self.settings['merged_dxf_path']):
+        if not path.exists(path.dirname(self.settings['merged_dxf_path'])):
             print('merged_dxf_path created')
             mkdir(path.dirname(self.settings['merged_dxf_path']))
 
