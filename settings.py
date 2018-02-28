@@ -9,6 +9,8 @@ class Settings():
         if not self.load_settings():
             self.init_constants()
             self.dump_settings()
+            print('Settings file not found, created it.')
+        self.check_pathes()
 
     def init_constants(self):
         """ color_iter, colors: colors in dxf file
@@ -24,7 +26,8 @@ class Settings():
             'my_dxf_file_path': path.abspath(
                 'xml\\my_dxf_file\\my_dxf_file.dxf'),
             'my_dxf_check_path': path.abspath(
-                'xml\\my_dxf_file\\my_dxf_check.txt')}
+                'xml\\my_dxf_file\\my_dxf_check.txt'),
+            'merged_dxf_path': path.abspath('xml\\dwg\\merged\\merged.dxf')}
         # # Some input / output pathes
         # self.settings['xml_folder_path'] = path.abspath('xml')
         # self.settings['dxf_folder_path'] = path.abspath('xml\\dwg')
@@ -45,9 +48,17 @@ class Settings():
 
     def check_pathes(self):
         if not path.exists(self.settings['xml_folder_path']):
+            print('xml_folder_path created')
             mkdir(self.settings['xml_folder_path'])
         if not path.exists(self.settings['dxf_folder_path']):
+            print('dxf_folder_path created')
             mkdir(self.settings['dxf_folder_path'])
+        if not path.exists(self.settings['my_dxf_check_path']):
+            print('my_dxf_check_path created')
+            mkdir(path.dirname(self.settings['my_dxf_check_path']))
+        if not path.exists(self.settings['merged_dxf_path']):
+            print('merged_dxf_path created')
+            mkdir(path.dirname(self.settings['merged_dxf_path']))
 
     def get_file_list(self, path, pattern):
         """ Pattern should be '.xml' or '.dxf' """
@@ -69,9 +80,9 @@ class Settings():
     def dump_settings(self):
         """ Dumps to json_file settings,
         recommended to call this when adding new setting"""
-        attrs = self.get_all_attrs()
         with open(self.json_settings_path, 'w') as file:
-            json.dump(attrs, file, indent='    ')
+            # json.dump(attrs, file, indent='    ')
+            json.dump(self.settings, file, indent='    ')
 
     def load_settings(self):
         """ Load settings from json_file and initialize with them """
@@ -83,6 +94,8 @@ class Settings():
         except Exception:
             return False
         self.settings = settings
+        print('Settings loaded fom file')
+        return True
 
     def get_all_attrs(self):
         result = {attr: getattr(self, attr)
