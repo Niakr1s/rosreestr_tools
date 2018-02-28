@@ -2,15 +2,28 @@ import json
 from os import path, mkdir, scandir
 
 
+def init_constants():
+    """ color_iter, colors: colors in dxf file
+    dxf_folder_path - for dxf output files
+    xml_folder_path - for xml input files
+    my_dxf_file_path - for user file to check in xmls
+    my_dxf_check_path - result of my file check """
+    settings = {'color_iter': 0, 'colors': [1, 2, 4, 5, 6, 34, 84, 234], 'dxf_folder_path': path.abspath('xml\\dxf'),
+                'xml_folder_path': path.abspath('xml'),
+                'my_dxf_file_path': path.abspath('xml\\my_dxf_file\\my_dxf_file.dxf'),
+                'my_dxf_check_path': path.abspath('xml\\my_dxf_file\\my_dxf_check.txt'),
+                'merged_dxf_path': path.abspath('xml\\dxf\\merged\\merged.dxf')}
+    return settings
+
+
 class Settings():
     def __init__(self):
         """ settings.json should be in app path """
         self.json_settings_path = path.abspath('settings.json')
-        # if not self.load_settings():
-        #     self.init_constants()
-        #     self.dump_settings()
-        #     print('Settings file not found, created it.')
-        self.settings = init_constants()
+        if not self.load_settings():
+            self.settings = init_constants()
+            self.dump_settings()
+            print('Settings file not found, created it.')
         self.check_paths()
 
     def get_next_color(self):
@@ -56,20 +69,6 @@ class Settings():
         self.settings = settings
         print('Settings loaded fom file')
         return True
-
-
-def init_constants():
-    """ color_iter, colors: colors in dxf file
-    dxf_folder_path - for dxf output files
-    xml_folder_path - for xml input files
-    my_dxf_file_path - for user file to check in xmls
-    my_dxf_check_path - result of my file check """
-    settings = {'color_iter': 0, 'colors': [1, 2, 4, 5, 6, 34, 84, 234], 'dxf_folder_path': path.abspath('xml\\dxf'),
-                'xml_folder_path': path.abspath('xml'),
-                'my_dxf_file_path': path.abspath('xml\\my_dxf_file\\my_dxf_file.dxf'),
-                'my_dxf_check_path': path.abspath('xml\\my_dxf_file\\my_dxf_check.txt'),
-                'merged_dxf_path': path.abspath('xml\\dxf\\merged\\merged.dxf')}
-    return settings
 
 
 def get_file_list(input_path, pattern):

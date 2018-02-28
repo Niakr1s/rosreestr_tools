@@ -1,10 +1,3 @@
-"""
-Simple usage:
-settings = Settings() # creating settings instance
-MyDxfFile(settings).check() # checking my file for intersects with parcels
-convert_all_xml2dxf(settings) # converting all xmls
-merge_dxfs(settings) # merging all dxfs
-"""
 from actions import merge_dxfs, convert_xmlfiles_to_dxffiles
 from my_dxf_file import MyDxfFile
 from settings import Settings
@@ -56,8 +49,7 @@ def menu():
     while True:
         inp = short_input()
         if inp == '1':
-            mydxffile = MyDxfFile(settings)
-            mydxffile.check()
+            MyDxfFile(settings).check()
         elif inp == '2':
             convert_xmlfiles_to_dxffiles(settings)
         elif inp == '3':
