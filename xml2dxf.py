@@ -5,6 +5,7 @@ from os import path, remove
 
 class RRxml2dxf():
     def __init__(self, rrxml, settings):
+        """ rrxml - object from xml_parser.py """
         self.rrxml = rrxml
         self.settings = settings
         self.blocks = self.rrxml.blocks
@@ -95,7 +96,8 @@ def get_text_attrib(v):
 
 
 def merge_dxfs(settings):
-    """ Merging all dxfs from settings.settings['dxf_folder_path'] into merged.dxf"""
+    """ Merging all dxfs from settings.settings['dxf_folder_path']
+    into merged.dxf"""
     dxf_list = settings.get_dxf_list()
     # Creating clear dxf file
     dwg = ezdxf.new('R2000')

@@ -1,14 +1,16 @@
-from xml_parser import convert_all_xml2dxf
+# main settings class
 from settings import Settings
+# merges all dxfs
 from xml2dxf import merge_dxfs
+# MydxfFile.check() - checking for intersection
 from dxf_intersect import MyDxfFile
+# convert all xml to dxf
+from xml_parser import convert_all_xml2dxf
 
 
 settings = Settings()
 # convert_all_xml2dxf(settings)
 # merge_dxfs(settings)
-my_dxf_file = MyDxfFile(settings)
-checked_parcels = my_dxf_file.check()
-with open(settings.settings['my_dxf_check_path'], 'w') as file:
-    for parcel in checked_parcels:
-        print(parcel, file=file)
+MyDxfFile(settings).check()
+convert_all_xml2dxf(settings)
+merge_dxfs(settings)

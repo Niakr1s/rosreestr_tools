@@ -1,8 +1,26 @@
 from lxml import etree
 from pprint import pprint, pformat
 from os import path
-from settings import Settings
 from xml2dxf import RRxml2dxf
+
+
+def convert_all_xml2dxf(settings):
+    """ Converts all xml files from settings.settings['xml_folder_path']
+    to settings.settings['dxf_folder_path'] """
+    for file in settings.get_xml_list():
+        print(file)
+        xml_file = RRxml(file, settings)
+        RRxml2dxf(xml_file, settings).save_dxf()
+
+
+def get_list_of_rrxmls(settings):
+    """function for bunch of xml files
+    from dir settings.settings['xml_folder_path']"""
+    result = []
+    for file in settings.get_xml_list():
+        print(file)
+        result.append(RRxml(file, settings))
+    return result
 
 
 class RRxml():
@@ -58,22 +76,3 @@ class RRxml():
         for contur in parcel.iterchildren('{*}SpatialData'):
             result = self.get_parcel_conturs(contur)
         return result
-
-
-def get_list_of_rrxmls(settings):
-    result = []
-    for file in settings.get_xml_list():
-        print(file)
-        result.append(RRxml(file, settings))
-    return result
-
-
-def convert_all_xml2dxf(settings):
-    """ Converts all xml files from settings.settings['xml_folder_path']
-    to settings.settings['dxf_folder_path'] """
-    for file in settings.get_xml_list():
-        print(file)
-        xml_file = RRxml(file, settings)
-        pprint(xml_file.blocks)
-        pprint(xml_file.parcels)
-        RRxml2dxf(xml_file, settings).save_dxf()

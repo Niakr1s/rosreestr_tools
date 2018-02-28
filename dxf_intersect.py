@@ -44,8 +44,16 @@ class MyDxfFile():
         check1 = self.check_intersect(mydxffile, rrxmls)
         print('Checking for inpolygon')
         check2 = self.check_inpolygon(mydxffile, rrxmls)
-        checks = check1 | check2
-        return sorted(checks)
+        checks = sorted(check1 | check2)
+        self.check_to_file(checks)
+        return checks
+
+    def check_to_file(self, checks):
+        output_path = self.settings.settings['my_dxf_check_path']
+        with open(output_path, 'w') as file:
+            for parcel in checks:
+                print(parcel, file=file)
+        print('Checks saved to file %s' % (output_path))
 
     def check_intersect(self, mydxffile, rrxmls):
         res = set()
