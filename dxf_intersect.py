@@ -33,6 +33,7 @@ class MyDxfFile():
                 for x, y, _ in e.points():
                     coords.append((x, y))
                 res.append(coords)
+        print('coords of my_dxf_file:\n', res)
         return res
 
     def check(self):
