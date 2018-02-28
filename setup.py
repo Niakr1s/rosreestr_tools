@@ -5,4 +5,4 @@ setup(
     name='dxfinxmlcheck',
     version='0.2',
     description='smth',
-    executables=[Executable('main.py')])
+    executables=[Executable('console.py')])

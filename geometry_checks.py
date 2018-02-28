@@ -1,7 +1,6 @@
 """ This module is made for is_intersect(segment1, segment2) check
 see https://www.geeksforgeeks.org/check-if-two-given-line-segments-intersect/
-for logics explanation
-"""
+for logics explanation"""
 
 
 def area(a_x, a_y, b_x, b_y, c_x, c_y):
@@ -17,7 +16,7 @@ def is_collinear(a_x, a_y, b_x, b_y, c_x, c_y):
 
 
 def x_projection(point):
-    return (point[0], 0)
+    return point[0], 0
 
 
 def y_projection(point):
@@ -25,19 +24,15 @@ def y_projection(point):
 
 
 def is_intersect(segment1, segment2):
-    """
-    Returns True if intersect else False
+    """Returns True if intersect else False
     segment1 = (p1, q1), segment2 = (p2, q2),
-    where p1,q1,p2,q2 - points like (x,y)->tuple, where x,y - coordinates
-    """
+    where p1,q1,p2,q2 - points like (x,y)->tuple, where x,y - coordinates"""
     p1, q1, p2, q2 = *segment1, *segment2
 
     def case1(p1, q1, p2, q2):
-        """
-        1. General Case:
+        """1. General Case:
         – (p1, q1, p2) and (p1, q1, q2) have different orientations and
-        – (p2, q2, p1) and (p2, q2, q1) have different orientations.
-        """
+        – (p2, q2, p1) and (p2, q2, q1) have different orientations."""
         subcase1 = is_on_left_or_right(*p1, *q1, *p2) ^ \
             is_on_left_or_right(*p1, *q1, *q2)
         if subcase1:
@@ -48,13 +43,11 @@ def is_intersect(segment1, segment2):
         return False
 
     def case2(p1, q1, p2, q2):
-        """
-        2. Special Case
+        """2. Special Case
         – (p1, q1, p2), (p1, q1, q2), (p2, q2, p1)
         and (p2, q2, q1) are all collinear and
         – the x-projections of (p1, q1) and (p2, q2) intersect via case1
-        – the y-projections of (p1, q1) and (p2, q2) intersect via case1
-        """
+        – the y-projections of (p1, q1) and (p2, q2) intersect via case1"""
         subcase1 = is_collinear(*p1, *q1, *p2) & is_collinear(*p1, *q1, *q2) &\
             is_collinear(*p2, *q2, *p1) & is_collinear(*p2, *q2, *q1)
         if subcase1:
@@ -68,13 +61,34 @@ def is_intersect(segment1, segment2):
                 if subcase3:
                     return True
         return False
-
     if case1(p1, q1, p2, q2):
         return True
     elif case2(p1, q1, p2, q2):
         return True
-
     return False
+
+
+def inside_polygon(x, y, points):
+    """
+    Return True if a coordinate (x, y) is inside a polygon defined by
+    a list of verticies [(x1, y1), (x2, x2), ... , (xN, yN)].
+
+    Reference: http://www.ariel.com.au/a/python-point-int-poly.html
+    """
+    n = len(points)
+    inside = False
+    p1x, p1y = points[0]
+    for i in range(1, n + 1):
+        p2x, p2y = points[i % n]
+        if y > min(p1y, p2y):
+            if y <= max(p1y, p2y):
+                if x <= max(p1x, p2x):
+                    if p1y != p2y:
+                        xinters = (y - p1y) * (p2x - p1x) / (p2y - p1y) + p1x
+                    if p1x == p2x or x <= xinters:
+                        inside = not inside
+        p1x, p1y = p2x, p2y
+    return inside
 
 
 if __name__ == '__main__':

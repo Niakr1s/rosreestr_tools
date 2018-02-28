@@ -1,8 +1,3 @@
-from settings import Settings
-from xml2dxf import merge_dxfs
-from dxf_intersect import MyDxfFile
-from xml_parser import convert_all_xml2dxf
-
 """
 Simple usage:
 settings = Settings() # creating settings instance
@@ -10,6 +5,10 @@ MyDxfFile(settings).check() # checking my file for intersects with parcels
 convert_all_xml2dxf(settings) # converting all xmls
 merge_dxfs(settings) # merging all dxfs
 """
+from dxf_intersect import MyDxfFile
+from settings import Settings
+from xml2dxf import merge_dxfs
+from xml_parser import convert_all_xml2dxf
 
 
 def help_screen(settings):

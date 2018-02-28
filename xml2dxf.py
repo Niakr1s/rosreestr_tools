@@ -17,22 +17,22 @@ class RRxml2dxf():
     def draw_contur(self, dic):
         """ Draws iterables from dictionary to modelspace.
         CAUTION: Use with reversed coordinates"""
-        for k, v in dic.items():
+        for parcel_name, conturs in dic.items():
             # Creating block with name ~ '21 02 000000'
-            block_name = k.replace(':', ' ')
+            block_name = parcel_name.replace(':', ' ')
             dxf_block = self.dwg.blocks.new(name=block_name)
             # Getting random color for every block
             color = self.settings.get_next_color()
             # Adding parcels polylines
-            for contur in v:
+            for contur in conturs:
                 dxf_block.add_lwpolyline(contur, dxfattribs={'color': color})
             # Adding text description
-            text_attrib = get_text_attrib(v)
+            text_attrib = get_text_attrib(conturs)
             if text_attrib:
                 text_coords, text_height = text_attrib
                 # print('Adding text at: %s with height %s ' %
                 #       (text_coords, text_height))
-                dxf_block.add_text(k,
+                dxf_block.add_text(parcel_name,
                                    dxfattribs={'height': text_height,
                                                'color': color}).\
                     set_pos((text_coords), align='MIDDLE_CENTER')
@@ -40,8 +40,8 @@ class RRxml2dxf():
             self.msp.add_blockref(block_name, insert=(
                 0, 0), dxfattribs={'color': 2})
             # print name of cadastral block
-            if len(k.split(':')) == 3:
-                print('%s drawed' % (k))
+            if len(parcel_name.split(':')) == 3:
+                print('%s drawed' % (parcel_name))
 
     def draw_conturs(self):
         """ Draws blocks and parcels from dictionary to modelspace.
@@ -64,22 +64,22 @@ def reverse_dict_coords(dic):
     return reversed_result
 
 
-def reverse_coords(v):
+def reverse_coords(conturs):
     reversed_result = []
-    for contur in v:
+    for contur in conturs:
         reversed_result.append([])
         for (x, y) in contur:
             reversed_result[-1].append((y, x))
     return reversed_result
 
 
-def get_text_attrib(v):
+def get_text_attrib(conturs):
     """ Calculating some text_attribs like coordinates and height,
     based on contur coordinates """
     list_of_x = []
     list_of_y = []
     try:
-        for contur in v:
+        for contur in conturs:
             for x, y in contur:
                 list_of_x.append(x)
                 list_of_y.append(y)
