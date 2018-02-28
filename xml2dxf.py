@@ -8,9 +8,7 @@ class RRxml2dxf():
         """ rrxml - object from xml_parser.py """
         self.rrxml = rrxml
         self.settings = settings
-        self.blocks = self.rrxml.blocks
         self.parcels = self.rrxml.parcels
-        self.reversed_blocks = reverse_dict_coords(self.blocks)
         self.reversed_parcels = reverse_dict_coords(self.parcels)
         self.output_file_path = path.join(
             self.settings.settings['dxf_folder_path'],
@@ -32,8 +30,8 @@ class RRxml2dxf():
             text_attrib = get_text_attrib(v)
             if text_attrib:
                 text_coords, text_height = text_attrib
-                print('Adding text at: %s with height %s ' %
-                      (text_coords, text_height))
+                # print('Adding text at: %s with height %s ' %
+                #       (text_coords, text_height))
                 dxf_block.add_text(k,
                                    dxfattribs={'height': text_height,
                                                'color': color}).\
@@ -41,14 +39,15 @@ class RRxml2dxf():
             # Adding block to modelspace
             self.msp.add_blockref(block_name, insert=(
                 0, 0), dxfattribs={'color': 2})
-            print('parcel %s drawed' % (k))
+            # print name of cadastral block
+            if len(k.split(':')) == 3:
+                print('%s drawed' % (k))
 
     def draw_conturs(self):
         """ Draws blocks and parcels from dictionary to modelspace.
         Needed for save_dxf function"""
         self.dwg = ezdxf.new('R2000')  # create R2000 drawing
         self.msp = self.dwg.modelspace()  # modelspace for dwg
-        self.draw_contur(self.reversed_blocks)
         self.draw_contur(self.reversed_parcels)
 
     def save_dxf(self):

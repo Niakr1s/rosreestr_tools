@@ -33,10 +33,9 @@ class RRxml():
         self.basename_file_path = path.basename(file_path)
         self.tree = etree.parse(file_path)
         self.root = self.tree.getroot()
-        self.blocks = self.get_blocks()
         self.parcels = self.get_parcels()
         # parcels now contains blocks!!!
-        self.parcels.update(self.blocks)
+        self.parcels.update(self.get_blocks())
 
     def __str__(self):
         # b = pformat(self.blocks)
