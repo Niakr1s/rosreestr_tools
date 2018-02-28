@@ -6,10 +6,11 @@ class Settings():
     def __init__(self):
         """ settings.json should be in app path """
         self.json_settings_path = path.abspath('settings.json')
-        if not self.load_settings():
-            self.init_constants()
-            self.dump_settings()
-            print('Settings file not found, created it.')
+        # if not self.load_settings():
+        #     self.init_constants()
+        #     self.dump_settings()
+        #     print('Settings file not found, created it.')
+        self.init_constants()
         self.check_pathes()
 
     def init_constants(self):
