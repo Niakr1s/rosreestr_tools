@@ -1,13 +1,16 @@
+from os import path
+
 import ezdxf
-from intersection import is_intersect
-from os import path, remove
 
 
-class RRxml2dxf():
-    def __init__(self, rrxml, settings):
-        """ rrxml - object from xml_parser.py """
-        self.rrxml = rrxml
-        self.settings = settings
+class DxfFile():
+    """This class represents """
+
+    def __init__(self, XmlFile):
+        self.dwg = ezdxf.new('R2000')  # create R2000 drawing
+        self.msp = self.dwg.modelspace()  # modelspace for dwg
+        self.rrxml = XmlFile
+        self.settings = XmlFile.settings
         self.parcels = self.rrxml.parcels
         self.reversed_parcels = reverse_dict_coords(self.parcels)
         self.output_file_path = path.join(
@@ -43,16 +46,10 @@ class RRxml2dxf():
             if len(parcel_name.split(':')) == 3:
                 print('%s drawed' % (parcel_name))
 
-    def draw_conturs(self):
+    def draw_conturs_and_save(self):
         """ Draws blocks and parcels from dictionary to modelspace.
         Needed for save_dxf function"""
-        self.dwg = ezdxf.new('R2000')  # create R2000 drawing
-        self.msp = self.dwg.modelspace()  # modelspace for dwg
         self.draw_contur(self.reversed_parcels)
-
-    def save_dxf(self):
-        """ Draws all items to dxf files """
-        self.draw_conturs()
         self.dwg.saveas(self.output_file_path)
 
 
@@ -74,8 +71,8 @@ def reverse_coords(conturs):
 
 
 def get_text_attrib(conturs):
-    """ Calculating some text_attribs like coordinates and height,
-    based on contur coordinates """
+    """ Calculating some dxf text_attributes like coordinates and height,
+    based on conturs coordinates """
     list_of_x = []
     list_of_y = []
     try:
@@ -92,21 +89,3 @@ def get_text_attrib(conturs):
     average_diff = ((max_x - mid_x) + (max_y - mid_y)) / 2
     height = min(average_diff / 5, 25)
     return (int(mid_x), int(mid_y)), height
-
-
-def merge_dxfs(settings):
-    """ Merging all dxfs from settings.settings['dxf_folder_path']
-    into merged.dxf"""
-    dxf_list = settings.get_dxf_list()
-    # Creating clear dxf file
-    dwg = ezdxf.new('R2000')
-    merged_path = settings.settings['merged_dxf_path']
-    dwg.saveas(merged_path)
-    target_dwg = ezdxf.readfile(merged_path)
-    # Merging
-    for dxf in dxf_list:
-        source_dwg = ezdxf.readfile(dxf)
-        importer = ezdxf.Importer(source_dwg, target_dwg)
-        importer.import_all()
-        print('%s added' % (dxf))
-    target_dwg.save()

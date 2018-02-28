@@ -5,10 +5,9 @@ MyDxfFile(settings).check() # checking my file for intersects with parcels
 convert_all_xml2dxf(settings) # converting all xmls
 merge_dxfs(settings) # merging all dxfs
 """
-from dxf_intersect import MyDxfFile
+from actions import merge_dxfs, convert_xmlfiles_to_dxffiles
+from my_dxf_file import MyDxfFile
 from settings import Settings
-from xml2dxf import merge_dxfs
-from xml_parser import convert_all_xml2dxf
 
 
 def help_screen(settings):
@@ -54,12 +53,13 @@ def short_input():
 def menu():
     settings = Settings()
     help_screen(settings)
-    while(True):
+    while True:
         inp = short_input()
         if inp == '1':
-            MyDxfFile(settings).check()
+            mydxffile = MyDxfFile(settings)
+            mydxffile.check()
         elif inp == '2':
-            convert_all_xml2dxf(settings)
+            convert_xmlfiles_to_dxffiles(settings)
         elif inp == '3':
             merge_dxfs(settings)
         elif inp in ('q', 'Q'):

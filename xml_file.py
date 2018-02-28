@@ -1,30 +1,12 @@
-from lxml import etree
-from pprint import pprint, pformat
 from os import path
-from xml2dxf import RRxml2dxf
-from pprint import pprint
+from pprint import pformat
+
+from lxml import etree
+
+from dxf_file import DxfFile
 
 
-def convert_all_xml2dxf(settings):
-    """ Converts all xml files from settings.settings['xml_folder_path']
-    to settings.settings['dxf_folder_path'] """
-    for file in settings.get_xml_list():
-        print(file)
-        xml_file = RRxml(file, settings)
-        RRxml2dxf(xml_file, settings).save_dxf()
-
-
-def get_list_of_rrxmls(settings):
-    """function for bunch of xml files
-    from dir settings.settings['xml_folder_path']"""
-    result = []
-    for file in settings.get_xml_list():
-        print(file)
-        result.append(RRxml(file, settings))
-    return result
-
-
-class RRxml():
+class XmlFile():
     """ Class for a single rosreestr xml file """
 
     def __init__(self, file_path, settings):
@@ -34,13 +16,10 @@ class RRxml():
         self.tree = etree.parse(file_path)
         self.root = self.tree.getroot()
         self.parcels = self.get_parcels()
-        # parcels now contains blocks!!!
-        self.parcels.update(self.get_blocks())
+        self.parcels.update(self.get_blocks())  # parcels now contains blocks!!!
 
     def __str__(self):
-        # b = pformat(self.blocks)
         p = pformat(self.parcels)
-        # return b + '\n\n' + p
         return p
 
     def get_parcels(self):
@@ -79,3 +58,16 @@ class RRxml():
         for contur in parcel.iterchildren('{*}SpatialData'):
             result = self.get_parcel_conturs(contur)
         return result
+
+    def convert_to_dxffile(self):
+        dxffile = DxfFile(self)
+        dxffile.draw_conturs_and_save()
+
+
+def get_list_of_xmlfiles(settings):
+    """ Returns list of XmlFile class objects """
+    res = []
+    for file in settings.get_xml_list():
+        xml_file = XmlFile(file, settings)
+        res.append(xml_file)
+    return res
