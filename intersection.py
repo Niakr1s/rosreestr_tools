@@ -49,12 +49,13 @@ def is_intersect(segment1, segment2):
 
     def case2(p1, q1, p2, q2):
         """
-        2. Special Case 
-        – (p1, q1, p2), (p1, q1, q2), (p2, q2, p1), and (p2, q2, q1) are all collinear and
+        2. Special Case
+        – (p1, q1, p2), (p1, q1, q2), (p2, q2, p1)
+        and (p2, q2, q1) are all collinear and
         – the x-projections of (p1, q1) and (p2, q2) intersect via case1
         – the y-projections of (p1, q1) and (p2, q2) intersect via case1
         """
-        subcase1 = is_collinear(*p1, *q1, *p2) & is_collinear(*p1, *q1, *q2) & \
+        subcase1 = is_collinear(*p1, *q1, *p2) & is_collinear(*p1, *q1, *q2) &\
             is_collinear(*p2, *q2, *p1) & is_collinear(*p2, *q2, *q1)
         if subcase1:
             xp1, xq1, xp2, xq2 = x_projection(p1), x_projection(q1), \

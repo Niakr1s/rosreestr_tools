@@ -8,7 +8,8 @@ from xml_parser import get_list_of_rrxmls
 class MyDxfFile():
     def __init__(self, settings):
         self.settings = settings
-        self.my_dxf_file = ezdxf.readfile(self.settings.my_dxf_file_path)
+        self.my_dxf_file = ezdxf.readfile(
+            self.settings.settings['my_dxf_file_path'])
         self.msp = self.my_dxf_file.modelspace()
         # It's reversed coords from dxf!
         self.reversed_coords = self.get_coords()

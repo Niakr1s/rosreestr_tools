@@ -9,6 +9,6 @@ settings = Settings()
 # merge_dxfs(settings)
 my_dxf_file = MyDxfFile(settings)
 checked_parcels = my_dxf_file.check()
-with open(settings.my_dxf_check_path, 'w') as file:
+with open(settings.settings['my_dxf_check_path'], 'w') as file:
     for parcel in checked_parcels:
         print(parcel, file=file)

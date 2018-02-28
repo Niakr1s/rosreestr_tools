@@ -62,7 +62,7 @@ class RRxml():
 
 def get_list_of_rrxmls(settings):
     result = []
-    for file in settings.xml_list:
+    for file in settings.get_xml_list():
         print(file)
         result.append(RRxml(file, settings))
     return result
@@ -71,7 +71,7 @@ def get_list_of_rrxmls(settings):
 def convert_all_xml2dxf(settings):
     """ Converts all xml files from settings.xml_folder_path
     to settings.dxf_folder_path """
-    for file in settings.xml_list:
+    for file in settings.get_xml_list():
         print(file)
         xml_file = RRxml(file, settings)
         pprint(xml_file.blocks)
