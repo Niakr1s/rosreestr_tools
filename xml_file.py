@@ -64,10 +64,3 @@ class XmlFile():
         dxffile.draw_conturs_and_save()
 
 
-def get_list_of_xmlfiles(settings):
-    """ Returns list of XmlFile class objects """
-    res = []
-    for file in settings.get_xml_list():
-        xml_file = XmlFile(file, settings)
-        res.append(xml_file)
-    return res

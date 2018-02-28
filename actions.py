@@ -1,6 +1,6 @@
 import ezdxf
 
-from xml_file import get_list_of_xmlfiles
+from xml_file import XmlFile
 
 
 def convert_xmlfiles_to_dxffiles(settings):
@@ -26,3 +26,12 @@ def merge_dxfs(settings):
         importer.import_all()
         print('%s added' % (dxf))
     target_dwg.save()
+
+
+def get_list_of_xmlfiles(settings):
+    """ Returns list of XmlFile class objects """
+    res = []
+    for file in settings.get_xml_list():
+        xml_file = XmlFile(file, settings)
+        res.append(xml_file)
+    return res

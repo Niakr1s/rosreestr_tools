@@ -1,9 +1,9 @@
 import ezdxf
 
+from actions import get_list_of_xmlfiles
 from dxf_file import reverse_coords
 from geometry_checks import is_intersect, inside_polygon
 from settings import Settings
-from xml_file import get_list_of_xmlfiles
 
 
 class MyDxfFile():
@@ -41,12 +41,12 @@ class MyDxfFile():
         """ Main function for checking dxf file in xmls,
         returns not sorted set """
         settings = self.settings
-        list_of_rrxmls = get_list_of_xmlfiles(settings)
+        list_of_xmlfiles = get_list_of_xmlfiles(settings)
         mydxffile = MyDxfFile(settings)
         print('Checking for geometry_checks')
-        check1 = self.check_intersect(mydxffile, list_of_rrxmls)
+        check1 = self.check_intersect(mydxffile, list_of_xmlfiles)
         print('Checking for inpolygon')
-        check2 = self.check_inpolygon(mydxffile, list_of_rrxmls)
+        check2 = self.check_inpolygon(mydxffile, list_of_xmlfiles)
         checks = check1 | check2
         self.check_to_file(checks)
         return checks
