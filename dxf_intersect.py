@@ -53,6 +53,7 @@ class MyDxfFile():
         output_path = self.settings.settings['my_dxf_check_path']
         with open(output_path, 'w') as file:
             for parcel in checks:
+                print('my_dxf_file is in: ', parcel)
                 print(parcel, file=file)
         print('Checks saved to file %s' % (output_path))
 

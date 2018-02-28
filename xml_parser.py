@@ -2,6 +2,7 @@ from lxml import etree
 from pprint import pprint, pformat
 from os import path
 from xml2dxf import RRxml2dxf
+from pprint import pprint
 
 
 def convert_all_xml2dxf(settings):
@@ -34,11 +35,14 @@ class RRxml():
         self.root = self.tree.getroot()
         self.blocks = self.get_blocks()
         self.parcels = self.get_parcels()
+        # parcels now contains blocks!!!
+        self.parcels.update(self.blocks)
 
     def __str__(self):
-        b = pformat(self.blocks)
+        # b = pformat(self.blocks)
         p = pformat(self.parcels)
-        return b + '\n\n' + p
+        # return b + '\n\n' + p
+        return p
 
     def get_parcels(self):
         """ Here we are getting dict of parcels with coordinates """
