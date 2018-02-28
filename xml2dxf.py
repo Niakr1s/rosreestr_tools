@@ -12,7 +12,7 @@ class RRxml2dxf():
         self.reversed_blocks = reverse_dict_coords(self.blocks)
         self.reversed_parcels = reverse_dict_coords(self.parcels)
         self.output_file_path = path.join(
-            self.settings.dxf_folder_path,
+            self.settings.settings['dxf_folder_path'],
             self.rrxml.basename_file_path.replace('.xml', '.dxf'))
 
     def draw_contur(self, dic):
@@ -95,11 +95,11 @@ def get_text_attrib(v):
 
 
 def merge_dxfs(settings):
-    """ Merging all dxfs from settings.dxf_folder_path into merged.dxf"""
+    """ Merging all dxfs from settings.settings['dxf_folder_path'] into merged.dxf"""
     dxf_list = settings.get_dxf_list()
     # Creating clear dxf file
     dwg = ezdxf.new('R2000')
-    merged_path = path.join(settings.dxf_folder_path, 'merged.dxf')
+    merged_path = path.join(settings.settings['dxf_folder_path'], 'merged.dxf')
     dwg.saveas(merged_path)
     target_dwg = ezdxf.readfile(merged_path)
     # Merging
