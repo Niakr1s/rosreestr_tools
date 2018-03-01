@@ -16,7 +16,7 @@ def init_constants():
     return settings
 
 
-class Settings():
+class Settings:
     def __init__(self):
         """ settings.json should be in app path """
         self.json_settings_path = path.abspath('settings.json')
