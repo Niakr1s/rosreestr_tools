@@ -23,8 +23,9 @@ class XmlFile():
             self.parcels.update(blocks)  # parcels now contains blocks!!!
             self.suggested_name = tuple(blocks.keys())[0]
         except NotABlock:
-            print('It is not a block')
-
+            print('%s is a parcel' % self.file_path)
+        finally:
+            print('%s is a block' % self.file_path)
 
     def __str__(self):
         p = pformat(self.parcels)
