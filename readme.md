@@ -1,10 +1,12 @@
-Rosreestr Tools are dedicated for using with xmls (Blocks and Parcels) from rosreestr.ru
-and can do following magic:
-1) Check dxf files, containing lines and polylines, if they are intersecting with
-xml files from rosreestr.ru
-2) Convert xml files to dxf
+Rosreestr Tools are dedicated to
+using with xmls (Blocks and Parcels) from rosreestr.ru
+and can do the following magic:
+
+1) Check dxf files, containing lines and polylines,
+if they are intersecting with XML files from rosreestr.ru
+2) Convert XML files to dxf
 3) Merge some dxfs in merged one
-4) Rename xml files in pretty name
+4) Rename XML files in pretty name
 
 Settings description:
 color_iter, colors: colors in dxf file,
@@ -15,4 +17,4 @@ my_dxf_file_path - for user dxf files needing in check
 my_dxf_check_path - for result of checking
 
 If your settings.json have errors you can just delete it,
-program creates default one.
+the program creates default one.
