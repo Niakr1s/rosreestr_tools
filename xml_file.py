@@ -7,12 +7,12 @@ from dxf_file import DxfFile
 from exceptions import NotABlock
 
 
-class XmlFile():
+class XmlFile:
     """ Class for a single rosreestr xml file """
 
     def __init__(self, file_path, settings):
         self.settings = settings
-        self.file_path = file_path
+        self.file_path = os.path.abspath(file_path)
         self.basename_file_path = os.path.basename(file_path)
         self.tree = etree.parse(file_path)
         self.root = self.tree.getroot()
@@ -37,9 +37,11 @@ class XmlFile():
             self.parcels.update(blocks)  # parcels now contains blocks!!!
             self.head_parcel = tuple(blocks.keys())[0]
         except NotABlock:
-            print('%s is a parcel' % self.file_path)
+            pass
+            # print('%s is a parcel' % self.file_path)
         finally:
-            print('%s is a block' % self.file_path)
+            pass
+            # print('%s is a block' % self.file_path)
 
     def get_parcels(self):
         """ Here we are getting dict of parcels with coordinates """
@@ -85,9 +87,11 @@ class XmlFile():
         dxffile = DxfFile(self)
         dxffile.draw_conturs_and_save()
 
-        # def pretty_rename(self):
-        #     if os.path.basename(self.file_path) !=
-
+    def pretty_rename(self):
+        dirpath = os.path.dirname(self.file_path)
+        pretty_basename = self.head_parcel.replace(':', ' ') + '.xml'
+        if os.path.basename(self.file_path) != pretty_basename:
+            os.rename(self.file_path, os.path.join(dirpath, pretty_basename))
 
 
 def get_list_of_xmlfiles(settings, source='settings'):
