@@ -16,10 +16,10 @@ class DxfFile():
         self.output_file_path = path.join(
             self.settings.settings['dxf_folder_path'], self.xmlfile.basename_file_path.replace('.xml', '.dxf'))
 
-    def draw_contur(self, dic):
+    def draw_conturs_and_save(self):
         """ Draws iterables from dictionary to modelspace.
         CAUTION: Use with reversed coordinates"""
-        for parcel_name, conturs in dic.items():
+        for parcel_name, conturs in self.reversed_parcels.items():
             # Creating block with name ~ '21 02 000000'
             block_name = parcel_name.replace(':', ' ')
             dxf_block = self.dwg.blocks.new(name=block_name)
@@ -42,14 +42,9 @@ class DxfFile():
             self.msp.add_blockref(block_name, insert=(
                 0, 0), dxfattribs={'color': 2})
             # print name of cadastral block
-            if len(parcel_name.split(':')) == 3:
-                print('%s drawed' % (parcel_name))
-
-    def draw_conturs_and_save(self):
-        """ Draws blocks and parcels from dictionary to modelspace.
-        Needed for save_dxf function"""
-        self.draw_contur(self.reversed_parcels)
-        self.dwg.saveas(self.output_file_path)
+            # saving
+            self.dwg.saveas(self.output_file_path)
+        print('%s drawed and saved' % (self.xmlfile.file_path))
 
 
 def reverse_dict_coords(dic):

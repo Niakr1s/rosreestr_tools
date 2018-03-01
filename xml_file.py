@@ -4,6 +4,7 @@ from pprint import pformat
 from lxml import etree
 
 from dxf_file import DxfFile
+from exceptions import NotABlock
 
 
 class XmlFile():
@@ -16,7 +17,14 @@ class XmlFile():
         self.tree = etree.parse(file_path)
         self.root = self.tree.getroot()
         self.parcels = self.get_parcels()
-        self.parcels.update(self.get_blocks())  # parcels now contains blocks!!!
+        self.suggested_name = tuple(self.parcels.keys())[0]
+        try:  # Updates self.parcels with blocks and updates self.suggested_name
+            blocks = self.get_blocks()
+            self.parcels.update(blocks)  # parcels now contains blocks!!!
+            self.suggested_name = tuple(blocks.keys())[0]
+        except NotABlock:
+            print('It is not a block')
+
 
     def __str__(self):
         p = pformat(self.parcels)
@@ -46,11 +54,14 @@ class XmlFile():
     def get_blocks(self):
         """ Here we are getting dict of blocks with coordinates """
         result = {}
-        for block in self.root.iter('{*}CadastralBlock'):
-            cadastral_number = block.attrib['CadastralNumber']
-            conturs = self.get_block_conturs(block)
-            result[cadastral_number] = conturs
-        return result
+        try:
+            for block in self.root.iter('{*}CadastralBlock'):
+                cadastral_number = block.attrib['CadastralNumber']
+                conturs = self.get_block_conturs(block)
+                result[cadastral_number] = conturs
+            return result
+        except KeyError:
+            raise NotABlock
 
     def get_block_conturs(self, parcel):
         """ Subfunction for get_blocks function
