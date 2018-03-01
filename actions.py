@@ -26,11 +26,11 @@ def convert_xmlfiles_to_dxffiles(settings, source='settings'):
 
 def merge_dxfs(settings, source='settings'):
     """ Merging all dxfs
-    if source='settings' - from settings.settings['xml_folder_path']
+    if source='settings' - from settings.settings['dxf_folder_path']
     if source='qt' - from list of xml_paths from QT window (TODO)
     into merged.dxf"""
     if source == 'settings':
-        dxf_list = settings.get_dxf_list()
+        dxf_list = settings.get_file_list('dxf_folder_path')
         # TODO get file_paths from qt window
     else:
         raise WrongArguments

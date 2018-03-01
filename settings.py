@@ -48,14 +48,21 @@ class Settings:
             print('merged_dxf_path created')
             mkdir(path.dirname(self.settings['merged_dxf_path']))
 
-    def get_xml_list(self):
-        return get_file_list(self.settings['xml_folder_path'], '.xml')
-
-    def get_dxf_list(self):
-        return get_file_list(self.settings['dxf_folder_path'], '.dxf')
-
-    def get_mydxf_list(self):
-        return get_file_list(self.settings['my_dxf_file_path'], '.dxf')
+    def get_file_list(self, key):
+        """ Key is from self.settings dict,
+        for example 'xml_folder_path', 'my_dxf_check_path' etc"""
+        if 'dxf' in key:
+            pattern = '.dxf'
+        elif 'xml' in key:
+            pattern = '.xml'
+        else:
+            raise FileNotFoundError
+        res = []
+        with scandir(self.settings[key]) as it:
+            for entry in it:
+                if entry.is_file() and pattern in entry.name:
+                    res.append(entry.path)
+        return res
 
     def dump_settings(self):
         """ Dumps to json_file settings,
@@ -74,16 +81,6 @@ class Settings:
         self.settings = settings
         print('Settings loaded fom file')
         return True
-
-
-def get_file_list(input_path, pattern):
-    """ Pattern should be '.xml' or '.dxf' """
-    res = []
-    with scandir(input_path) as it:
-        for entry in it:
-            if entry.is_file() and pattern in entry.name:
-                res.append(entry.path)
-    return res
 
 
 if __name__ == '__main__':

@@ -71,9 +71,9 @@ def get_list_of_xmlfiles(settings, source='settings'):
     #     # TODO get file_paths from qt window
     # else:
     #     raise WrongArguments
-    file_paths = settings.get_xml_list()
+    xml_paths = settings.get_file_list('xml_folder_path')
     res = []
-    for file in file_paths:
+    for file in xml_paths:
         xml_file = XmlFile(file, settings)
         res.append(xml_file)
     return res

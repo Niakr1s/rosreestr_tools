@@ -127,9 +127,9 @@ def get_list_of_mydxffiles(settings, source='settings'):
     #     # TODO get file_paths from qt window
     # else:
     #     raise WrongArguments
-    file_paths = settings.get_mydxf_list()
+    mydxf_list = settings.get_file_list('my_dxf_file_path')
     res = []
-    for file in file_paths:
+    for file in mydxf_list:
         mydxf_file = MyDxfFile(file, settings)
         res.append(mydxf_file)
     return res
