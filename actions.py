@@ -46,3 +46,9 @@ def merge_dxfs(settings, source='settings'):
         importer.import_all()
         print('%s added' % (dxf))
     target_dxf.save()
+
+
+def pretty_rename_dxfs(settings, source='settings'):
+    """ Renames list of dxfs to a pretty format """
+    for xml_file in get_list_of_xmlfiles(settings, source):
+        xml_file.pretty_rename()
