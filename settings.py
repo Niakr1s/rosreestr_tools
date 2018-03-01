@@ -2,18 +2,17 @@ import json
 from os import path, mkdir, scandir
 
 
-def init_constants():
+def init_defaults():
     """ color_iter, colors: colors in dxf file
     dxf_folder_path - for dxf output files
     xml_folder_path - for xml input files
     my_dxf_file_path - for user file to check in xmls
     my_dxf_check_path - result of my file check """
-    settings = {'color_iter': 0, 'colors': [1, 2, 4, 5, 6, 34, 84, 234], 'dxf_folder_path': path.abspath('xml\\dxf'),
-                'xml_folder_path': path.abspath('xml'),
-                'my_dxf_file_path': path.abspath('xml\\my_dxf_file\\my_dxf_file.dxf'),
-                'my_dxf_check_path': path.abspath('xml\\my_dxf_file\\my_dxf_check.txt'),
+    defaults = {'color_iter': 0, 'colors': [1, 2, 4, 5, 6, 34, 84, 234], 'dxf_folder_path': path.abspath('xml\\dxf'),
+                'xml_folder_path': path.abspath('xml'), 'my_dxf_file_path': path.abspath('xml\\mydxfs'),
+                'my_dxf_check_path': path.abspath('xml\\mydxfs\\results'),
                 'merged_dxf_path': path.abspath('xml\\dxf\\merged\\merged.dxf')}
-    return settings
+    return defaults
 
 
 class Settings:
@@ -21,7 +20,7 @@ class Settings:
         """ settings.json should be in app path """
         self.json_settings_path = path.abspath('settings.json')
         if not self.load_settings():
-            self.settings = init_constants()
+            self.settings = init_defaults()
             self.dump_settings()
             print('Settings file not found, created it.')
         self.check_paths()
@@ -39,9 +38,12 @@ class Settings:
         if not path.exists(self.settings['dxf_folder_path']):
             print('dxf_folder_path created')
             mkdir(self.settings['dxf_folder_path'])
-        if not path.exists(path.dirname(self.settings['my_dxf_check_path'])):
+        if not path.exists(self.settings['my_dxf_file_path']):
+            print('my_dxf_file_path created')
+            mkdir(self.settings['my_dxf_file_path'])
+        if not path.exists(self.settings['my_dxf_check_path']):
             print('my_dxf_check_path created')
-            mkdir(path.dirname(self.settings['my_dxf_check_path']))
+            mkdir(self.settings['my_dxf_check_path'])
         if not path.exists(path.dirname(self.settings['merged_dxf_path'])):
             print('merged_dxf_path created')
             mkdir(path.dirname(self.settings['merged_dxf_path']))
@@ -51,6 +53,9 @@ class Settings:
 
     def get_dxf_list(self):
         return get_file_list(self.settings['dxf_folder_path'], '.dxf')
+
+    def get_mydxf_list(self):
+        return get_file_list(self.settings['my_dxf_file_path'], '.dxf')
 
     def dump_settings(self):
         """ Dumps to json_file settings,

@@ -1,16 +1,17 @@
+from os import path
+
 import ezdxf
 
-from actions import get_list_of_xmlfiles
 from dxf_file import reverse_coords
 from geometry_checks import is_intersect, inside_polygon
-from settings import Settings
+from xml_file import get_list_of_xmlfiles
 
 
-class MyDxfFile():
-    def __init__(self, settings):
+class MyDxfFile:
+    def __init__(self, file_path, settings):
         self.settings = settings
-        self.my_dxf_file = ezdxf.readfile(
-            self.settings.settings['my_dxf_file_path'])
+        self.file_path = file_path
+        self.my_dxf_file = ezdxf.readfile(self.file_path)
         self.msp = self.my_dxf_file.modelspace()
         # It's reversed coords from dxf!
         self.reversed_coords = self.get_coords()
@@ -37,28 +38,28 @@ class MyDxfFile():
         print('coords of my_dxf_file:\n', res)
         return res
 
-    def check(self):
+    def check(self, source='settings'):
         """ Main function for checking dxf file in xmls,
         returns not sorted set """
         settings = self.settings
-        list_of_xmlfiles = get_list_of_xmlfiles(settings)
-        mydxffile = MyDxfFile(settings)
+        list_of_xmlfiles = get_list_of_xmlfiles(settings, source)
         print('Checking for geometry_checks')
-        check1 = self.check_intersect(mydxffile, list_of_xmlfiles)
+        check1 = self.check_intersect(self, list_of_xmlfiles)
         print('Checking for inpolygon')
-        check2 = self.check_inpolygon(mydxffile, list_of_xmlfiles)
+        check2 = self.check_inpolygon(self, list_of_xmlfiles)
         checks = check1 | check2
-        self.check_to_file(checks)
+        self.save_check_to_file(checks)
         return checks
 
-    def check_to_file(self, checks):
+    def save_check_to_file(self, checks):
         """ Saves SORTED check() result to file and prints in console """
         sorted_checks = [*[i for i in sorted(checks) if
                            len(i.split(':')) == 3],
                          *[i for i in sorted(checks) if
                            len(i.split(':')) != 3]]
-        output_path = self.settings.settings['my_dxf_check_path']
-        print('\n\nВаш dxf файл проходит по следующим участкам:')
+        basename = path.basename(self.file_path).replace('.dxf', '.txt')
+        output_path = path.join(self.settings.settings['my_dxf_check_path'], basename)
+        print('\n\nФайл %s проходит по следующим участкам:' % (self.file_path))
         with open(output_path, 'w') as file:
             for parcel in sorted_checks:
                 print(parcel)
@@ -116,6 +117,19 @@ def is_equal(lst: list):
     return True
 
 if __name__ == '__main__':
-    settings = Settings()
-    my = MyDxfFile(settings)
-    print(my.check())
+    pass
+
+
+def get_list_of_mydxffiles(settings, source='settings'):
+    """ Returns list of XmlFile class objects """
+    # if source == 'settings':
+    #     file_paths = settings.get_mydxf_list()
+    #     # TODO get file_paths from qt window
+    # else:
+    #     raise WrongArguments
+    file_paths = settings.get_mydxf_list()
+    res = []
+    for file in file_paths:
+        mydxf_file = MyDxfFile(file, settings)
+        res.append(mydxf_file)
+    return res

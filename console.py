@@ -1,5 +1,4 @@
-from actions import merge_dxfs, convert_xmlfiles_to_dxffiles
-from my_dxf_file import MyDxfFile
+from actions import merge_dxfs, convert_xmlfiles_to_dxffiles, check_mydxfs
 from settings import Settings
 
 
@@ -49,7 +48,7 @@ def menu():
     while True:
         inp = short_input()
         if inp == '1':
-            MyDxfFile(settings).check()
+            check_mydxfs(settings)
         elif inp == '2':
             convert_xmlfiles_to_dxffiles(settings)
         elif inp == '3':

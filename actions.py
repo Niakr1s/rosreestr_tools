@@ -1,7 +1,18 @@
 import ezdxf
 
 from exceptions import WrongArguments
-from xml_file import XmlFile
+from my_dxf_file import get_list_of_mydxffiles
+from xml_file import get_list_of_xmlfiles
+
+
+def check_mydxfs(settings, source='settings'):
+    """ Checks all mydxf files from:
+    if source='settings' - from settings.settings['my_dxf_file_path']
+    if source='qt' - from list of xml_paths from QT window (TODO)
+    in settings.settings['xml_folder_path']
+    or if source='qt' - from QT window (TODO)"""
+    for xml_file in get_list_of_mydxffiles(settings, source):
+        xml_file.check(source)
 
 
 def convert_xmlfiles_to_dxffiles(settings, source='settings'):
@@ -35,17 +46,3 @@ def merge_dxfs(settings, source='settings'):
         importer.import_all()
         print('%s added' % (dxf))
     target_dxf.save()
-
-
-def get_list_of_xmlfiles(settings, source='settings'):
-    """ Returns list of XmlFile class objects """
-    if source == 'settings':
-        file_paths = settings.get_xml_list()
-        # TODO get file_paths from qt window
-    else:
-        raise WrongArguments
-    res = []
-    for file in file_paths:
-        xml_file = XmlFile(file, settings)
-        res.append(xml_file)
-    return res

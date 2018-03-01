@@ -6,16 +6,15 @@ import ezdxf
 class DxfFile():
     """This class represents """
 
-    def __init__(self, XmlFile):
+    def __init__(self, xmlfile):
         self.dwg = ezdxf.new('R2000')  # create R2000 drawing
         self.msp = self.dwg.modelspace()  # modelspace for dwg
-        self.rrxml = XmlFile
-        self.settings = XmlFile.settings
-        self.parcels = self.rrxml.parcels
+        self.xmlfile = xmlfile
+        self.settings = xmlfile.settings
+        self.parcels = self.xmlfile.parcels
         self.reversed_parcels = reverse_dict_coords(self.parcels)
         self.output_file_path = path.join(
-            self.settings.settings['dxf_folder_path'],
-            self.rrxml.basename_file_path.replace('.xml', '.dxf'))
+            self.settings.settings['dxf_folder_path'], self.xmlfile.basename_file_path.replace('.xml', '.dxf'))
 
     def draw_contur(self, dic):
         """ Draws iterables from dictionary to modelspace.
