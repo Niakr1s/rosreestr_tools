@@ -12,7 +12,7 @@ class DxfFile():
         self.xmlfile = xmlfile
         self.settings = xmlfile.settings
         self.parcels = self.xmlfile.parcels
-        self.reversed_parcels = reverse_dict_coords(self.parcels)
+        self.reversed_parcels = reverse_parcels_coords(self.parcels)
         self.output_file_path = path.join(
             self.settings.settings['dxf_folder_path'], self.xmlfile.basename_file_path.replace('.xml', '.dxf'))
 
@@ -47,11 +47,11 @@ class DxfFile():
         print('%s drawed and saved' % (self.xmlfile.file_path))
 
 
-def reverse_dict_coords(dic):
+def reverse_parcels_coords(parcels):
     """ Getting reverse coords, need for dxf file """
     reversed_result = {}
-    for k, v in dic.items():
-        reversed_result[k] = reverse_coords(v)
+    for name, conturs in parcels.items():
+        reversed_result[name] = reverse_coords(conturs)
     return reversed_result
 
 

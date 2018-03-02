@@ -2,7 +2,6 @@ from os import path
 
 import ezdxf
 
-from dxf_file import reverse_coords
 from geometry_checks import is_intersect, inside_polygon
 from xml_file import get_list_of_XmlFiles
 
@@ -16,27 +15,47 @@ class MyDxfFile:
         # It's reversed coords from dxf!
         self.reversed_coords = self.get_coords()
         # It's normal coords like in xml.
-        self.coords = reverse_coords(self.reversed_coords)
+        self.coords = self.get_reversed_coords()
 
     def get_coords(self):
-        """ It's a tuple(tuples)"""
-        res = []
+        """ It's a dict(tuples):
+        'LWPOLYLINE' = ((0,0), (1,1), (3,3)), ((0,0), (1,1), (3,3)), ...
+        'POLYLINE' = ((0,0), (1,1), (3,3)), ((0,0), (1,1), (3,3)), ...
+        'LINE' = ((0,0), (1,1)), ((0,0), (1,1)),
+        'POINT' = (0,0), (1,1), (3,3), ...
+        'CIRCLE' = ((0,0),3), ((1,1),2), ((3,3),6), ... (3rd item is radius)"""
+        res = {'LWPOLYLINE': [], 'POLYLINE': [], 'LINE': [], 'POINT': [], 'CIRCLE': []}
         for e in self.msp:
             if e.dxftype() == 'LWPOLYLINE':
                 coords = []
                 for coord in e.get_rstrip_points():
                     coords.append(coord)
-                res.append(tuple(coords))
-            elif e.dxftype() == 'LINE':
-                startx, starty = e.dxf.start[0:2]
-                endx, endy = e.dxf.end[0:2]
-                res.append(((startx, starty), (endx, endy)))
+                res['LWPOLYLINE'].append(coords)
             elif e.dxftype() == 'POLYLINE':
                 coords = []
                 for x, y, _ in e.points():
                     coords.append((x, y))
-                res.append(coords)
-        return res
+                res['POLYLINE'].append(coords)
+            elif e.dxftype() == 'LINE':
+                startx, starty = e.dxf.start[0:2]
+                endx, endy = e.dxf.end[0:2]
+                res['LINE'].append(((startx, starty), (endx, endy)))
+            elif e.dxftype() == 'POINT':
+                res['POINT'].append(e.dxf.location[0:2])
+            elif e.dxftype() == 'CIRCLE':
+                res['CIRCLE'].append(e.dxf.center, e.dxf.radius)
+        return {k: v for k, v in res.items() if v}
+
+    def get_reversed_coords(self):
+        result = {}
+        for name, conturs in self.reversed_coords.items():
+            if name in ('LWPOLYLINE, POLYLINE, LINE'):
+                result[name] = [[(y, x) for x, y in contur] for contur in conturs]
+            elif name == 'POINT':
+                result[name] = [(y, x) for x, y in conturs]
+            elif name == 'CIRCLE':
+                result[name] = [((y, x), r) for (x, y), r in conturs]
+        return result
 
     def check(self, source='settings'):
         """ Main function for checking dxf file in xmls,
@@ -69,7 +88,7 @@ class MyDxfFile:
         both is_intersect and is_inpolygon checks."""
         res = set()
         parcel = XmlFile.parcels[parcel_name]
-        for mydxf_contur in self.coords:
+        for mydxf_name, mydxf_contur in self.coords.items():
             # This variable is for first (is_intersect check)
             mydxf_previous_point = mydxf_contur[0]
             flags = []
@@ -80,9 +99,7 @@ class MyDxfFile:
                     # details in module geometry_checks
                     xml_previous_point = xml_contur[0]
                     for xml_point in xml_contur:
-                        if mydxf_point == mydxf_previous_point:
-                            pass
-                        else:
+                        if not (mydxf_point == mydxf_previous_point):
                             segment1 = (mydxf_point, mydxf_previous_point)
                             segment2 = (xml_point, xml_previous_point)
                             if is_intersect(segment1, segment2):
@@ -123,9 +140,6 @@ def is_equal(lst: list):
             return False
     return True
 
-if __name__ == '__main__':
-    pass
-
 
 def get_list_of_MyDxfFiles(settings, source='settings'):
     """ Returns list of XmlFile class objects """
@@ -140,3 +154,15 @@ def get_list_of_MyDxfFiles(settings, source='settings'):
         mydxf_file = MyDxfFile(file, settings)
         res.append(mydxf_file)
     return res
+
+
+if __name__ == '__main__':
+    from settings import Settings
+
+    settings = Settings()
+    my = MyDxfFile('xml\\mydxfs\\my_dxf_file.dxf', settings)
+    print(my.coords)
+    print(my.reversed_coords)
+    my = MyDxfFile('xml\\mydxfs\\my_dxf_file - копия.dxf', settings)
+    print(my.coords)
+    print(my.reversed_coords)

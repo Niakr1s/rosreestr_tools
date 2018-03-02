@@ -90,6 +90,7 @@ class XmlFile:
         pretty_basename = ' '.join((self.xml_type, self.xml_subtype, cadastral_number_spaced))
         if os.path.basename(self.file_path) != pretty_basename:
             os.rename(self.file_path, os.path.join(dirpath, pretty_basename))
+        print('Renamed to %s' % pretty_basename)
 
 
 def get_list_of_XmlFiles(settings, source='settings'):
