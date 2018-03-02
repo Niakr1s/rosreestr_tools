@@ -136,8 +136,12 @@ class MyDxfFile:
 
     def save_checks_to_file(self):
         """ Saves SORTED check() result to file and prints in console """
-        sorted_checks = [*[i for i in sorted(self.checks) if len(i.split(':')) == 3],
-                         *[i for i in sorted(self.checks) if len(i.split(':')) != 3]]
+        sorted_blocks = [i for i in sorted(self.checks) if len(i.split(':')) == 3]
+        parcels = [i for i in sorted(self.checks) if len(i.split(':')) != 3]
+        sorted_parcels = sorted(sorted(parcels, key=lambda x: int(x.split(':')[-2])),
+                                key=lambda x: int(x.split(':')[-1]))
+        sorted_parcels = sorted(parcels, key=lambda x: (x.split(':')[-2], int(x.split(':')[-1])))
+        sorted_checks = [*sorted_blocks, *sorted_parcels]
         basename = path.basename(self.file_path).replace('.dxf', '.txt')
         output_path = path.join(self.settings.settings['my_dxf_check_path'], basename)
         with open(output_path, 'w') as file:
