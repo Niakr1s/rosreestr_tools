@@ -4,7 +4,6 @@ from pprint import pformat
 from lxml import etree
 
 from dxf_file import DxfFile
-from exceptions import NotABlock
 
 
 class XmlFile:
@@ -16,37 +15,50 @@ class XmlFile:
         self.basename_file_path = os.path.basename(file_path)
         self.tree = etree.parse(file_path)
         self.root = self.tree.getroot()
-        self.parcels = self.get_parcels()
-        self.head_parcel = tuple(self.parcels.keys())[0]
-        self.update_parcels_with_blocks()
-        # self.parcels and self.head_name should be updated after this with
-        # string like '21:01:000000' if it is a block
+        # can be KPT, KVZU, KVOKS (Flat), KPOKS (Building, Construction, Uncompleted)
+        self.xml_type = remove_namespace(self.root.tag)
+        # xml_subtype can be str type:
+        # CadastralBlock, Parcel, Building, Construction, Uncompleted, Flat
+        # it should update after get_parsels() execution
+        self.cadastral_number = None
+        self.xml_subtype = None
+        self.update_cadastral_number_and_xml_subtype()
+        self.parcels = self.get_parcels()  # sml_subtype should update after this
+        # if self.xml_type == 'KPT':
+        try:
+            self.blocks = self.get_blocks()
+            self.parcels.update(self.blocks)
+        except Exception:
+            pass
 
     def __str__(self):
         p = pformat(self.parcels)
         return p
 
-    def update_parcels_with_blocks(self):
-        """Updates self.parcels with blocks if any,
-        also updates self.head_parcel if any block.
-        If xml is not a block, returns only parcels
-        Also sets self.head_parcel='21:01:000000' if block
-                            or '21:01:000000:00' if parcel"""
-        try:  # Updates self.parcels with blocks and updates self.suggested_name
-            blocks = self.get_blocks()
-            self.parcels.update(blocks)  # parcels now contains blocks!!!
-            self.head_parcel = tuple(blocks.keys())[0]
-        except NotABlock:
-            pass
-            # print('%s is a parcel' % self.file_path)
-        finally:
-            pass
-            # print('%s is a block' % self.file_path)
+    def update_cadastral_number_and_xml_subtype(self):
+        """Search at 2 lvl depth 1st argument with search_attribute"""
+        search_attribute = 'CadastralNumber'
+        found_child = self.root.find('.//*//*[@%s]' % search_attribute)
+        self.cadastral_number = found_child.attrib[search_attribute]
+        self.xml_subtype = remove_namespace(found_child.tag)
 
     def get_parcels(self):
-        """ Here we are getting dict of parcels with coordinates """
         result = {}
-        for parcel in self.root.iter('{*}Parcel'):
+        if self.xml_type in ('KVZU', 'KPT'):
+            # Adding parcels to result
+            for parcel in self.root.iter('{*}Parcel'):
+                cadastral_number = parcel.attrib['CadastralNumber']
+                conturs = self.get_parcel_conturs(parcel)
+                result[cadastral_number] = conturs
+        if self.xml_type == 'KPT':
+            # Adding block to result
+            for block in self.root.iter('{*}CadastralBlock'):
+                cadastral_number = block.attrib['CadastralNumber']
+                conturs = self.get_block_conturs(block)
+                result[cadastral_number] = conturs
+        # if it's a Building, Construction, Uncompleted
+        if self.xml_type == 'KVOKS':
+            parcel = self.root.find('.//*[@CadastralNumber]')
             cadastral_number = parcel.attrib['CadastralNumber']
             conturs = self.get_parcel_conturs(parcel)
             result[cadastral_number] = conturs
@@ -64,17 +76,14 @@ class XmlFile:
                 result[-1].append((x, y))
         return result
 
-    def get_blocks(self):
-        """ Here we are getting dict of blocks with coordinates """
-        result = {}
-        try:
-            for block in self.root.iter('{*}CadastralBlock'):
-                cadastral_number = block.attrib['CadastralNumber']
-                conturs = self.get_block_conturs(block)
-                result[cadastral_number] = conturs
-            return result
-        except KeyError:
-            raise NotABlock
+    # def get_blocks(self):
+    #     """ Here we are getting dict of blocks with coordinates """
+    #     result = {}
+    #     for block in self.root.iter('{*}CadastralBlock'):
+    #         cadastral_number = block.attrib['CadastralNumber']
+    #         conturs = self.get_block_conturs(block)
+    #         result[cadastral_number] = conturs
+    #     return result
 
     def get_block_conturs(self, parcel):
         """ Subfunction for get_blocks function
@@ -89,7 +98,7 @@ class XmlFile:
 
     def pretty_rename(self):
         dirpath = os.path.dirname(self.file_path)
-        pretty_basename = self.head_parcel.replace(':', ' ') + '.xml'
+        pretty_basename = self.xml_type + ' ' + self.cadastral_number.replace(':', ' ') + '.xml'
         if os.path.basename(self.file_path) != pretty_basename:
             os.rename(self.file_path, os.path.join(dirpath, pretty_basename))
 
@@ -107,3 +116,23 @@ def get_list_of_xmlfiles(settings, source='settings'):
         xml_file = XmlFile(file, settings)
         res.append(xml_file)
     return res
+
+
+def remove_namespace(not_pretty_tag):
+    return not_pretty_tag.split('}')[-1]
+
+
+if __name__ == '__main__':
+    from settings import Settings
+
+    settings = Settings()
+    xmls = get_list_of_xmlfiles(settings)
+    for xml in xmls:
+        print(os.path.basename(xml.file_path), xml.cadastral_number)
+        print(xml.xml_type, xml.xml_subtype)
+        print('Have parcels' if xml.parcels.keys() else "Doesn't have parcels")
+        # # print(xml.parcels.keys())
+        # try:
+        #     print(xml.blocks.keys())
+        # except Exception:
+        #     pass
