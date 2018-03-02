@@ -24,12 +24,6 @@ class XmlFile:
         self.xml_subtype = None
         self.update_cadastral_number_and_xml_subtype()
         self.parcels = self.get_parcels()  # sml_subtype should update after this
-        # if self.xml_type == 'KPT':
-        try:
-            self.blocks = self.get_blocks()
-            self.parcels.update(self.blocks)
-        except Exception:
-            pass
 
     def __str__(self):
         p = pformat(self.parcels)
@@ -64,7 +58,8 @@ class XmlFile:
             result[cadastral_number] = conturs
         return result
 
-    def get_parcel_conturs(self, parcel):
+    @staticmethod
+    def get_parcel_conturs(parcel):
         """ Subfunction for get_parcels function,
         returns list of conturs with tuple of coords """
         result = []
@@ -75,15 +70,6 @@ class XmlFile:
                 y = float(point.attrib['Y'])
                 result[-1].append((x, y))
         return result
-
-    # def get_blocks(self):
-    #     """ Here we are getting dict of blocks with coordinates """
-    #     result = {}
-    #     for block in self.root.iter('{*}CadastralBlock'):
-    #         cadastral_number = block.attrib['CadastralNumber']
-    #         conturs = self.get_block_conturs(block)
-    #         result[cadastral_number] = conturs
-    #     return result
 
     def get_block_conturs(self, parcel):
         """ Subfunction for get_blocks function
@@ -98,7 +84,8 @@ class XmlFile:
 
     def pretty_rename(self):
         dirpath = os.path.dirname(self.file_path)
-        pretty_basename = self.xml_type + ' ' + self.cadastral_number.replace(':', ' ') + '.xml'
+        cadastral_number_spaced = self.cadastral_number.replace(':', ' ') + '.xml'
+        pretty_basename = ' '.join((self.xml_type, self.xml_subtype, cadastral_number_spaced))
         if os.path.basename(self.file_path) != pretty_basename:
             os.rename(self.file_path, os.path.join(dirpath, pretty_basename))
 
@@ -129,8 +116,8 @@ if __name__ == '__main__':
     xmls = get_list_of_xmlfiles(settings)
     for xml in xmls:
         print(os.path.basename(xml.file_path), xml.cadastral_number)
-        print(xml.xml_type, xml.xml_subtype)
-        print('Have parcels' if xml.parcels.keys() else "Doesn't have parcels")
+        print(xml.parcels)
+        # print('Have parcels' if xml.parcels.keys() else "Doesn't have parcels")
         # # print(xml.parcels.keys())
         # try:
         #     print(xml.blocks.keys())
