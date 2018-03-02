@@ -36,7 +36,6 @@ class MyDxfFile:
                 for x, y, _ in e.points():
                     coords.append((x, y))
                 res.append(coords)
-        print('coords of my_dxf_file:\n', res)
         return res
 
     def check(self, source='settings'):
@@ -49,61 +48,70 @@ class MyDxfFile:
         self.save_check_to_file(checks)
         return checks
 
-    def save_check_to_file(self, checks):
-        """ Saves SORTED check() result to file and prints in console """
-        sorted_checks = [*[i for i in sorted(checks) if
-                           len(i.split(':')) == 3],
-                         *[i for i in sorted(checks) if
-                           len(i.split(':')) != 3]]
-        basename = path.basename(self.file_path).replace('.dxf', '.txt')
-        output_path = path.join(self.settings.settings['my_dxf_check_path'], basename)
-        print('\n\nФайл %s проходит по следующим участкам:' % (self.file_path))
-        with open(output_path, 'w') as file:
-            for parcel in sorted_checks:
-                print(parcel)
-                print(parcel, file=file)
-        print('Saved to file %s' % (output_path))
-
     def geometry_checks(self, XmlFiles):
-        """Checks for both is_intersect and is_inpolygon checks."""
+        """Checks for multiple files both is_intersect and is_inpolygon checks."""
         res = set()
         for XmlFile in XmlFiles:
-            # We don't want to waste time on flats or blank Xmls
+            # We don't want to waste time on flats, blank Xmls
             if XmlFile.xml_type == 'KPOKS' or not XmlFile.parcels:
                 continue
-            for name, parcel in XmlFile.parcels.items():
-                for mydxf_contur in self.coords:
-                    # This variable is for first (is_intersect check)
-                    mydxf_previous_point = mydxf_contur[0]
-                    flags = []
-                    for mydxf_point in mydxf_contur:
-                        flag = 0
-                        for xml_contur in parcel:
-                            # first check is is_intersect,
-                            # details in module geometry_checks
-                            xml_previous_point = xml_contur[0]
-                            for xml_point in xml_contur:
-                                if mydxf_point == mydxf_previous_point:
-                                    pass
-                                else:
-                                    segment1 = (mydxf_point, mydxf_previous_point)
-                                    segment2 = (xml_point, xml_previous_point)
-                                    if is_intersect(segment1, segment2):
-                                        res.add(name)
-                            # second check is_inpolygon
-                            # flag represents how many times each point
-                            # contains in mydxf_contur
-                            # if all of them == each other and % 2 == 0
-                            # don't add contur to result
-                            if inside_polygon(*mydxf_point, xml_contur):
-                                flag += 1
-                        flags.append(flag)
-                    if is_equal(flags) & flags[0] == 0 & flags[0] % 2:
-                        pass
-                    else:
-                        res.add(name)
-                        # end of check is_inpolygon
+            # We don't want to waste time on full KPT check if not intersect
+            elif XmlFile.xml_type == 'KPT':
+                test = self.geometry_check(XmlFile, XmlFile.cadastral_number)
+                if not test:
+                    continue
+            for parcel_name in XmlFile.parcels.keys():
+                res |= self.geometry_check(XmlFile, parcel_name)
         return res
+
+    def geometry_check(self, XmlFile, parcel_name):
+        """Checks for single file, name is name of parcel
+        both is_intersect and is_inpolygon checks."""
+        res = set()
+        parcel = XmlFile.parcels[parcel_name]
+        for mydxf_contur in self.coords:
+            # This variable is for first (is_intersect check)
+            mydxf_previous_point = mydxf_contur[0]
+            flags = []
+            for mydxf_point in mydxf_contur:
+                flag = 0
+                for xml_contur in parcel:
+                    # first check is is_intersect,
+                    # details in module geometry_checks
+                    xml_previous_point = xml_contur[0]
+                    for xml_point in xml_contur:
+                        if mydxf_point == mydxf_previous_point:
+                            pass
+                        else:
+                            segment1 = (mydxf_point, mydxf_previous_point)
+                            segment2 = (xml_point, xml_previous_point)
+                            if is_intersect(segment1, segment2):
+                                res.add(parcel_name)
+                    # second check is_inpolygon
+                    # flag represents how many times each point
+                    # contains in mydxf_contur
+                    # if all of them == each other and % 2 == 0
+                    # don't add contur to result
+                    if inside_polygon(*mydxf_point, xml_contur):
+                        flag += 1
+                flags.append(flag)
+            if is_equal(flags) & flags[0] == 0 & flags[0] % 2:
+                pass
+            else:
+                res.add(parcel_name)
+                # end of check is_inpolygon
+        return res
+
+    def save_check_to_file(self, checks):
+        """ Saves SORTED check() result to file and prints in console """
+        sorted_checks = [*[i for i in sorted(checks) if len(i.split(':')) == 3],
+                         *[i for i in sorted(checks) if len(i.split(':')) != 3]]
+        basename = path.basename(self.file_path).replace('.dxf', '.txt')
+        output_path = path.join(self.settings.settings['my_dxf_check_path'], basename)
+        with open(output_path, 'w') as file:
+            for parcel in sorted_checks:
+                print(parcel, file=file)
+        print('Result saved to file %s' % (output_path))
 
 
 def is_equal(lst: list):
