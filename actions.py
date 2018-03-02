@@ -1,6 +1,5 @@
 import ezdxf
 
-from exceptions import WrongArguments
 from my_dxf_file import get_list_of_mydxffiles
 from xml_file import get_list_of_xmlfiles
 
@@ -29,11 +28,7 @@ def merge_dxfs(settings, source='settings'):
     if source='settings' - from settings.settings['dxf_folder_path']
     if source='qt' - from list of xml_paths from QT window (TODO)
     into merged.dxf"""
-    if source == 'settings':
-        dxf_list = settings.get_file_list('dxf_folder_path')
-        # TODO get file_paths from qt window
-    else:
-        raise WrongArguments
+    dxf_list = settings.get_file_list('dxf_folder_path')
     # Creating clear dxf file
     dwg = ezdxf.new('R2000')
     merged_path = settings.settings['merged_dxf_path']
@@ -48,7 +43,7 @@ def merge_dxfs(settings, source='settings'):
     target_dxf.save()
 
 
-def pretty_rename_dxfs(settings, source='settings'):
+def pretty_rename_xmls(settings, source='settings'):
     """ Renames list of dxfs to a pretty format """
     for xml_file in get_list_of_xmlfiles(settings, source):
         xml_file.pretty_rename()

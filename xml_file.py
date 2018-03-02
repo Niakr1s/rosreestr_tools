@@ -79,6 +79,8 @@ class XmlFile:
         return result
 
     def convert_to_dxffile(self):
+        if self.xml_type == 'KPOKS' or not self.parcels:
+            return
         dxffile = DxfFile(self)
         dxffile.draw_conturs_and_save()
 
@@ -91,12 +93,8 @@ class XmlFile:
 
 
 def get_list_of_xmlfiles(settings, source='settings'):
-    """ Returns list of XmlFile class objects """
-    # if source == 'settings':
-    #
-    #     # TODO get file_paths from qt window
-    # else:
-    #     raise WrongArguments
+    """ Returns list of XmlFile class objects
+    if settings='gui' - get list from gui"""
     xml_paths = settings.get_file_list('xml_folder_path')
     res = []
     for file in xml_paths:

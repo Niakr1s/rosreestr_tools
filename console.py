@@ -41,7 +41,7 @@ def menu():
         elif inp == '3':
             actions.merge_dxfs(settings)
         elif inp == '4':
-            actions.pretty_rename_dxfs(settings)
+            actions.pretty_rename_xmls(settings)
         elif inp in ('q', 'Q'):
             break
         elif inp in ('h', 'H'):
