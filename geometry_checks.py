@@ -3,26 +3,6 @@ see https://www.geeksforgeeks.org/check-if-two-given-line-segments-intersect/
 for logics explanation"""
 
 
-def area(a_x, a_y, b_x, b_y, c_x, c_y):
-    return (b_x - a_x) * (c_y - a_y) - (c_x - a_x) * (b_y - a_y)
-
-
-def is_on_left_or_right(a_x, a_y, b_x, b_y, c_x, c_y):
-    return True if area(a_x, a_y, b_x, b_y, c_x, c_y) > 0 else False
-
-
-def is_collinear(a_x, a_y, b_x, b_y, c_x, c_y):
-    return area(a_x, a_y, b_x, b_y, c_x, c_y) == 0
-
-
-def x_projection(point):
-    return point[0], 0
-
-
-def y_projection(point):
-    return (0, point[1])
-
-
 def is_intersect(segment1, segment2):
     """Returns True if intersect else False
     segment1 = (p1, q1), segment2 = (p2, q2),
@@ -61,6 +41,22 @@ def is_intersect(segment1, segment2):
                 if subcase3:
                     return True
         return False
+
+    def area(a_x, a_y, b_x, b_y, c_x, c_y):
+        return (b_x - a_x) * (c_y - a_y) - (c_x - a_x) * (b_y - a_y)
+
+    def is_on_left_or_right(a_x, a_y, b_x, b_y, c_x, c_y):
+        return True if area(a_x, a_y, b_x, b_y, c_x, c_y) > 0 else False
+
+    def is_collinear(a_x, a_y, b_x, b_y, c_x, c_y):
+        return area(a_x, a_y, b_x, b_y, c_x, c_y) == 0
+
+    def x_projection(point):
+        return point[0], 0
+
+    def y_projection(point):
+        return 0, point[1]
+
     if case1(p1, q1, p2, q2):
         return True
     elif case2(p1, q1, p2, q2):

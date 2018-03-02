@@ -19,6 +19,7 @@ class MyDxfFile:
         self.coords = reverse_coords(self.reversed_coords)
 
     def get_coords(self):
+        """ It's a tuple(tuples)"""
         res = []
         for e in self.msp:
             if e.dxftype() == 'LWPOLYLINE':
@@ -43,11 +44,8 @@ class MyDxfFile:
         returns not sorted set """
         settings = self.settings
         XmlFiles = get_list_of_XmlFiles(settings, source)
-        print('Checking for intersection')
-        check1 = self.check_intersect(XmlFiles)
-        print('Checking for inpolygon')
-        check2 = self.check_inpolygon(XmlFiles)
-        checks = check1 | check2
+        # Checking for is_intersect and is_inpolygon
+        checks = self.geometry_checks(XmlFiles)
         self.save_check_to_file(checks)
         return checks
 
@@ -66,50 +64,45 @@ class MyDxfFile:
                 print(parcel, file=file)
         print('Saved to file %s' % (output_path))
 
-    def check_intersect(self, XmlFiles):
-        """First check for object of class MyDxfFile in list of XmlFile objects"""
-        res = set()
-        for contur in self.coords:
-            for i in range(len(contur) - 1):
-                for XmlFile in XmlFiles:
-                    # We don't want to waste time on flats or blank Xmls
-                    if XmlFile.xml_type == 'KPOKS' or not XmlFile.parcels:
-                        return res
-                    for k, v in XmlFile.parcels.items():
-                        for contur_xml in v:
-                            for j in range(len(contur_xml) - 1):
-                                segment1 = (contur[i], contur[i + 1])
-                                segment2 = (contur_xml[j], contur_xml[j + 1])
-                                if is_intersect(segment1, segment2):
-                                    print('Intersects, ', k)
-                                    res.add(k)
-        return res
-
-    def check_inpolygon(self, XmlFiles):  # new func
-        """Second check for object of class MyDxfFile in list of XmlFile objects"""
+    def geometry_checks(self, XmlFiles):
+        """Checks for both is_intersect and is_inpolygon checks."""
         res = set()
         for XmlFile in XmlFiles:
             # We don't want to waste time on flats or blank Xmls
             if XmlFile.xml_type == 'KPOKS' or not XmlFile.parcels:
-                return res
+                continue
             for name, parcel in XmlFile.parcels.items():
                 for mydxf_contur in self.coords:
-                    # how many times each point of mydxf_contur
-                    # contains in parcel
-                    # if all of them == each other and % 2 == 0
-                    # don't add contur to result
+                    # This variable is for first (is_intersect check)
+                    mydxf_previous_point = mydxf_contur[0]
                     flags = []
                     for mydxf_point in mydxf_contur:
                         flag = 0
                         for xml_contur in parcel:
+                            # first check is is_intersect,
+                            # details in module geometry_checks
+                            xml_previous_point = xml_contur[0]
+                            for xml_point in xml_contur:
+                                if mydxf_point == mydxf_previous_point:
+                                    pass
+                                else:
+                                    segment1 = (mydxf_point, mydxf_previous_point)
+                                    segment2 = (xml_point, xml_previous_point)
+                                    if is_intersect(segment1, segment2):
+                                        res.add(name)
+                            # second check is_inpolygon
+                            # flag represents how many times each point
+                            # contains in mydxf_contur
+                            # if all of them == each other and % 2 == 0
+                            # don't add contur to result
                             if inside_polygon(*mydxf_point, xml_contur):
                                 flag += 1
                         flags.append(flag)
                     if is_equal(flags) & flags[0] == 0 & flags[0] % 2:
                         pass
                     else:
-                        print(name, flags)
                         res.add(name)
+                        # end of check is_inpolygon
         return res
 
 
