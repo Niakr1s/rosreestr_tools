@@ -16,7 +16,6 @@ class MyDxfFile:
         self.reversed_coords = self.get_coords()
         # It's normal coords like in xml.
         self.coords = self.get_reversed_coords()
-        self.checks = set()
 
     def get_coords(self):
         """ It's a dict(tuples):
@@ -58,17 +57,15 @@ class MyDxfFile:
                 result[name] = [((y, x), r) for (x, y), r in conturs]
         return result
 
-    def checks_update(self, source='settings'):
-        """ Main function for checking dxf file in xmls,
-        clears and then updates self.checks """
+    def checks(self, source='settings'):
+        """ Main function for checking dxf file in xmls """
         settings = self.settings
         XmlFiles = get_list_of_XmlFiles(settings, source)
         # Checking for is_intersect and is_inpolygon
-        self.checks = set()  # Making sure that checks are blank
-        self.geometry_checks_update(XmlFiles)  # This function updates self.checks
-        self.save_checks_to_file()
+        self.geometry_checks(XmlFiles)  # This function updates XmlFiles.check
+        self.save_checks_to_file(XmlFiles)
 
-    def geometry_checks_update(self, XmlFiles):
+    def geometry_checks(self, XmlFiles):
         """Checks for multiple files both is_intersect and is_inpolygon checks."""
         for XmlFile in XmlFiles:
             # We don't want to waste time on Flats and blank Xmls
@@ -76,26 +73,27 @@ class MyDxfFile:
                 continue
             # We don't want to waste time on full KPT check if not nessessary
             elif XmlFile.xml_type == 'KPT':
-                test = self.geometry_check_update(XmlFile, XmlFile.cadastral_number)
-                if XmlFile.cadastral_number not in self.checks:
+                test = self.geometry_check(XmlFile, XmlFile.cadastral_number)
+                if not XmlFile.check:
                     continue
             # Checking in whole dictionary
             for parcel_name in XmlFile.parcels.keys():
-                self.geometry_check_update(XmlFile, parcel_name)
+                self.geometry_check(XmlFile, parcel_name)
 
-    def geometry_check_update(self, XmlFile, parcel_name):
+    def geometry_check(self, XmlFile, parcel_name):
         """This functon checks self.coords based on keys in XmlFile class instance"""
         for mydxf_name, mydxf_conturs in self.coords.items():
             for mydxf_contur in mydxf_conturs:
                 # If it is a line or polyline checking both is_intersect and is_inpolygon
                 if mydxf_name in ('LWPOLYLINE, POLYLINE, LINE'):
                     # Breaking cycles if not nessessary
-                    if parcel_name not in self.checks:
-                        self.is_intersect_check_update(XmlFile, parcel_name, mydxf_contur)
-                    if parcel_name not in self.checks:
-                        self.is_inpolygon_check_update(XmlFile, parcel_name, mydxf_contur)
+                    if parcel_name not in XmlFile.check:
+                        self.is_intersect_check(XmlFile, parcel_name, mydxf_contur)
+                    if parcel_name not in XmlFile.check:
+                        self.is_inpolygon_check(XmlFile, parcel_name, mydxf_contur)
+                        # TODO point, circle checks
 
-    def is_intersect_check_update(self, XmlFile, parcel_name, mydxf_contur):
+    def is_intersect_check(self, XmlFile, parcel_name, mydxf_contur):
         """First check, checking if line or polyline contur
                 is intersecting XmlFile parcel"""
         parcel = XmlFile.parcels[parcel_name]
@@ -110,9 +108,9 @@ class MyDxfFile:
                         segment1 = (mydxf_point, mydxf_previous_point)
                         segment2 = (xml_point, xml_previous_point)
                         if is_intersect(segment1, segment2):
-                            self.checks.add(parcel_name)
+                            XmlFile.check.add(parcel_name)
 
-    def is_inpolygon_check_update(self, XmlFile, parcel_name, mydxf_contur):
+    def is_inpolygon_check(self, XmlFile, parcel_name, mydxf_contur):
         """Second check, checking if points in contur
                 (can be separate poings, or points of line or polyline
                 is lying in XmlFile parcel"""
@@ -132,22 +130,38 @@ class MyDxfFile:
         if is_equal(flags) & flags[0] == 0 & flags[0] % 2:
             pass
         else:
-            self.checks.add(parcel_name)
+            XmlFile.check.add(parcel_name)
 
-    def save_checks_to_file(self):
+    def save_checks_to_file(self, XmlFiles):
         """ Saves SORTED check() result to file and prints in console """
-        sorted_blocks = [i for i in sorted(self.checks) if len(i.split(':')) == 3]
-        parcels = [i for i in sorted(self.checks) if len(i.split(':')) != 3]
-        sorted_parcels = sorted(sorted(parcels, key=lambda x: int(x.split(':')[-2])),
-                                key=lambda x: int(x.split(':')[-1]))
-        sorted_parcels = sorted(parcels, key=lambda x: (x.split(':')[-2], int(x.split(':')[-1])))
-        sorted_checks = [*sorted_blocks, *sorted_parcels]
+        checks = self.get_checks(XmlFiles)
         basename = path.basename(self.file_path).replace('.dxf', '.txt')
         output_path = path.join(self.settings.settings['my_dxf_check_path'], basename)
         with open(output_path, 'w') as file:
-            for parcel in sorted_checks:
-                print(parcel, file=file)
+            for k, v in checks.items():
+                if v:
+                    print(k, file=file)
+                    for i in v:
+                        print(i, file=file)
         print('Result saved to file %s' % (output_path))
+
+    def get_checks(self, XmlFiles):
+        """getting checks from XmlFiles"""
+        parcels, okses = set(), set()
+        for XmlFile in XmlFiles:
+            if XmlFile.check:
+                if XmlFile.xml_type in ('KPT', 'KVZU'):
+                    parcels |= XmlFile.check
+                elif XmlFile.xml_type == 'KVOKS':
+                    okses |= XmlFile.check
+        result = {}
+        result['Parcels'] = sort_result(parcels)
+        result['OKSes'] = sort_result(okses)
+        return result
+
+
+def sort_result(result):
+    return sorted(result, key=lambda x: (int(x.split(':')[-2]), int(x.split(':')[-1])))
 
 
 def is_equal(lst: list):

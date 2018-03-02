@@ -10,8 +10,8 @@ def check_mydxfs(settings, source='settings'):
     if source='qt' - from list of xml_paths from QT window (TODO)
     in settings.settings['xml_folder_path']
     or if source='qt' - from QT window (TODO)"""
-    for xml_file in get_list_of_MyDxfFiles(settings, source):
-        xml_file.checks_update(source)
+    for mydxf_file in get_list_of_MyDxfFiles(settings, source):
+        mydxf_file.checks(source)
 
 
 def convert_xmlfiles_to_dxffiles(settings, source='settings'):

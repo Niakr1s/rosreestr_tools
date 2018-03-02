@@ -24,6 +24,7 @@ class XmlFile:
         self.xml_subtype = None
         self.update_params()
         self.parcels = self.get_parcels()  # sml_subtype should update after this
+        self.check = set()  # if myxml file checked and intersect parcel
 
     def __str__(self):
         p = pformat(self.parcels)
