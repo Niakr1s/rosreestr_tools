@@ -11,7 +11,7 @@ def check_mydxfs(settings, source='settings'):
     in settings.settings['xml_folder_path']
     or if source='qt' - from QT window (TODO)"""
     for xml_file in get_list_of_MyDxfFiles(settings, source):
-        xml_file.check(source)
+        xml_file.checks_update(source)
 
 
 def convert_xmlfiles_to_dxffiles(settings, source='settings'):
