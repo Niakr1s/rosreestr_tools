@@ -4,7 +4,7 @@ import ezdxf
 
 from dxf_file import reverse_coords
 from geometry_checks import is_intersect, inside_polygon
-from xml_file import get_list_of_xmlfiles
+from xml_file import get_list_of_XmlFiles
 
 
 class MyDxfFile:
@@ -42,11 +42,11 @@ class MyDxfFile:
         """ Main function for checking dxf file in xmls,
         returns not sorted set """
         settings = self.settings
-        list_of_xmlfiles = get_list_of_xmlfiles(settings, source)
-        print('Checking for geometry_checks')
-        check1 = self.check_intersect(self, list_of_xmlfiles)
+        XmlFiles = get_list_of_XmlFiles(settings, source)
+        print('Checking for intersection')
+        check1 = self.check_intersect(XmlFiles)
         print('Checking for inpolygon')
-        check2 = self.check_inpolygon(self, list_of_xmlfiles)
+        check2 = self.check_inpolygon(XmlFiles)
         checks = check1 | check2
         self.save_check_to_file(checks)
         return checks
@@ -66,13 +66,16 @@ class MyDxfFile:
                 print(parcel, file=file)
         print('Saved to file %s' % (output_path))
 
-    def check_intersect(self, MyDxfFile, list_of_xmlfiles):
+    def check_intersect(self, XmlFiles):
         """First check for object of class MyDxfFile in list of XmlFile objects"""
         res = set()
-        for contur in MyDxfFile.coords:
+        for contur in self.coords:
             for i in range(len(contur) - 1):
-                for rrxml in list_of_xmlfiles:
-                    for k, v in rrxml.parcels.items():
+                for XmlFile in XmlFiles:
+                    # We don't want to waste time on flats or blank Xmls
+                    if XmlFile.xml_type == 'KPOKS' or not XmlFile.parcels:
+                        return res
+                    for k, v in XmlFile.parcels.items():
                         for contur_xml in v:
                             for j in range(len(contur_xml) - 1):
                                 segment1 = (contur[i], contur[i + 1])
@@ -82,12 +85,15 @@ class MyDxfFile:
                                     res.add(k)
         return res
 
-    def check_inpolygon(self, MyDxfFile, list_of_xmlfiles):  # new func
+    def check_inpolygon(self, XmlFiles):  # new func
         """Second check for object of class MyDxfFile in list of XmlFile objects"""
         res = set()
-        for rrxml in list_of_xmlfiles:
-            for name, parcel in rrxml.parcels.items():
-                for mydxf_contur in MyDxfFile.coords:
+        for XmlFile in XmlFiles:
+            # We don't want to waste time on flats or blank Xmls
+            if XmlFile.xml_type == 'KPOKS' or not XmlFile.parcels:
+                return res
+            for name, parcel in XmlFile.parcels.items():
+                for mydxf_contur in self.coords:
                     # how many times each point of mydxf_contur
                     # contains in parcel
                     # if all of them == each other and % 2 == 0
@@ -120,7 +126,7 @@ if __name__ == '__main__':
     pass
 
 
-def get_list_of_mydxffiles(settings, source='settings'):
+def get_list_of_MyDxfFiles(settings, source='settings'):
     """ Returns list of XmlFile class objects """
     # if source == 'settings':
     #     file_paths = settings.get_mydxf_list()

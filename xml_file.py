@@ -22,14 +22,14 @@ class XmlFile:
         # it should update after get_parsels() execution
         self.cadastral_number = None
         self.xml_subtype = None
-        self.update_cadastral_number_and_xml_subtype()
+        self.update_params()
         self.parcels = self.get_parcels()  # sml_subtype should update after this
 
     def __str__(self):
         p = pformat(self.parcels)
         return p
 
-    def update_cadastral_number_and_xml_subtype(self):
+    def update_params(self):
         """Search at 2 lvl depth 1st argument with search_attribute"""
         search_attribute = 'CadastralNumber'
         found_child = self.root.find('.//*//*[@%s]' % search_attribute)
@@ -92,7 +92,7 @@ class XmlFile:
             os.rename(self.file_path, os.path.join(dirpath, pretty_basename))
 
 
-def get_list_of_xmlfiles(settings, source='settings'):
+def get_list_of_XmlFiles(settings, source='settings'):
     """ Returns list of XmlFile class objects
     if settings='gui' - get list from gui"""
     xml_paths = settings.get_file_list('xml_folder_path')
@@ -111,7 +111,7 @@ if __name__ == '__main__':
     from settings import Settings
 
     settings = Settings()
-    xmls = get_list_of_xmlfiles(settings)
+    xmls = get_list_of_XmlFiles(settings)
     for xml in xmls:
         print(os.path.basename(xml.file_path), xml.cadastral_number)
         print(xml.parcels)
