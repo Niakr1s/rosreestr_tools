@@ -93,12 +93,14 @@ def circle_intersect(point_with_radius, segment_point1, segment_point2):
 
     def dist(x1, y1, x2, y2):
         """Checking distance between points (x1, y1) and (x2, y2)"""
-        return ((x1 - y1) ** 2 + (x2 - y2) ** 2) ** 0.5
+        return ((x2 - x1) ** 2 + (y2 - y1) ** 2) ** 0.5
 
     (x0, y0, radius), (x1, y1), (x2, y2) = point_with_radius, segment_point1, segment_point2
+    print('x0 = %10.2f, y0 = %10.2f, x1 = %10.2f, y1 = %10.2f, x2 = %10.2f, y2 = %10.2f' % (x0, y0, x1, y1, x2, y2))
     r1 = dist(x0, y0, x1, y1)
     r2 = dist(x0, y0, x2, y2)
     r12 = dist(x1, y1, x2, y2)
+    print('r1 = %10.2f, r2 = %10.2f, r3 = %10.2f' % (r1, r2, r12))
     if r1 >= dist(r2, r12, 0, 0):
         res = r2
     elif r2 >= dist(r1, r12, 0, 0):
@@ -112,14 +114,11 @@ def circle_intersect(point_with_radius, segment_point1, segment_point2):
             a, b, c = -a, -b, -c
         r0 = (a * x0 + b * y0 + c) / t
         res = r0
-        if r0 < 0:
-            raise ZeroDivisionError
+    res = abs(res)
     if res <= radius:
         return True
     else:
         return False
-
-
 
 
 if __name__ == '__main__':
