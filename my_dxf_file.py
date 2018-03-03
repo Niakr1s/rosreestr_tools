@@ -177,7 +177,6 @@ class MyDxfFile:
                     print(k, file=file)
                     for i in v:
                         print(i, file=file)
-        print('Result saved to file %s' % (output_path))
 
     def get_checks(self, XmlFiles):
         """getting checks from XmlFiles"""

@@ -48,7 +48,6 @@ class DxfFile:
             # print name of cadastral block
             # saving
             self.dwg.saveas(self.output_file_path)
-        print('%s drew and saved' % self.XmlFile.file_path)
 
 
 def reverse_parcels_coords(parcels):
