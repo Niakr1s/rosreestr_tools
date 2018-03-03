@@ -24,37 +24,52 @@ class MyDxfFile:
         'LINE' = ((0,0), (1,1)), ((0,0), (1,1)),
         'POINT' = (0,0), (1,1), (3,3), ...
         'CIRCLE' = ((0,0),3), ((1,1),2), ((3,3),6), ... (3rd item is radius)"""
-        res = {'LWPOLYLINE': [], 'POLYLINE': [], 'LINE': [], 'POINT': [], 'CIRCLE': []}
+        # res = {'LWPOLYLINE': [], 'POLYLINE': [], 'LINE': [],
+        #        'POINT': [[]], 'CIRCLE': [[]]}  # Due reuse of is_inpolygon method
+        res = {}
         for e in self.msp:
             if e.dxftype() == 'LWPOLYLINE':
                 coords = []
                 for coord in e.get_rstrip_points():
                     coords.append(coord)
+                # res['LWPOLYLINE'].append(coords)
+                if 'LWPOLYLINE' not in res:
+                    res['LWPOLYLINE'] = []
                 res['LWPOLYLINE'].append(coords)
             elif e.dxftype() == 'POLYLINE':
                 coords = []
                 for x, y, _ in e.points():
                     coords.append((x, y))
-                res['POLYLINE'].append(coords)
+                # res['POLYLINE'].append(coords)
+                if 'POLYLINE' not in res:
+                    res['LWPOLYLINE'] = []
+                res['LWPOLYLINE'].append(coords)
             elif e.dxftype() == 'LINE':
                 startx, starty = e.dxf.start[0:2]
                 endx, endy = e.dxf.end[0:2]
+                # res['LINE'].append(((startx, starty), (endx, endy)))
+                if 'LINE' not in res:
+                    res['LINE'] = []
                 res['LINE'].append(((startx, starty), (endx, endy)))
             elif e.dxftype() == 'POINT':
-                res['POINT'].append(e.dxf.location[0:2])
+                if 'POINT' not in res:
+                    res['POINT'] = [[]]
+                res['POINT'][0].append(e.dxf.location)
+                # res['POINT'][-1].append(e.dxf.location)
             elif e.dxftype() == 'CIRCLE':
-                res['CIRCLE'].append(e.dxf.center, e.dxf.radius)
-        return {k: v for k, v in res.items() if v}
+                # res['CIRCLE'][-1].append(*e.dxf.center, e.dxf.radius)
+                if 'CIRCLE' not in res:
+                    res['CIRCLE'] = [[]]
+                res['CIRCLE'][0].append((*e.dxf.center[0:2], e.dxf.radius))
+        return res
 
     def get_reversed_coords(self):
         result = {}
         for name, conturs in self.reversed_coords.items():
             if name in ('LWPOLYLINE, POLYLINE, LINE'):
                 result[name] = [[(y, x) for x, y in contur] for contur in conturs]
-            elif name == 'POINT':
-                result[name] = [(y, x) for x, y in conturs]
-            elif name == 'CIRCLE':
-                result[name] = [((y, x), r) for (x, y), r in conturs]
+            elif name in ('POINT', 'CIRCLE'):
+                result[name] = [[(y, x, z) for x, y, z in i] for i in conturs]
         return result
 
     def checks(self, source='settings'):
@@ -85,13 +100,16 @@ class MyDxfFile:
         for mydxf_name, mydxf_conturs in self.coords.items():
             for mydxf_contur in mydxf_conturs:
                 # If it is a line or polyline checking both is_intersect and is_inpolygon
-                if mydxf_name in ('LWPOLYLINE, POLYLINE, LINE'):
+                if mydxf_name in ('LWPOLYLINE', 'POLYLINE', 'LINE'):
                     # Breaking cycles if not nessessary
                     if parcel_name not in XmlFile.check:
                         self.is_intersect_check(XmlFile, parcel_name, mydxf_contur)
                     if parcel_name not in XmlFile.check:
                         self.is_inpolygon_check(XmlFile, parcel_name, mydxf_contur)
                         # TODO point, circle checks
+                elif mydxf_name in ('POINT', 'CIRCLE'):
+                    if parcel_name not in XmlFile.check:
+                        self.is_inpolygon_check(XmlFile, parcel_name, mydxf_contur)
 
     def is_intersect_check(self, XmlFile, parcel_name, mydxf_contur):
         """First check, checking if line or polyline contur
@@ -124,7 +142,7 @@ class MyDxfFile:
                 # contains in mydxf_contur
                 # if all of them == each other and % 2 == 0
                 # don't add contur to result
-                if inside_polygon(*mydxf_point, xml_contur):
+                if inside_polygon(mydxf_point[0], mydxf_point[1], xml_contur):
                     flag += 1
             flags.append(flag)
         if is_equal(flags) & flags[0] == 0 & flags[0] % 2:
@@ -187,6 +205,13 @@ def get_list_of_MyDxfFiles(settings, source='settings'):
         mydxf_file = MyDxfFile(file, settings)
         res.append(mydxf_file)
     return res
+
+
+def append_if(lst, k, v):
+    if k not in lst:
+        lst[k] = []
+    lst[k].append(v)
+    return lst
 
 
 if __name__ == '__main__':
