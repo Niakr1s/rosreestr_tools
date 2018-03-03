@@ -57,7 +57,8 @@ class XmlFile:
             cadastral_number = parcel.attrib['CadastralNumber']
             conturs = self.get_parcel_conturs(parcel)
             result[cadastral_number] = conturs
-        return result
+        # Removing blank keys
+        return {k: v for k, v in result.items() if v}
 
     @staticmethod
     def get_parcel_conturs(parcel):
@@ -82,6 +83,8 @@ class XmlFile:
     def convert_to_dxffile(self):
         if self.xml_type == 'KPOKS' or not self.parcels:
             return
+        if self.xml_subtype == 'Construction':
+            print(self.parcels)
         dxffile = DxfFile(self)
         dxffile.draw_conturs_and_save()
 
