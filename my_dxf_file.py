@@ -111,7 +111,6 @@ class MyDxfFile:
                     # Check, if any contur of Xml file is fully in
                     # closed contur in Mydxf file, add this contur to checks
                     if len(mydxf_contur) > 1 & (mydxf_contur[0] == mydxf_contur[-1]):
-                        print('we are here')
                         self.is_XmlFile_inpolygon_check(XmlFile, parcel_name, mydxf_contur)
                 elif mydxf_name in ('POINT', 'CIRCLE'):
                     if parcel_name not in XmlFile.check:
