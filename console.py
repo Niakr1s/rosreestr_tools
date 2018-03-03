@@ -1,3 +1,5 @@
+import os
+
 import actions
 from settings import Settings
 
@@ -29,22 +31,34 @@ def short_input():
     return inp
 
 
+def cls():
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print('\n' * 25)
+
+
 def menu():
+    cls()
     settings = Settings()
     help_screen(settings)
     while True:
         inp = short_input()
         if inp == '1':
+            cls()
             actions.check_mydxfs(settings)
         elif inp == '2':
+            cls()
             actions.convert_xmlfiles_to_dxffiles(settings)
         elif inp == '3':
+            cls()
             actions.merge_dxfs(settings)
         elif inp == '4':
+            cls()
             actions.pretty_rename_xmls(settings)
         elif inp in ('q', 'Q'):
+            cls()
             break
         elif inp in ('h', 'H'):
+            cls()
             help_screen(settings)
 
 

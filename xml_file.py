@@ -92,9 +92,11 @@ class XmlFile:
         dirpath = os.path.dirname(self.file_path)
         cadastral_number_spaced = self.cadastral_number.replace(':', ' ') + '.xml'
         pretty_basename = ' '.join((self.xml_type, self.xml_subtype, cadastral_number_spaced))
-        if os.path.basename(self.file_path) != pretty_basename:
+        try:
             os.rename(self.file_path, os.path.join(dirpath, pretty_basename))
-        print('Renamed to %s' % pretty_basename)
+        except FileExistsError as err:
+            os.remove(os.path.join(dirpath, pretty_basename))
+            os.rename(self.file_path, os.path.join(dirpath, pretty_basename))
 
 
 def get_list_of_XmlFiles(settings, source='settings'):
