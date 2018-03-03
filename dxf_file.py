@@ -3,18 +3,18 @@ from os import path
 import ezdxf
 
 
-class DxfFile():
+class DxfFile:
     """This class represents """
 
-    def __init__(self, xmlfile):
+    def __init__(self, XmlFile):
         self.dwg = ezdxf.new('R2000')  # create R2000 drawing
         self.msp = self.dwg.modelspace()  # modelspace for dwg
-        self.xmlfile = xmlfile
-        self.settings = xmlfile.settings
-        self.parcels = self.xmlfile.parcels
+        self.XmlFile = XmlFile
+        self.settings = XmlFile.settings
+        self.parcels = self.XmlFile.parcels
         self.reversed_parcels = reverse_parcels_coords(self.parcels)
-        self.output_file_path = path.join(
-            self.settings.settings['dxf_folder_path'], self.xmlfile.basename_file_path.replace('.xml', '.dxf'))
+        self.output_file_path = path.join(self.settings.settings['dxf_folder_path'],
+            self.XmlFile.basename_file_path.replace('.xml', '.dxf'))
 
     def draw_conturs_and_save(self):
         """ Draws iterables from dictionary to modelspace.
@@ -24,10 +24,17 @@ class DxfFile():
             block_name = parcel_name.replace(':', ' ')
             dxf_block = self.dwg.blocks.new(name=block_name)
             # Getting random color for every block
-            color = self.settings.get_next_color()
-            # Adding parcels polylines
+            # color = self.settings.get_next_color()
+            # Default attribs for parcels
+            attribs = {'color': self.settings.settings['color_type']['parcel']}
+            # if current contur is a block
+            if len(parcel_name.split(':')) == 3:
+                attribs['color'] = self.settings.settings['color_type']['block']
+                attribs['const_width'] = 2
+            elif self.XmlFile.xml_type == 'KVOKS':
+                attribs['color'] = self.settings.settings['color_type']['oks']
             for contur in conturs:
-                dxf_block.add_lwpolyline(contur, dxfattribs={'color': color})
+                dxf_block.add_lwpolyline(contur, dxfattribs=attribs)
             # Adding text description
             text_attrib = get_text_attrib(conturs)
             if text_attrib:
@@ -35,16 +42,13 @@ class DxfFile():
                 # print('Adding text at: %s with height %s ' %
                 #       (text_coords, text_height))
                 dxf_block.add_text(parcel_name,
-                                   dxfattribs={'height': text_height,
-                                               'color': color}).\
-                    set_pos((text_coords), align='MIDDLE_CENTER')
+                                   dxfattribs={'height': text_height, 'color': attribs['color']}).set_pos((text_coords), align='MIDDLE_CENTER')
             # Adding block to modelspace
-            self.msp.add_blockref(block_name, insert=(
-                0, 0), dxfattribs={'color': 2})
+            self.msp.add_blockref(block_name, insert=(0, 0))
             # print name of cadastral block
             # saving
             self.dwg.saveas(self.output_file_path)
-        print('%s drawed and saved' % (self.xmlfile.file_path))
+        print('%s drew and saved' % self.XmlFile.file_path)
 
 
 def reverse_parcels_coords(parcels):

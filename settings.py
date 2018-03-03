@@ -8,7 +8,8 @@ def init_defaults():
     xml_folder_path - for xml input files
     my_dxf_file_path - for user file to check in xmls
     my_dxf_check_path - result of my file check """
-    defaults = {'color_iter': 0, 'colors': [1, 2, 4, 5, 6, 34, 84, 234], 'dxf_folder_path': path.abspath('xml\\dxf'),
+    defaults = {'color_iter': 0, 'colors': [1, 2, 4, 5, 6, 34, 84, 234],
+                'color_type': {'block': 7, 'parcel': 8, 'oks': 1}, 'dxf_folder_path': path.abspath('xml\\dxf'),
                 'xml_folder_path': path.abspath('xml'), 'my_dxf_file_path': path.abspath('xml\\mydxfs'),
                 'my_dxf_check_path': path.abspath('xml\\mydxfs\\results'),
                 'merged_dxf_path': path.abspath('xml\\dxf\\merged\\merged.dxf')}
