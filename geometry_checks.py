@@ -87,7 +87,7 @@ def inside_polygon(x, y, points):
     return inside
 
 
-def circle_intersect(*point, radius, segment_point1, segment_point2):
+def circle_intersect(point_with_radius, segment_point1, segment_point2):
     """algorithm:
     http: // pers.narod.ru / algorithms / pas_dist_from_point_to_line.html"""
 
@@ -95,7 +95,7 @@ def circle_intersect(*point, radius, segment_point1, segment_point2):
         """Checking distance between points (x1, y1) and (x2, y2)"""
         return ((x1 - y1) ** 2 + (x2 - y2) ** 2) ** 0.5
 
-    (x0, y0), (x1, y1), (x2, y2) = point, segment_point1, segment_point2
+    (x0, y0, radius), (x1, y1), (x2, y2) = point_with_radius, segment_point1, segment_point2
     r1 = dist(x0, y0, x1, y1)
     r2 = dist(x0, y0, x2, y2)
     r12 = dist(x1, y1, x2, y2)

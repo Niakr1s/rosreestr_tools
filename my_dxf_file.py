@@ -112,6 +112,9 @@ class MyDxfFile:
                 elif mydxf_name in ('POINT', 'CIRCLE'):
                     if parcel_name not in XmlFile.check:
                         self.is_inpolygon_check(XmlFile, parcel_name, mydxf_contur)
+                        # if parcel_name not in XmlFile.check:
+                        #     if mydxf_name == 'CIRCLE':
+
 
     def is_intersect_check(self, XmlFile, parcel_name, mydxf_contur):
         """First check, checking if line or polyline contur
@@ -129,6 +132,8 @@ class MyDxfFile:
                         segment2 = (xml_point, xml_previous_point)
                         if is_intersect(segment1, segment2):
                             XmlFile.check.add(parcel_name)
+                    xml_previous_point = xml_point
+            mydxf_previous_point = mydxf_point
 
     def is_inpolygon_check(self, XmlFile, parcel_name, mydxf_contur):
         """Second check, checking if points in contur
@@ -151,6 +156,15 @@ class MyDxfFile:
             pass
         else:
             XmlFile.check.add(parcel_name)
+
+    # def circle_intersect_check(self, XmlFile, parcel_name, mydxf_contur):
+    #     parcel = XmlFile.parcels[parcel_name]
+    #     for mydxf_point in mydxf_contur:
+    #         for xml_contur in parcel:
+    #             xml_previous_point = xml_contur[0]
+    #             for xml_point in xml_contur:
+    #                 if circle_intersect(mydxf_point, xml_previous_point, xml_point):
+    #                     XmlFile.check.add(parcel_name)
 
     def save_checks_to_file(self, XmlFiles):
         """ Saves SORTED check() result to file and prints in console """
