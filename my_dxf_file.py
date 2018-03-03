@@ -108,6 +108,11 @@ class MyDxfFile:
                         self.is_intersect_check(XmlFile, parcel_name, mydxf_contur)
                     if parcel_name not in XmlFile.check:
                         self.is_inpolygon_check(XmlFile, parcel_name, mydxf_contur)
+                    # Check, if any contur of Xml file is fully in
+                    # closed contur in Mydxf file, add this contur to checks
+                    if len(mydxf_contur) > 1 & (mydxf_contur[0] == mydxf_contur[-1]):
+                        print('we are here')
+                        self.is_XmlFile_inpolygon_check(XmlFile, parcel_name, mydxf_contur)
                 elif mydxf_name in ('POINT', 'CIRCLE'):
                     if parcel_name not in XmlFile.check:
                         self.is_inpolygon_check(XmlFile, parcel_name, mydxf_contur)
@@ -165,6 +170,20 @@ class MyDxfFile:
                     if circle_intersect(mydxf_point, xml_previous_point, xml_point):
                         XmlFile.check.add(parcel_name)
                     xml_previous_point = xml_point
+
+    def is_XmlFile_inpolygon_check(self, XmlFile, parcel_name, mydxf_contur):
+        # Check, if any contur of Xml file is fully in inner space of
+        # closed contur in Mydxf file, add this contur to checks
+        parcel = XmlFile.parcels[parcel_name]
+        flags = []  # If any point of XmlFile contur in outer space -> False
+        for xml_contur in parcel:
+            flag = True
+            for xml_point in xml_contur:
+                if not inside_polygon(*xml_point, mydxf_contur):
+                    flag = False
+            if flag:
+                XmlFile.check.add(parcel_name)
+                break
 
     def save_checks_to_file(self, XmlFiles):
         """ Saves SORTED check() result to file and prints in console """
@@ -230,12 +249,12 @@ def append_if(lst, k, v):
 
 
 if __name__ == '__main__':
+    from xml_file import XmlFile
     from settings import Settings
 
     settings = Settings()
-    my = MyDxfFile('xml\\mydxfs\\my_dxf_file.dxf', settings)
-    print(my.coords)
-    print(my.reversed_coords)
-    my = MyDxfFile('xml\\mydxfs\\my_dxf_file - копия.dxf', settings)
-    print(my.coords)
-    print(my.reversed_coords)
+    my = MyDxfFile('files\\mydxf\\my.dxf', settings)
+    xml = XmlFile('files\\xml\\KPT CadastralBlock 21 02 010614.xml', settings)
+    for mydxf_name, mydxf_conturs in my.coords.items():
+        for mydxf_contur in mydxf_conturs:
+            print(my.is_XmlFile_inpolygon_check(xml, '21:02:010614:338', mydxf_contur))
