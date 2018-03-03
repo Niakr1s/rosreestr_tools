@@ -1,5 +1,5 @@
 import json
-from os import path, mkdir, scandir
+from os import path, makedirs, scandir
 
 
 def init_defaults():
@@ -31,22 +31,11 @@ class Settings:
         return self.settings['colors'][self.settings['color_iter']]
 
     def check_paths(self):
-        if not path.exists(self.settings['xml_folder_path']):
-            mkdir(self.settings['xml_folder_path'].rpartition('\\')[0])
-            mkdir(self.settings['xml_folder_path'])
-            print('xml_folder_path created')
-        if not path.exists(self.settings['dxf_folder_path']):
-            mkdir(self.settings['dxf_folder_path'])
-            print('xml_folder_path created')
-        if not path.exists(self.settings['my_dxf_file_path']):
-            mkdir(self.settings['my_dxf_file_path'])
-            print('my_dxf_file_path created')
-        if not path.exists(self.settings['my_dxf_check_path']):
-            mkdir(self.settings['my_dxf_check_path'])
-            print('my_dxf_check_path created')
-        if not path.exists(path.dirname(self.settings['merged_dxf_path'])):
-            mkdir(path.dirname(self.settings['merged_dxf_path']))
-            print('merged_dxf_path created')
+        makedirs(self.settings['xml_folder_path'], exist_ok=True)
+        makedirs(self.settings['dxf_folder_path'], exist_ok=True)
+        makedirs(self.settings['my_dxf_file_path'], exist_ok=True)
+        makedirs(self.settings['my_dxf_check_path'], exist_ok=True)
+        makedirs(path.dirname(self.settings['merged_dxf_path']), exist_ok=True)
 
     def get_file_list(self, key):
         """ Key is from self.settings dict,

@@ -161,6 +161,7 @@ class MyDxfFile:
             XmlFile.check.add(parcel_name)
 
     def circle_intersect_check(self, XmlFile, parcel_name, mydxf_contur):
+        """Third check, only for circles"""
         parcel = XmlFile.parcels[parcel_name]
         for mydxf_point in mydxf_contur:
             for xml_contur in parcel:
@@ -171,7 +172,7 @@ class MyDxfFile:
                     xml_previous_point = xml_point
 
     def is_XmlFile_inpolygon_check(self, XmlFile, parcel_name, mydxf_contur):
-        # Check, if any contur of Xml file is fully in inner space of
+        # Fourth check, if any contur of Xml file is fully in inner space of
         # closed contur in Mydxf file, add this contur to checks
         parcel = XmlFile.parcels[parcel_name]
         flags = []  # If any point of XmlFile contur in outer space -> False
@@ -206,13 +207,15 @@ class MyDxfFile:
                 elif XmlFile.xml_type == 'KVOKS':
                     okses |= XmlFile.check
         result = {}
-        result['Parcels'] = sort_result(parcels)
-        result['OKSes'] = sort_result(okses)
+        if parcels:
+            result['Parcels'] = sort_result(parcels)
+        if okses:
+            result['OKSes'] = sort_result(okses)
         return result
 
 
 def sort_result(result):
-    return sorted(result, key=lambda x: (int(x.split(':')[-2]), int(x.split(':')[-1])))
+    return sorted(result, key=lambda x: (len(x), int(x.split(':')[-2]), int(x.split(':')[-1])))
 
 
 def is_equal(lst: list):
@@ -246,14 +249,3 @@ def append_if(lst, k, v):
     lst[k].append(v)
     return lst
 
-
-if __name__ == '__main__':
-    from xml_file import XmlFile
-    from settings import Settings
-
-    settings = Settings()
-    my = MyDxfFile('files\\mydxf\\my.dxf', settings)
-    xml = XmlFile('files\\xml\\KPT CadastralBlock 21 02 010614.xml', settings)
-    for mydxf_name, mydxf_conturs in my.coords.items():
-        for mydxf_contur in mydxf_conturs:
-            print(my.is_XmlFile_inpolygon_check(xml, '21:02:010614:338', mydxf_contur))
