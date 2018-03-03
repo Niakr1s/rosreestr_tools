@@ -54,7 +54,7 @@ class MyDxfFile:
             elif e.dxftype() == 'POINT':
                 if 'POINT' not in res:
                     res['POINT'] = [[]]
-                res['POINT'][0].append(e.dxf.location)
+                res['POINT'][0].append((e.dxf.location[0:2]))
                 # res['POINT'][-1].append(e.dxf.location)
             elif e.dxftype() == 'CIRCLE':
                 # res['CIRCLE'][-1].append(*e.dxf.center, e.dxf.radius)
@@ -68,8 +68,10 @@ class MyDxfFile:
         for name, conturs in self.reversed_coords.items():
             if name in ('LWPOLYLINE, POLYLINE, LINE'):
                 result[name] = [[(y, x) for x, y in contur] for contur in conturs]
-            elif name in ('POINT', 'CIRCLE'):
+            elif name in ('CIRCLE'):
                 result[name] = [[(y, x, z) for x, y, z in i] for i in conturs]
+            elif name in ('POINT'):
+                result[name] = [[(y, x) for x, y in i] for i in conturs]
         return result
 
     def checks(self, source='settings'):
