@@ -9,10 +9,10 @@ def init_defaults():
     my_dxf_file_path - for user file to check in xmls
     my_dxf_check_path - result of my file check """
     defaults = {'color_iter': 0, 'colors': [1, 2, 4, 5, 6, 34, 84, 234],
-                'color_type': {'block': 7, 'parcel': 8, 'oks': 1}, 'dxf_folder_path': path.abspath('xml\\dxf'),
-                'xml_folder_path': path.abspath('xml'), 'my_dxf_file_path': path.abspath('xml\\mydxfs'),
-                'my_dxf_check_path': path.abspath('xml\\mydxfs\\results'),
-                'merged_dxf_path': path.abspath('xml\\dxf\\merged\\merged.dxf')}
+                'color_type': {'block': 7, 'parcel': 8, 'oks': 1}, 'dxf_folder_path': path.abspath('files\\dxf'),
+                'xml_folder_path': path.abspath('files\\xml'), 'my_dxf_file_path': path.abspath('files\\mydxf'),
+                'my_dxf_check_path': path.abspath('files\\results'),
+                'merged_dxf_path': path.abspath('files\\merged\\merged.dxf')}
     return defaults
 
 
@@ -20,10 +20,8 @@ class Settings:
     def __init__(self):
         """ settings.json should be in app path """
         self.json_settings_path = path.abspath('settings.json')
-        if not self.load_settings():
-            self.settings = init_defaults()
-            self.dump_settings()
-            print('Settings file not found, created it.')
+        self.settings = init_defaults()
+        self.update_settings_from_json()
         self.check_paths()
 
     def get_next_color(self):
@@ -34,20 +32,21 @@ class Settings:
 
     def check_paths(self):
         if not path.exists(self.settings['xml_folder_path']):
-            print('xml_folder_path created')
+            mkdir(self.settings['xml_folder_path'].rpartition('\\')[0])
             mkdir(self.settings['xml_folder_path'])
+            print('xml_folder_path created')
         if not path.exists(self.settings['dxf_folder_path']):
-            print('dxf_folder_path created')
             mkdir(self.settings['dxf_folder_path'])
+            print('xml_folder_path created')
         if not path.exists(self.settings['my_dxf_file_path']):
-            print('my_dxf_file_path created')
             mkdir(self.settings['my_dxf_file_path'])
+            print('my_dxf_file_path created')
         if not path.exists(self.settings['my_dxf_check_path']):
-            print('my_dxf_check_path created')
             mkdir(self.settings['my_dxf_check_path'])
+            print('my_dxf_check_path created')
         if not path.exists(path.dirname(self.settings['merged_dxf_path'])):
-            print('merged_dxf_path created')
             mkdir(path.dirname(self.settings['merged_dxf_path']))
+            print('merged_dxf_path created')
 
     def get_file_list(self, key):
         """ Key is from self.settings dict,
@@ -72,16 +71,14 @@ class Settings:
             # json.dump(attrs, file, indent='    ')
             json.dump(self.settings, file, indent='    ')
 
-    def load_settings(self):
+    def update_settings_from_json(self):
         """ Load settings from json_file and initialize with them """
         try:
             with open(self.json_settings_path) as file:
-                settings = json.load(file)
-        except FileNotFoundError:
-            return False
-        self.settings = settings
-        print('Settings loaded fom file')
-        return True
+                self.settings = json.load(file)
+        except (FileNotFoundError, json.JSONDecodeError):
+            self.dump_settings()
+
 
 
 if __name__ == '__main__':
