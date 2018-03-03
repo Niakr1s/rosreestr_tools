@@ -53,6 +53,7 @@ def menu():
     help_screen(settings)
     while True:
         inp = short_input()
+        settings.check_paths()
         if inp == '1':
             cls()
             actions.check_mydxfs(settings)
