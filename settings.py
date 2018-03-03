@@ -11,7 +11,7 @@ def init_defaults():
     defaults = {'color_iter': 0, 'colors': [1, 2, 4, 5, 6, 34, 84, 234],
                 'color_type': {'block': 7, 'parcel': 8, 'oks': 1}, 'dxf_folder_path': path.abspath('files\\dxf'),
                 'xml_folder_path': path.abspath('files\\xml'), 'my_dxf_file_path': path.abspath('files\\mydxf'),
-                'my_dxf_check_path': path.abspath('files\\results'),
+                'my_dxf_check_path': path.abspath('files\\txt'),
                 'merged_dxf_path': path.abspath('files\\merged\\merged.dxf')}
     return defaults
 
