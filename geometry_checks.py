@@ -87,6 +87,37 @@ def inside_polygon(x, y, points):
     return inside
 
 
+def circle_intersect(point, segment_point1, segment_point2):
+    """algorithm:
+    http: // pers.narod.ru / algorithms / pas_dist_from_point_to_line.html"""
+
+    def dist(x1, y1, x2, y2):
+        """Checking distance between points (x1, y1) and (x2, y2)"""
+        return ((x1 - y1) ** 2 + (x2 - y2) ** 2) ** 0.5
+
+    (x0, y0), (x1, y1), (x2, y2) = point, segment_point1, segment_point2
+    r1 = dist(x0, y0, x1, y1)
+    r2 = dist(x0, y0, x2, y2)
+    r12 = dist(x1, y1, x2, y2)
+    if r1 >= dist(r2, r12, 0, 0):
+        return r2
+    elif r2 >= dist(r1, r12, 0, 0):
+        return r1
+    else:
+        a = y2 - y1
+        b = x1 - x2
+        c = -x1 * (y2 - y1) + y1 * (x2 - x1)
+        t = dist(a, b, 0, 0)
+        if c > 0:
+            a, b, c = -a, -b, -c
+        r0 = (a * x0 + b * y0 + c) / t
+        return r0
+        # if r0 < 0:
+        #     raise ZeroDivisionError
+
+
+
+
 if __name__ == '__main__':
     """ Some Tests: 1st should be False, 2nd should be True, 3rd should be False """
     segment1 = ((1, 1), (10, 1))
