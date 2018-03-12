@@ -4,3 +4,7 @@ class WrongArguments(Exception):
 
 class NotABlock(Exception):
     pass
+
+
+class NoCoordinates(Exception):
+    pass

@@ -1,9 +1,10 @@
 import os
-from pprint import pformat
 
 from lxml import etree
 
+import actions
 from dxf_file import DxfFile
+from exceptions import NoCoordinates
 
 
 class XmlFile:
@@ -20,33 +21,35 @@ class XmlFile:
         # xml_subtype can be str type:
         # CadastralBlock, Parcel, Building, Construction, Uncompleted, Flat
         # it should update after get_parsels() execution
-        self.cadastral_number = None
-        self.xml_subtype = None
-        self.update_params()
+        self.cadastral_number = self.root.find('.//*//*[@CadastralNumber]').attrib['CadastralNumber']
+        # self.xml_subtype = None
+        # self.update_params()
         self.parcels = self.get_parcels()  # sml_subtype should update after this
         self.check = set()  # if myxml file checked and intersect parcel
 
-    def __str__(self):
-        p = pformat(self.parcels)
-        return p
-
-    def update_params(self):
-        """Search at 2 lvl depth 1st argument with search_attribute"""
-        search_attribute = 'CadastralNumber'
-        found_child = self.root.find('.//*//*[@%s]' % search_attribute)
-        self.cadastral_number = found_child.attrib[search_attribute]
-        self.xml_subtype = remove_namespace(found_child.tag)
+    # def update_params(self):
+    #     """Search at 2 lvl depth 1st argument with search_attribute"""
+    #     search_attribute = 'CadastralNumber'
+    #     found_child = self.root.find('.//*//*[@%s]' % search_attribute)
+    #     self.cadastral_number = found_child.attrib[search_attribute]
+    #     self.xml_subtype = remove_namespace(found_child.tag)
 
     def get_parcels(self):
         result = {}
         for item in self.root.iterfind('.//*[@CadastralNumber]'):
             cadastral_number = item.attrib['CadastralNumber']
-            if len(cadastral_number.split(':')) == 3:  # if it is a block
-                result[cadastral_number] = self.get_block_conturs(item)
-            else:
-                result[cadastral_number] = self.get_parcel_conturs(item)
+            try:
+                if len(cadastral_number.split(':')) == 3:  # if it is a block
+                    actions.update(result, {cadastral_number: {'coordinates': self.get_block_conturs(item),
+                                                               'type': remove_namespace(item.tag)}})
+                else:
+                    actions.update(result, {cadastral_number: {'coordinates': self.get_parcel_conturs(item),
+                                                               'type': remove_namespace(item.tag)}})
+            except NoCoordinates:
+                pass
+                # result[cadastral_number]['coordinates'] = self.get_parcel_conturs(item)
         # Removing blank keys
-        return {k: v for k, v in result.items() if v}
+        return result
 
     @staticmethod
     def get_parcel_conturs(parcel):
@@ -59,6 +62,8 @@ class XmlFile:
                 x = float(point.attrib['X'])
                 y = float(point.attrib['Y'])
                 result[-1].append((x, y))
+        if not result:
+            raise NoCoordinates
         return result
 
     def get_block_conturs(self, parcel):
@@ -104,4 +109,6 @@ if __name__ == '__main__':
     from settings import Settings
     settings = Settings()
     xml = XmlFile(r'd:\github\rosreestr_tools\files\xml\KPT CadastralBlock 21 02 010103.xml', settings)
+    xml.convert_to_dxffile()
+    xml = XmlFile(r'd:\Dropbox\xml\зд.xml', settings)
     xml.convert_to_dxffile()

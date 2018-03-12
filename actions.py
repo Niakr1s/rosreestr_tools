@@ -1,3 +1,5 @@
+import collections
+
 import ezdxf
 from progressbar import ProgressBar, streams
 
@@ -70,6 +72,15 @@ def pretty_rename_xmls(settings, source='settings'):
 
 if __name__ == '__main__':
     from settings import Settings
-
     settings = Settings()
     txts_to_formatted_string(settings)
+
+
+def update(d, u):
+    """Updates dictionary"""
+    for k, v in u.items():
+        if isinstance(v, collections.Mapping):
+            d[k] = update(d.get(k, {}), v)
+        else:
+            d[k] = v
+    return d
