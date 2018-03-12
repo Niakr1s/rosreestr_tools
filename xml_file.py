@@ -18,21 +18,10 @@ class XmlFile:
         self.root = self.tree.getroot()
         # can be KPT, KVZU, KVOKS (Flat), KPOKS (Building, Construction, Uncompleted)
         self.xml_type = remove_namespace(self.root.tag)
-        # xml_subtype can be str type:
-        # CadastralBlock, Parcel, Building, Construction, Uncompleted, Flat
-        # it should update after get_parsels() execution
         self.cadastral_number = self.root.find('.//*//*[@CadastralNumber]').attrib['CadastralNumber']
-        # self.xml_subtype = None
-        # self.update_params()
         self.parcels = self.get_parcels()  # sml_subtype should update after this
+        self.xml_subtype = remove_namespace(self.root.find('.//*[@CadastralNumber]').tag)
         self.check = set()  # if myxml file checked and intersect parcel
-
-    # def update_params(self):
-    #     """Search at 2 lvl depth 1st argument with search_attribute"""
-    #     search_attribute = 'CadastralNumber'
-    #     found_child = self.root.find('.//*//*[@%s]' % search_attribute)
-    #     self.cadastral_number = found_child.attrib[search_attribute]
-    #     self.xml_subtype = remove_namespace(found_child.tag)
 
     def get_parcels(self):
         result = {}

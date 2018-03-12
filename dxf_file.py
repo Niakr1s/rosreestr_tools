@@ -78,7 +78,6 @@ def get_text_attrib(cadastral_attributes):
 
 
 def get_attributes(settings, attributes):
-    print(attributes)
     if attributes['type'] == 'CadastralBlock':
         return {'color': settings.settings['color_type']['block'], 'const_width': 2}
     elif attributes['type'] == 'Parcel':
