@@ -258,7 +258,7 @@ def txts_to_formatted_string(settings):
     for file in file_list:
         with open(file) as f:
             for line in f:
-                if len(line.split(':')) in (2, 3, 4):  # To exclude wrong lines
+                if len(line.split(':')) == 4:  # Only parcels
                     s.add(line.rstrip())
     res = '; '.join(sort_result(s))
     with open(settings.settings['formatted_txt_path'], 'w') as f:
