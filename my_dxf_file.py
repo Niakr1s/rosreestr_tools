@@ -38,7 +38,7 @@ class MyDxfFile:
                 res['LWPOLYLINE'].append(coords)
             elif e.dxftype() == 'POLYLINE':
                 coords = []
-                for x, y, _ in e.points():
+                for x, y in e.points()[0:2]:
                     coords.append((x, y))
                 # res['POLYLINE'].append(coords)
                 if 'POLYLINE' not in res:
@@ -122,7 +122,7 @@ class MyDxfFile:
     def is_intersect_check(self, XmlFile, parcel_name, mydxf_contur):
         """First check, checking if line or polyline contur
                 is intersecting XmlFile parcel"""
-        parcel = XmlFile.parcels[parcel_name]
+        parcel = XmlFile.parcels[parcel_name]['coordinates']
         mydxf_previous_point = mydxf_contur[0]
         for mydxf_point in mydxf_contur:
             for xml_contur in parcel:
@@ -142,7 +142,7 @@ class MyDxfFile:
         """Second check, checking if points in contur
                 (can be separate poings, or points of line or polyline
                 is lying in XmlFile parcel"""
-        parcel = XmlFile.parcels[parcel_name]
+        parcel = XmlFile.parcels[parcel_name]['coordinates']
         flags = []
         for mydxf_point in mydxf_contur:
             flag = 0
@@ -162,7 +162,7 @@ class MyDxfFile:
 
     def circle_intersect_check(self, XmlFile, parcel_name, mydxf_contur):
         """Third check, only for circles"""
-        parcel = XmlFile.parcels[parcel_name]
+        parcel = XmlFile.parcels[parcel_name]['coordinates']
         for mydxf_point in mydxf_contur:
             for xml_contur in parcel:
                 xml_previous_point = xml_contur[0]
@@ -174,7 +174,7 @@ class MyDxfFile:
     def is_XmlFile_inpolygon_check(self, XmlFile, parcel_name, mydxf_contur):
         # Fourth check, if any contur of Xml file is fully in inner space of
         # closed contur in Mydxf file, add this contur to checks
-        parcel = XmlFile.parcels[parcel_name]
+        parcel = XmlFile.parcels[parcel_name]['coordinates']
         flags = []  # If any point of XmlFile contur in outer space -> False
         for xml_contur in parcel:
             flag = True

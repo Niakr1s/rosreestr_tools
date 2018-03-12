@@ -25,9 +25,7 @@ class DxfFile:
             # Creating block with name ~ '21 02 000000'
             block_name = cadastral_number.replace(':', ' ')
             dxf_block = self.dwg.blocks.new(name=block_name)
-            # Getting random color for every block
-            # color = self.settings.get_next_color()
-            # Default attribs for parcels
+            # Different color and width for parcels, blocks and other
             attribs = get_attributes(self.settings, cadastral_attributes)
             for contur in cadastral_attributes['reversed_coordinates']:
                 dxf_block.add_lwpolyline(contur, dxfattribs=attribs)
@@ -35,13 +33,10 @@ class DxfFile:
             text_attrib = get_text_attrib(cadastral_attributes)
             if text_attrib:
                 text_coords, text_height = text_attrib
-                # print('Adding text at: %s with height %s ' %
-                #       (text_coords, text_height))
                 dxf_block.add_text(' '.join((cadastral_number, cadastral_attributes['type'])),
                                    dxfattribs={'height': text_height, 'color': attribs['color']}).set_pos((text_coords), align='MIDDLE_CENTER')
             # Adding block to modelspace
             self.msp.add_blockref(block_name, insert=(0, 0))
-            # print name of cadastral block
             # saving
             self.dwg.saveas(self.output_file_path)
 
