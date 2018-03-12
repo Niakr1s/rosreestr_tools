@@ -39,24 +39,12 @@ class XmlFile:
 
     def get_parcels(self):
         result = {}
-        if self.xml_type in ('KVZU', 'KPT'):
-            # Adding parcels to result
-            for parcel in self.root.iter('{*}Parcel'):
-                cadastral_number = parcel.attrib['CadastralNumber']
-                conturs = self.get_parcel_conturs(parcel)
-                result[cadastral_number] = conturs
-        if self.xml_type == 'KPT':
-            # Adding block to result
-            for block in self.root.iter('{*}CadastralBlock'):
-                cadastral_number = block.attrib['CadastralNumber']
-                conturs = self.get_block_conturs(block)
-                result[cadastral_number] = conturs
-        # if it's a Building, Construction, Uncompleted
-        if self.xml_type == 'KVOKS':
-            parcel = self.root.find('.//*[@CadastralNumber]')
-            cadastral_number = parcel.attrib['CadastralNumber']
-            conturs = self.get_parcel_conturs(parcel)
-            result[cadastral_number] = conturs
+        for item in self.root.iterfind('.//*[@CadastralNumber]'):
+            cadastral_number = item.attrib['CadastralNumber']
+            if len(cadastral_number.split(':')) == 3:  # if it is a block
+                result[cadastral_number] = self.get_block_conturs(item)
+            else:
+                result[cadastral_number] = self.get_parcel_conturs(item)
         # Removing blank keys
         return {k: v for k, v in result.items() if v}
 
@@ -81,10 +69,8 @@ class XmlFile:
         return result
 
     def convert_to_dxffile(self):
-        if self.xml_type == 'KPOKS' or not self.parcels:
+        if not self.parcels:
             return
-        if self.xml_subtype == 'Construction':
-            print(self.parcels)
         dxffile = DxfFile(self)
         dxffile.draw_conturs_and_save()
 
@@ -116,15 +102,6 @@ def remove_namespace(not_pretty_tag):
 
 if __name__ == '__main__':
     from settings import Settings
-
     settings = Settings()
-    xmls = get_list_of_XmlFiles(settings)
-    for xml in xmls:
-        print(os.path.basename(xml.file_path), xml.cadastral_number)
-        print(xml.parcels)
-        # print('Have parcels' if xml.parcels.keys() else "Doesn't have parcels")
-        # # print(xml.parcels.keys())
-        # try:
-        #     print(xml.blocks.keys())
-        # except Exception:
-        #     pass
+    xml = XmlFile(r'd:\github\rosreestr_tools\files\xml\KPT CadastralBlock 21 02 010103.xml', settings)
+    xml.convert_to_dxffile()
