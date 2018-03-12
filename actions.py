@@ -1,7 +1,7 @@
 import ezdxf
 from progressbar import ProgressBar, streams
 
-from my_dxf_file import get_list_of_MyDxfFiles
+from my_dxf_file import get_list_of_MyDxfFiles, txts_to_formatted_string
 from xml_file import get_list_of_XmlFiles
 
 
@@ -16,6 +16,7 @@ def check_mydxfs(settings, source='settings'):
     for n, MyDxfFile in enumerate(list_of_MyDxfFiles):
         bar.update(n)
         MyDxfFile.checks(source)
+    txts_to_formatted_string(settings)
 
 
 def convert_xmlfiles_to_dxffiles(settings, source='settings'):
@@ -57,7 +58,6 @@ def merge_dxfs(settings, source='settings'):
         target_dxf.save()
 
 
-
 def pretty_rename_xmls(settings, source='settings'):
     """ Renames list of dxfs to a pretty format """
     list_of_XmlFiles = get_list_of_XmlFiles(settings, source)
@@ -66,3 +66,10 @@ def pretty_rename_xmls(settings, source='settings'):
         bar.update(n)
         XmlFile.pretty_rename()
     print('Файлы были успешно переименованы!')
+
+
+if __name__ == '__main__':
+    from settings import Settings
+
+    settings = Settings()
+    txts_to_formatted_string(settings)

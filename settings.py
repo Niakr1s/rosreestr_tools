@@ -7,11 +7,12 @@ def init_defaults():
     dxf_folder_path - for dxf output files
     xml_folder_path - for xml input files
     my_dxf_file_path - for user file to check in xmls
-    my_dxf_check_path - result of my file check """
+    check_txt_path - result of my file check """
     defaults = {'color_iter': 0, 'colors': [1, 2, 4, 5, 6, 34, 84, 234],
                 'color_type': {'block': 7, 'parcel': 8, 'oks': 1}, 'dxf_folder_path': path.abspath('files\\dxf'),
                 'xml_folder_path': path.abspath('files\\xml'), 'my_dxf_file_path': path.abspath('files\\mydxf'),
-                'my_dxf_check_path': path.abspath('files\\txt'),
+                'check_txt_path': path.abspath('files\\txt'),
+                'formatted_txt_path': path.abspath('files\\txt\\formatted.txt'),
                 'merged_dxf_path': path.abspath('files\\merged\\merged.dxf')}
     return defaults
 
@@ -34,16 +35,18 @@ class Settings:
         makedirs(self.settings['xml_folder_path'], exist_ok=True)
         makedirs(self.settings['dxf_folder_path'], exist_ok=True)
         makedirs(self.settings['my_dxf_file_path'], exist_ok=True)
-        makedirs(self.settings['my_dxf_check_path'], exist_ok=True)
+        makedirs(self.settings['check_txt_path'], exist_ok=True)
         makedirs(path.dirname(self.settings['merged_dxf_path']), exist_ok=True)
 
     def get_file_list(self, key):
         """ Key is from self.settings dict,
-        for example 'xml_folder_path', 'my_dxf_check_path' etc"""
+        for example 'xml_folder_path', 'check_txt_path' etc"""
         if 'dxf' in key:
             pattern = '.dxf'
         elif 'xml' in key:
             pattern = '.xml'
+        elif 'txt' in key:
+            pattern = '.txt'
         else:
             raise FileNotFoundError
         res = []

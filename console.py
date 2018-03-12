@@ -13,16 +13,15 @@ Rosreestr tools created by Pavel Koshelev.
 %s - для соединенного dxf
 %s - для ваших dxf, которые нужно проверить
 %s - для результатов проверки
+%s - для строки из результатов проверки, с помощью которой можно заказать выписки
 %s - конфиг файл
-
-
 
 
 
 """ % (
         settings.settings['xml_folder_path'], settings.settings['dxf_folder_path'],
         settings.settings['merged_dxf_path'], settings.settings['my_dxf_file_path'],
-        settings.settings['my_dxf_check_path'], settings.json_settings_path))
+        settings.settings['check_txt_path'], settings.settings['formatted_txt_path'], settings.json_settings_path))
 
 
 def short_input():
@@ -30,14 +29,16 @@ def short_input():
     #     Введите 1, 2, 3 или 4 для выбора, q для выхода,
     #     h - чтоб показать большое меню с подсказками.
     #     """)
-    print("""\n\nВведите цифру:
+    print("""\n\n
+    Введите цифру:
 1 - Чтобы проверить вхождение dxf файла в xml
 2 - Переименовать xml в приятные названия
 3 - Чтобы сконвертировать xml
-4 - Чтобы соединить несколько dxf (долго)""")
+4 - Чтобы соединить несколько dxf (долго)
+""")
     print('\n')
     print(''.center(79, '*'))
-    print('Введите 1, 2, 3 или 4 для выбора, q для выхода, h для помощи'.center(79, '*'))
+    print('Введите 1, 2, 3, 4 для выбора, q для выхода, h для помощи'.center(79, '*'))
     inp = input(''.center(78, '*'))
     return inp
 

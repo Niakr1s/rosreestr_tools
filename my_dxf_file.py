@@ -31,7 +31,7 @@ class MyDxfFile:
             if e.dxftype() == 'LWPOLYLINE':
                 coords = []
                 for coord in e.get_rstrip_points():
-                    coords.append(coord)
+                    coords.append(coord[0:2])
                 # res['LWPOLYLINE'].append(coords)
                 if 'LWPOLYLINE' not in res:
                     res['LWPOLYLINE'] = []
@@ -189,7 +189,7 @@ class MyDxfFile:
         """ Saves SORTED check() result to file and prints in console """
         checks = self.get_checks(XmlFiles)
         basename = path.basename(self.file_path).replace('.dxf', '.txt')
-        output_path = path.join(self.settings.settings['my_dxf_check_path'], basename)
+        output_path = path.join(self.settings.settings['check_txt_path'], basename)
         with open(output_path, 'w') as file:
             for k, v in checks.items():
                 if v:
@@ -214,8 +214,8 @@ class MyDxfFile:
         return result
 
 
-def sort_result(result):
-    return sorted(result, key=lambda x: (len(x), int(x.split(':')[-2]), int(x.split(':')[-1])))
+def sort_result(list_of_parcels):
+    return sorted(list_of_parcels, key=lambda x: (len(x), int(x.split(':')[-2]), int(x.split(':')[-1])))
 
 
 def is_equal(lst: list):
@@ -249,3 +249,17 @@ def append_if(lst, k, v):
     lst[k].append(v)
     return lst
 
+
+def txts_to_formatted_string(settings):
+    """Converts all directory of txts into one string format:
+    number1, number2, ... and saves to settings['formatted_txt_path']"""
+    file_list = settings.get_file_list('check_txt_path')
+    s = set()
+    for file in file_list:
+        with open(file) as f:
+            for line in f:
+                if len(line.split(':')) in (2, 3, 4):  # To exclude wrong lines
+                    s.add(line.rstrip())
+    res = '; '.join(sort_result(s))
+    with open(settings.settings['formatted_txt_path'], 'w') as f:
+        f.write(res)
