@@ -70,12 +70,6 @@ def pretty_rename_xmls(settings, source='settings'):
     print('Файлы были успешно переименованы!')
 
 
-if __name__ == '__main__':
-    from settings import Settings
-    settings = Settings()
-    txts_to_formatted_string(settings)
-
-
 def update(d, u):
     """Updates dictionary"""
     for k, v in u.items():
@@ -84,3 +78,10 @@ def update(d, u):
         else:
             d[k] = v
     return d
+
+
+if __name__ == '__main__':
+    from settings import Settings
+
+    settings = Settings()
+    txts_to_formatted_string(settings)

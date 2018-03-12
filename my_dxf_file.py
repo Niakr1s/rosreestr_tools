@@ -199,19 +199,17 @@ class MyDxfFile:
 
     def get_checks(self, XmlFiles):
         """getting checks from XmlFiles"""
-        parcels, okses = set(), set()
+        res = {}
         for XmlFile in XmlFiles:
             if XmlFile.check:
-                if XmlFile.xml_type in ('KPT', 'KVZU'):
-                    parcels |= XmlFile.check
-                elif XmlFile.xml_type == 'KVOKS':
-                    okses |= XmlFile.check
-        result = {}
-        if parcels:
-            result['Parcels'] = sort_result(parcels)
-        if okses:
-            result['OKSes'] = sort_result(okses)
-        return result
+                for k, v in XmlFile.parcels.items():
+                    if k in XmlFile.check:
+                        if not XmlFile.parcels[k]['type'] in res:
+                            res[XmlFile.parcels[k]['type']] = set()
+                        res[XmlFile.parcels[k]['type']].add(k)
+        for k, v in res.items():
+            res[k] = sort_result(v)
+        return res
 
 
 def sort_result(list_of_parcels):
