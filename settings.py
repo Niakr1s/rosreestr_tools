@@ -9,7 +9,7 @@ def init_defaults():
     my_dxf_file_path - for user file to check in xmls
     check_txt_path - result of my file check """
     defaults = {'color_iter': 0, 'colors': [1, 2, 4, 5, 6, 34, 84, 234],
-                'color_type': {'block': 7, 'parcel': 8, 'oks': 42}, 'dxf_folder_path': path.abspath('files\\dxf'),
+                'color_type': {'block': 7, 'parcel': 8, 'oks': 63}, 'dxf_folder_path': path.abspath('files\\dxf'),
                 'xml_folder_path': path.abspath('files\\xml'), 'my_dxf_file_path': path.abspath('files\\mydxf'),
                 'check_txt_path': path.abspath('files\\txt'),
                 'formatted_txt_path': path.abspath('files\\txt\\formatted.txt'),

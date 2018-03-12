@@ -27,7 +27,7 @@ def convert_xmlfiles_to_dxffiles(settings, source='settings'):
     if source='qt' - from list of xml_paths from QT window (TODO)
     to settings.settings['dxf_folder_path'] """
     list_of_XmlFiles = get_list_of_XmlFiles(settings, source)
-    bar = ProgressBar(max_value=len(list_of_XmlFiles), redirect_stdout=True)
+    bar = ProgressBar(max_value=len(list_of_XmlFiles))
     for n, XmlFile in enumerate(list_of_XmlFiles):
         bar.update(n)
         XmlFile.convert_to_dxffile()

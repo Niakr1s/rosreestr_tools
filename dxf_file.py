@@ -38,7 +38,14 @@ class DxfFile:
             # Adding block to modelspace
             self.msp.add_blockref(block_name, insert=(0, 0))
             # saving
-            self.dwg.saveas(self.output_file_path)
+            while True:
+                try:
+                    self.dwg.saveas(self.output_file_path)
+                except PermissionError:
+                    input(
+                        '\nФайл %s\nиспользуется!\nЗакройте файл и нажмите любую клавишу + Enter' % self.output_file_path)
+                else:
+                    break
 
     def parcels_add_reversed_coordinates(self):
         """ Getting reverse coords, need for dxf file """
