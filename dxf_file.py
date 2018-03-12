@@ -88,6 +88,6 @@ def get_attributes(settings, attributes):
     if attributes['type'] == 'CadastralBlock':
         return {'color': settings.settings['color_type']['block'], 'const_width': 2}
     elif attributes['type'] == 'Parcel':
-        return {'color': settings.settings['color_type']['block']}
+        return {'color': settings.settings['color_type']['parcel']}
     else:
         return {'color': settings.settings['color_type']['oks']}
