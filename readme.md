@@ -1,20 +1,30 @@
-Rosreestr Tools are dedicated to
-using with xmls (Blocks and Parcels) from rosreestr.ru
-and can do the following magic:
+Rosreestr Tools предназначена для кадастровых инженеров.
 
-1) Check dxf files, containing lines and polylines,
-if they are intersecting with XML files from rosreestr.ru
-2) Convert XML files to dxf
-3) Merge some dxfs in merged one
-4) Rename XML files in pretty name
+ Данная программа может следующее:
+1) Проверять вхождения dxf файлов (контуров объектов капитального строительства) в кадастровые участки (содержащиеся в xml выписках из Росреестра).
+2) Переименовывать xml выписки из "абракадабры" в читаемые названия.
+3) Конвертировать xml выписки из Росреестра в dxf формат.
+4) Объединять получившиеся dxf файлы в один.
 
-Settings description:
-color_iter, colors: colors in dxf file,
-if you want one black color - change colors = [7] in settings.json
-xml_folder_path - for xml files from rosreestr
-dxf_folder_path - for converted dxf files
-my_dxf_file_path - for user dxf files needing in check
-my_dxf_check_path - for result of checking
+По умолчанию пути к входным и выходным файлам в подпапке files. Пути к файлам можно поменять в settings.json.
+'dxf_folder_path': 'files\\dxf' - путь к директории с сконвертированными файлами
+'xml_folder_path': 'files\\xml' - путь к директории с xml выписками
+'my_dxf_file_path': 'files\\mydxf' -  путь к директории с проверяемыми dxf файлами
+'check_txt_path': 'files\\txt' - путь к директории с результатами проверки вхождения dxf в xml
+'formatted_txt_path': 'files\\txt\\formatted.txt' - путь к файлу с результами проверок, преобразованных в строку с разделителями ';'
+'merged_dxf_path': 'files\\merged\\merged.dxf' - путь к объединенному dxf файлу
+Чтоб вернуть настройки к исходным, просто удалите settings.json файл.
 
-If your settings.json have errors you can just delete it,
-the program creates default one.
+
+Установка и запуск:
+
+1) установить python 3.6 или выше: https://www.python.org/downloads/
+2) установить git: https://git-scm.com/downloads
+
+3) в командной строке:
+git clone https://github.com/Niakr1s/rosreestr_tools.git d:\rosreestr_tools
+pip install ezdxf
+progressbar lxml
+pip install progressbar
+
+4) запуск через console.py

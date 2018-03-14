@@ -8,8 +8,7 @@ def init_defaults():
     xml_folder_path - for xml input files
     my_dxf_file_path - for user file to check in xmls
     check_txt_path - result of my file check """
-    defaults = {'color_iter': 0, 'colors': [1, 2, 4, 5, 6, 34, 84, 234],
-                'color_type': {'block': 7, 'parcel': 8, 'oks': 63}, 'dxf_folder_path': path.abspath('files\\dxf'),
+    defaults = {'color_type': {'block': 7, 'parcel': 8, 'oks': 63}, 'dxf_folder_path': path.abspath('files\\dxf'),
                 'xml_folder_path': path.abspath('files\\xml'), 'my_dxf_file_path': path.abspath('files\\mydxf'),
                 'check_txt_path': path.abspath('files\\txt'),
                 'formatted_txt_path': path.abspath('files\\txt\\formatted.txt'),
@@ -24,12 +23,6 @@ class Settings:
         self.settings = init_defaults()
         self.update_settings_from_json()
         self.check_paths()
-
-    def get_next_color(self):
-        self.settings['color_iter'] += 1
-        if self.settings['color_iter'] >= len(self.settings['colors']):
-            self.settings['color_iter'] = 0
-        return self.settings['colors'][self.settings['color_iter']]
 
     def check_paths(self):
         makedirs(self.settings['xml_folder_path'], exist_ok=True)
@@ -72,10 +65,5 @@ class Settings:
             self.dump_settings()
 
 
-
 if __name__ == '__main__':
-    settings = Settings()
-    print(settings.settings)
-    print(settings.settings['color_iter'])
-    settings.get_next_color()
-    print(settings.settings['color_iter'])
+    pass
