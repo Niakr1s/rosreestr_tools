@@ -22,9 +22,9 @@ Rosreestr Tools предназначена для кадастровых инж�
 2) установить git: https://git-scm.com/downloads
 
 3) в командной строке:
-git clone https://github.com/Niakr1s/rosreestr_tools.git d:\rosreestr_tools
+git clone https://github.com/Niakr1s/rosreestr_tools.git c:\rosreestr_tools
 pip install ezdxf
-progressbar lxml
+pip install lxml
 pip install progressbar
 
 4) запуск через console.py
