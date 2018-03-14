@@ -19,12 +19,16 @@ Rosreestr Tools предназначена для кадастровых инж�
 Установка и запуск:
 
 1) установить python 3.6 или выше: https://www.python.org/downloads/
+
 2) установить git: https://git-scm.com/downloads
 
 3) в командной строке:
 git clone https://github.com/Niakr1s/rosreestr_tools.git c:\rosreestr_tools
+
 pip install ezdxf
+
 pip install lxml
+
 pip install progressbar
 
 4) запуск через console.py
