@@ -1,9 +1,11 @@
 import collections
+from queue import Queue
 
 import ezdxf
 from progressbar import ProgressBar, streams
 
 from my_dxf_file import get_list_of_MyDxfFiles, txts_to_formatted_string
+from thread_handling import ListOfMethodsThread
 from xml_file import get_list_of_XmlFiles
 
 
@@ -26,11 +28,19 @@ def convert_xmlfiles_to_dxffiles(settings, source='settings'):
     if source='settings' - from settings.settings['xml_folder_path']
     if source='qt' - from list of xml_paths from QT window (TODO)
     to settings.settings['dxf_folder_path'] """
+    queue = Queue(maxsize=10)
     list_of_XmlFiles = get_list_of_XmlFiles(settings, source)
     bar = ProgressBar(max_value=len(list_of_XmlFiles))
     for n, XmlFile in enumerate(list_of_XmlFiles):
+        while queue.full():
+            print('passing')
+            pass
+        queue.put(XmlFile.convert_to_dxffile)
+        # print('size is: ', queue.qsize(), queue.full())
+        t = ListOfMethodsThread(queue)
+        t.start()
         bar.update(n)
-        XmlFile.convert_to_dxffile()
+    queue.join()
 
 
 def merge_dxfs(settings, source='settings'):
@@ -79,9 +89,8 @@ def update(d, u):
             d[k] = v
     return d
 
-
-if __name__ == '__main__':
-    from settings import Settings
-
-    settings = Settings()
-    txts_to_formatted_string(settings)
+# if __name__ == '__main__':
+#     from settings import Settings
+#
+#     settings = Settings()
+#     convert_xmlfiles_to_dxffiles(settings)

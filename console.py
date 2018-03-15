@@ -1,7 +1,6 @@
 import os
 
 import actions
-from settings import Settings
 
 
 def help_screen(settings):
@@ -76,4 +75,9 @@ def menu():
 
 
 if __name__ == '__main__':
-    menu()
+    # menu()
+    from settings import Settings
+    from actions import convert_xmlfiles_to_dxffiles
+
+    settings = Settings()
+    convert_xmlfiles_to_dxffiles(settings)
