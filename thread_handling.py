@@ -1,16 +1,34 @@
 from threading import Thread
 
 
-class ListOfMethodsThread(Thread):
-    def __init__(self, queue):
-        super().__init__()
+class Threads:
+    def __init__(self, queue, max_threads, bar):
         self.queue = queue
+        self.is_active = True
+        self.max_threads = max_threads
+        self.bar = bar
+        self.bar_count = 0
+        self.threads = self.get_threads()
 
-    def run(self):
-        func = self.queue.get()
-        if type(func) == 'tuple':
-            func[0](func[1])
-        else:
-            func()
-        self.queue.task_done()
-        print('class queue', self.queue.qsize())
+    def get_threads(self):
+        threads = []
+        for i in range(self.max_threads):
+            t = Thread(target=self.worker)
+            t.start()
+            threads.append(t)
+        return threads
+
+    def worker(self):
+        while True:
+            task = self.queue.get()
+            if task is None:
+                break
+            if isinstance(task, tuple):
+                task[0](*task[1])
+            else:
+                task()
+            self.queue.task_done()
+            if self.bar is not None:
+                self.bar_count += 1
+                if self.bar_count <= self.bar.max_value:
+                    self.bar.update(self.bar_count)
