@@ -32,3 +32,10 @@ class Threads:
                 self.bar_count += 1
                 if self.bar_count <= self.bar.max_value:
                     self.bar.update(self.bar_count)
+
+    def __enter__(self):
+        pass
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        for i in range(self.max_threads):
+            self.queue.put(None)

@@ -89,16 +89,7 @@ def execute_list_of_tasks(list_of_tasks, max_threads=1, with_bar=True):
         bar.update(0)
     else:
         bar = None
-    threads = thread_handling.Threads(queue, max_threads, bar)
-    for task in list_of_tasks:
-        queue.put(task)
-    queue.join()
-    # stop workers
-    for i in range(max_threads):
-        queue.put(None)
-
-# if __name__ == '__main__':
-#     from settings import Settings
-#
-#     settings = Settings()
-#     convert_xmlfiles_to_dxffiles(settings)
+    with thread_handling.Threads(queue, max_threads, bar):
+        for task in list_of_tasks:
+            queue.put(task)
+        queue.join()
