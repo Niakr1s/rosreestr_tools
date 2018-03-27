@@ -13,7 +13,7 @@ Rosreestr tools created by Pavel Koshelev.
 %s - объединенный dxf
 %s - ваши dxf, которые нужно проверить на пересечения в xml
 %s - результаты проверок dxf с xml
-%s - общая строка проверок dxf с xml (кварталы исключаются)
+%s - общая строка проверок dxf с xml
 """ % (
         settings.settings['xml_folder_path'], settings.settings['dxf_folder_path'],
         settings.settings['merged_dxf_path'], settings.settings['my_dxf_file_path'],
