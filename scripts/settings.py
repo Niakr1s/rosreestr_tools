@@ -3,9 +3,9 @@ import os
 import platform
 
 if platform.system() == 'Windows':
-    DESKTOP_PATH = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
+    DESKTOP_PATH = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop\\rosreestr_tools_files')
 elif platform.system() == 'Linux':
-    DESKTOP_PATH = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop')
+    DESKTOP_PATH = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop\\rosreestr_tools_files')
 
 
 def init_defaults():
@@ -15,12 +15,12 @@ def init_defaults():
     my_dxf_file_path - for user file to check in xmls
     check_txt_path - result of my file check """
     defaults = {'color_type': {'block': 7, 'parcel': 8, 'oks': 63},
-                'dxf_folder_path': os.path.join(DESKTOP_PATH, 'rosreestr_tools_files\\dxf'),
-                'xml_folder_path': os.path.join(DESKTOP_PATH, 'rosreestr_tools_files\\xml'),
-                'my_dxf_file_path': os.path.join(DESKTOP_PATH, 'rosreestr_tools_files\\mydxf'),
-                'check_txt_path': os.path.join(DESKTOP_PATH, 'rosreestr_tools_files\\txt'),
-                'formatted_txt_path': os.path.join(DESKTOP_PATH, 'rosreestr_tools_files\\txt\\formatted.txt'),
-                'merged_dxf_path': os.path.join(DESKTOP_PATH, 'rosreestr_tools_files\\merged\\merged.dxf')}
+                'dxf_folder_path': os.path.join(DESKTOP_PATH, 'dxf'),
+                'xml_folder_path': os.path.join(DESKTOP_PATH, 'xml'),
+                'my_dxf_file_path': os.path.join(DESKTOP_PATH, 'mydxf'),
+                'check_txt_path': os.path.join(DESKTOP_PATH, 'txt'),
+                'formatted_txt_path': os.path.join(DESKTOP_PATH, 'formatted.txt'),
+                'merged_dxf_path': os.path.join(DESKTOP_PATH, 'merged.dxf')}
     return defaults
 
 
