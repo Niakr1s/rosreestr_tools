@@ -82,7 +82,7 @@ class XmlFile:
 def get_list_of_XmlFiles(settings, source='settings'):
     """ Returns list of XmlFile class objects
     if settings='gui' - get list from gui"""
-    xml_paths = settings.get_file_list('xml_folder_path')
+    xml_paths = settings.get_file_list('xml_folder_path', '.xml')
     res = []
     for file in xml_paths:
         xml_file = XmlFile(file, settings)

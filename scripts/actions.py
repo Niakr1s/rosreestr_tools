@@ -48,7 +48,7 @@ def merge_dxfs(settings, source='settings'):
         importer.import_all()
         target_dxf.save()
 
-    dxf_list = settings.get_file_list('dxf_folder_path')
+    dxf_list = settings.get_file_list('dxf_folder_path', '.dxf')
     # Creating clear dxf file
     dwg = ezdxf.new('R2000')
     merged_path = settings.settings['merged_dxf_path']

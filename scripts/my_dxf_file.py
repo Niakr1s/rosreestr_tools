@@ -233,7 +233,7 @@ def get_list_of_MyDxfFiles(settings, source='settings'):
     #     # TODO get file_paths from qt window
     # else:
     #     raise WrongArguments
-    mydxf_list = settings.get_file_list('my_dxf_file_path')
+    mydxf_list = settings.get_file_list('my_dxf_file_path', '.dxf')
     res = []
     for file in mydxf_list:
         mydxf_file = MyDxfFile(file, settings)
@@ -251,7 +251,7 @@ def append_if(lst, k, v):
 def txts_to_formatted_string(settings):
     """Converts all directory of txts into one string format:
     number1, number2, ... and saves to settings['formatted_txt_path']"""
-    file_list = settings.get_file_list('check_txt_path')
+    file_list = settings.get_file_list('check_txt_path', '.txt')
     s = set()
     for file in file_list:
         with open(file) as f:

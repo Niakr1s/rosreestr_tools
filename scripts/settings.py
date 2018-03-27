@@ -39,17 +39,10 @@ class Settings:
         os.makedirs(self.settings['check_txt_path'], exist_ok=True)
         os.makedirs(os.path.dirname(self.settings['merged_dxf_path']), exist_ok=True)
 
-    def get_file_list(self, key):
+    def get_file_list(self, key, pattern):
         """ Key is from self.settings dict,
-        for example 'xml_folder_path', 'check_txt_path' etc"""
-        if 'dxf' in key:
-            pattern = '.dxf'
-        elif 'xml' in key:
-            pattern = '.xml'
-        elif 'txt' in key:
-            pattern = '.txt'
-        else:
-            raise FileNotFoundError
+        for example 'xml_folder_path', 'check_txt_path' etc
+        pattern is '.dxf' string """
         res = []
         with os.scandir(self.settings[key]) as it:
             for entry in it:
