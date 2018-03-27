@@ -1,9 +1,11 @@
 from os import path
 from unittest import TestCase
 
-from my_dxf_file import MyDxfFile
-from settings import Settings
-from xml_file import get_list_of_XmlFiles
+from scripts.my_dxf_file import MyDxfFile, get_list_of_XmlFiles
+from scripts.settings import Settings
+
+
+# from scripts.xml_file import get_list_of_XmlFiles
 
 
 class TestMyDxfFile(TestCase):

@@ -1,5 +1,11 @@
 import json
-from os import path, makedirs, scandir
+import os
+import platform
+
+if platform.system() == 'Windows':
+    DESKTOP_PATH = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
+elif platform.system() == 'Linux':
+    DESKTOP_PATH = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop')
 
 
 def init_defaults():
@@ -8,28 +14,30 @@ def init_defaults():
     xml_folder_path - for xml input files
     my_dxf_file_path - for user file to check in xmls
     check_txt_path - result of my file check """
-    defaults = {'color_type': {'block': 7, 'parcel': 8, 'oks': 63}, 'dxf_folder_path': path.abspath('files\\dxf'),
-                'xml_folder_path': path.abspath('files\\xml'), 'my_dxf_file_path': path.abspath('files\\mydxf'),
-                'check_txt_path': path.abspath('files\\txt'),
-                'formatted_txt_path': path.abspath('files\\txt\\formatted.txt'),
-                'merged_dxf_path': path.abspath('files\\merged\\merged.dxf')}
+    defaults = {'color_type': {'block': 7, 'parcel': 8, 'oks': 63},
+                'dxf_folder_path': os.path.join(DESKTOP_PATH, 'rosreestr_tools_files\\dxf'),
+                'xml_folder_path': os.path.join(DESKTOP_PATH, 'rosreestr_tools_files\\xml'),
+                'my_dxf_file_path': os.path.join(DESKTOP_PATH, 'rosreestr_tools_files\\mydxf'),
+                'check_txt_path': os.path.join(DESKTOP_PATH, 'rosreestr_tools_files\\txt'),
+                'formatted_txt_path': os.path.join(DESKTOP_PATH, 'rosreestr_tools_files\\txt\\formatted.txt'),
+                'merged_dxf_path': os.path.join(DESKTOP_PATH, 'rosreestr_tools_files\\merged\\merged.dxf')}
     return defaults
 
 
 class Settings:
     def __init__(self):
         """ settings.json should be in app path """
-        self.json_settings_path = path.abspath('settings.json')
+        # self.json_settings_path = os.path.abspath('settings.json')
         self.settings = init_defaults()
-        self.update_settings_from_json()
+        # self.update_settings_from_json()
         self.check_paths()
 
     def check_paths(self):
-        makedirs(self.settings['xml_folder_path'], exist_ok=True)
-        makedirs(self.settings['dxf_folder_path'], exist_ok=True)
-        makedirs(self.settings['my_dxf_file_path'], exist_ok=True)
-        makedirs(self.settings['check_txt_path'], exist_ok=True)
-        makedirs(path.dirname(self.settings['merged_dxf_path']), exist_ok=True)
+        os.makedirs(self.settings['xml_folder_path'], exist_ok=True)
+        os.makedirs(self.settings['dxf_folder_path'], exist_ok=True)
+        os.makedirs(self.settings['my_dxf_file_path'], exist_ok=True)
+        os.makedirs(self.settings['check_txt_path'], exist_ok=True)
+        os.makedirs(os.path.dirname(self.settings['merged_dxf_path']), exist_ok=True)
 
     def get_file_list(self, key):
         """ Key is from self.settings dict,
@@ -43,7 +51,7 @@ class Settings:
         else:
             raise FileNotFoundError
         res = []
-        with scandir(self.settings[key]) as it:
+        with os.scandir(self.settings[key]) as it:
             for entry in it:
                 if entry.is_file() and pattern in entry.name:
                     res.append(entry.path)

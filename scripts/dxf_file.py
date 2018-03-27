@@ -2,7 +2,7 @@ from os import path
 
 import ezdxf
 
-import actions
+from scripts import actions
 
 
 class DxfFile:

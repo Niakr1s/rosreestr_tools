@@ -2,9 +2,9 @@ import os
 
 from lxml import etree
 
-import actions
-from dxf_file import DxfFile
-from exceptions import NoCoordinates
+from scripts import actions
+from scripts.dxf_file import DxfFile
+from scripts.exceptions import NoCoordinates
 
 
 class XmlFile:
@@ -95,7 +95,7 @@ def remove_namespace(not_pretty_tag):
 
 
 if __name__ == '__main__':
-    from settings import Settings
+    from scripts.settings import Settings
     settings = Settings()
     xml = XmlFile(r'd:\github\rosreestr_tools\files\xml\KPT CadastralBlock 21 02 010103.xml', settings)
     xml.convert_to_dxffile()

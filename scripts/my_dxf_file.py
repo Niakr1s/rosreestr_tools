@@ -2,8 +2,8 @@ from os import path
 
 import ezdxf
 
-from geometry_checks import is_intersect, inside_polygon, circle_intersect
-from xml_file import get_list_of_XmlFiles
+from scripts.geometry_checks import is_intersect, inside_polygon, circle_intersect
+from scripts.xml_file import get_list_of_XmlFiles
 
 
 class MyDxfFile:

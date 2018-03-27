@@ -4,9 +4,9 @@ from queue import Queue
 import ezdxf
 from progressbar import ProgressBar
 
-import thread_handling
-from my_dxf_file import get_list_of_MyDxfFiles, txts_to_formatted_string
-from xml_file import get_list_of_XmlFiles
+from scripts import thread_handling
+from scripts.my_dxf_file import get_list_of_MyDxfFiles, txts_to_formatted_string
+from scripts.xml_file import get_list_of_XmlFiles
 
 
 def check_mydxfs(settings, source='settings'):
