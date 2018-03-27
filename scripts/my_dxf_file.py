@@ -1,4 +1,5 @@
-from os import path
+import json
+import os
 
 import ezdxf
 
@@ -188,14 +189,10 @@ class MyDxfFile:
     def save_checks_to_file(self, XmlFiles):
         """ Saves SORTED check() result to file and prints in console """
         checks = self.get_checks(XmlFiles)
-        basename = path.basename(self.file_path).replace('.dxf', '.txt')
-        output_path = path.join(self.settings.settings['check_txt_path'], basename)
+        basename = os.path.basename(self.file_path).replace('.dxf', '.txt')
+        output_path = os.path.join(self.settings.settings['check_txt_path'], basename)
         with open(output_path, 'w') as file:
-            for k, v in checks.items():
-                if v:
-                    print(k, file=file)
-                    for i in v:
-                        print(i, file=file)
+            json.dump(checks, file, indent=' ')
 
     def get_checks(self, XmlFiles):
         """getting checks from XmlFiles"""
@@ -213,7 +210,7 @@ class MyDxfFile:
 
 
 def sort_result(list_of_parcels):
-    return sorted(list_of_parcels, key=lambda x: (len(x), int(x.split(':')[-2]), int(x.split(':')[-1])))
+    return sorted(list_of_parcels, key=lambda x: (int(x.split(':')[-2]), int(x.split(':')[-1])))
 
 
 def is_equal(lst: list):
@@ -252,12 +249,18 @@ def txts_to_formatted_string(settings):
     """Converts all directory of txts into one string format:
     number1, number2, ... and saves to settings['formatted_txt_path']"""
     file_list = settings.get_file_list('check_txt_path', '.txt')
-    s = set()
+    res = dict()
     for file in file_list:
+        # title = ''
         with open(file) as f:
-            for line in f:
-                if len(line.split(':')) == 4:  # Only parcels
-                    s.add(line.rstrip())
-    res = '; '.join(sort_result(s))
+            j = json.load(f)
+            for k, v in j.items():
+                if k in res:
+                    res[k] |= set(v)
+                else:
+                    res[k] = set(v)
+    for k, v in res.items():
+        res[k] = '; '.join(sort_result(v))
+
     with open(settings.settings['formatted_txt_path'], 'w') as f:
-        f.write(res)
+        json.dump(res, f, indent=' ')

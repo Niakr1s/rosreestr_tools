@@ -36,7 +36,6 @@ def merge_dxfs(settings, source='settings'):
     if source='settings' - from settings.settings['dxf_folder_path']
     if source='qt' - from list of xml_paths from QT window (TODO)
     into merged.dxf"""
-
     def import_and_save(dxf, target_dxf):
         try:
             source_dwg = ezdxf.readfile(dxf)
@@ -63,10 +62,6 @@ def pretty_rename_xmls(settings, source='settings'):
     list_of_XmlFiles = get_list_of_XmlFiles(settings, source)
     list_of_tasks = [i.pretty_rename for i in list_of_XmlFiles]
     execute_list_of_tasks(list_of_tasks, 10, with_bar=False)
-    # bar = ProgressBar(max_value=len(list_of_XmlFiles), redirect_stdout=True)
-    # for n, XmlFile in enumerate(list_of_XmlFiles):
-    #     bar.update(n)
-    #     XmlFile.pretty_rename()
     print('Файлы были успешно переименованы!')
 
 
