@@ -2,3 +2,5 @@ xml/*
 build/*
 *.xml
 *.dxf
+dist/*
+rosreestr_tools.spec
