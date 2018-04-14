@@ -35,28 +35,29 @@ class MyListView(QtWidgets.QWidget):
         self.list_view = QtWidgets.QListView(self)
         self.list_view.setModel(self.list_model)
 
+        # buttons section
         self.btn_add = QtWidgets.QPushButton('add')
         self.btn_add.clicked.connect(self.on_btn_add_click)
 
         self.btn_delete = QtWidgets.QPushButton('delete')
 
         # Top layout with buttons
-        top_layout = QtWidgets.QHBoxLayout()
-        top_layout.addWidget(self.btn_add)
-        top_layout.addWidget(self.btn_delete)
+        self.top_layout = QtWidgets.QHBoxLayout()
+        self.top_layout.addWidget(self.btn_add)
+        self.top_layout.addWidget(self.btn_delete)
 
         # Middle layout with view
-        mid_layout = QtWidgets.QHBoxLayout()
-        mid_layout.addWidget(self.list_view)
+        self.mid_layout = QtWidgets.QHBoxLayout()
+        self.mid_layout.addWidget(self.list_view)
 
         # Bottom layout with buttons
-        bot_layout = QtWidgets.QHBoxLayout()
+        self.bot_layout = QtWidgets.QHBoxLayout()
 
         # Main layout
         main_layout = QtWidgets.QVBoxLayout()
-        main_layout.addLayout(top_layout)
-        main_layout.addLayout(mid_layout)
-        main_layout.addLayout(bot_layout)
+        main_layout.addLayout(self.top_layout)
+        main_layout.addLayout(self.mid_layout)
+        main_layout.addLayout(self.bot_layout)
 
         self.setLayout(main_layout)
 
@@ -76,16 +77,25 @@ class MyListView(QtWidgets.QWidget):
         logging.info('selected files: %s' % str(file_names))
 
 
-
-
 class XmlListView(MyListView):
     def __init__(self, parent=None):
         MyListView.__init__(self, 'xml', parent)
+
+        self.btn_rename = QtWidgets.QPushButton('Переименовать')
+        self.btn_convert = QtWidgets.QPushButton('Выделенное 2dxf')
+        self.btn_convert_all = QtWidgets.QPushButton('Все 2dxf')
+
+        self.bot_layout.addWidget(self.btn_rename)
+        self.bot_layout.addWidget(self.btn_convert)
+        self.bot_layout.addWidget(self.btn_convert_all)
 
 
 class DxfListView(MyListView):
     def __init__(self, parent=None):
         MyListView.__init__(self, 'dxf', parent)
+
+        self.btn_check = QtWidgets.QPushButton('Проверить вхождения')
+        self.bot_layout.addWidget(self.btn_check)
 
 
 class OutputView(QtWidgets.QTextEdit):
