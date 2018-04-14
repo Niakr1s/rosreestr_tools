@@ -1,6 +1,6 @@
 import logging
 
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
 
 
 class CentralWidget(QtWidgets.QWidget):
@@ -30,7 +30,10 @@ class MyListView(QtWidgets.QWidget):
         QtWidgets.QWidget.__init__(self, parent)
         self.file_type = file_type
 
+        # Creating list view
+        self.list_model = QtCore.QStringListModel()
         self.list_view = QtWidgets.QListView(self)
+        self.list_view.setModel(self.list_model)
 
         self.btn_add = QtWidgets.QPushButton('add')
         self.btn_add.clicked.connect(self.on_btn_add_click)
@@ -64,9 +67,15 @@ class MyListView(QtWidgets.QWidget):
         else:
             filter_string = 'Чертеж (*.%s)' % self.file_type
 
-        file_names = QtWidgets.QFileDialog(self).getOpenFileNames(self, 'Добавить файлы', '', filter_string)
-        
-        logging.info('selected files: %s' % str(file_names[0]))
+        file_names = QtWidgets.QFileDialog(self).getOpenFileNames(self, 'Добавить файлы', '', filter_string)[0]
+        for file in file_names:
+            length = self.list_model.rowCount()
+            self.list_model.insertRow(length)
+            self.list_model.setData(self.list_model.index(length), file)
+
+        logging.info('selected files: %s' % str(file_names))
+
+
 
 
 class XmlListView(MyListView):
