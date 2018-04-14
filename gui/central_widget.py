@@ -11,7 +11,7 @@ class CentralWidget(QtWidgets.QWidget):
         self.xml_view = XmlListView(self)
 
         # Middle column
-        self.dxf_view = DxfListView(self)
+        self.dxf_view = MyDxfListView(self)
 
         # Right column
         self.output_view = OutputView(self)
@@ -40,6 +40,7 @@ class MyListView(QtWidgets.QWidget):
         self.btn_add.clicked.connect(self.on_btn_add_click)
 
         self.btn_delete = QtWidgets.QPushButton('delete')
+        self.btn_delete.clicked.connect(self.on_btn_delete_click)
 
         # Top layout with buttons
         self.top_layout = QtWidgets.QHBoxLayout()
@@ -62,6 +63,8 @@ class MyListView(QtWidgets.QWidget):
         self.setLayout(main_layout)
 
     def on_btn_add_click(self):
+        # adding items to list_view and list_model
+
         # Making filter_string for QFileDialog
         if self.file_type == 'xml':
             filter_string = 'Выписки (*.%s)' % self.file_type
@@ -69,15 +72,25 @@ class MyListView(QtWidgets.QWidget):
             filter_string = 'Чертеж (*.%s)' % self.file_type
 
         file_names = QtWidgets.QFileDialog(self).getOpenFileNames(self, 'Добавить файлы', '', filter_string)[0]
+        logging.info('selected files: %s' % str(file_names))
         for file in file_names:
             length = self.list_model.rowCount()
             self.list_model.insertRow(length)
             self.list_model.setData(self.list_model.index(length), file)
 
-        logging.info('selected files: %s' % str(file_names))
+        logging.info('files added, current rowCount = %i' % self.list_model.rowCount())
+
+    def on_btn_delete_click(self):
+        # deleting items from list_view and list_model
+        file_indexes = self.list_view.selectedIndexes()
+        logging.info('start deleting %i of %i items' % (len(file_indexes), self.list_model.rowCount()))
+        for f in file_indexes:
+            self.list_model.removeRow(f.row())
+        logging.info('%i items deleted, remained %i items' % (len(file_indexes), self.list_model.rowCount()))
 
 
 class XmlListView(MyListView):
+    # Xml list view
     def __init__(self, parent=None):
         MyListView.__init__(self, 'xml', parent)
 
@@ -90,7 +103,8 @@ class XmlListView(MyListView):
         self.bot_layout.addWidget(self.btn_convert_all)
 
 
-class DxfListView(MyListView):
+class MyDxfListView(MyListView):
+    # MyDxf list view
     def __init__(self, parent=None):
         MyListView.__init__(self, 'dxf', parent)
 
@@ -99,5 +113,6 @@ class DxfListView(MyListView):
 
 
 class OutputView(QtWidgets.QTextEdit):
+    # Results view
     def __init__(self, parent=None):
         QtWidgets.QTextEdit.__init__(self, parent)
