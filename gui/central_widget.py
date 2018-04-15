@@ -35,6 +35,7 @@ class MyListView(QtWidgets.QWidget):
         QtWidgets.QWidget.__init__(self, parent)
         self.main_window = self.parent().parent()
         self.file_type = file_type
+        self.progress_bar = self.main_window.statusBar().progress_bar
 
         # Creating list view
         self.list_model = QtCore.QStringListModel()
@@ -95,6 +96,10 @@ class MyListView(QtWidgets.QWidget):
             self.list_model.removeRow(f)
         logging.info('items deleted')
 
+    def on_thread_signal(self, s):
+        self.progress_bar.setFormat(s)
+        self.progress_bar.setValue(self.progress_bar.value() + 1)
+
 
 class XmlListView(MyListView):
     # Xml list view
@@ -124,18 +129,22 @@ class XmlListView(MyListView):
         logging.info('converting xmls START')
         indexes = self.list_view.selectedIndexes()
         if len(indexes):
-            progress_bar = self.main_window.statusBar().reset_progress_bar(len(indexes))
-            for i, index in enumerate(indexes):
-                progress_bar.setValue(i + 1)
-                file_path = self.list_model.data(index, QtCore.Qt.DisplayRole)
-                xml = xml_file.XmlFile(file_path, self.settings)
-                xml.convert_to_dxffile()
+            self.main_window.statusBar().reset_progress_bar(len(indexes))
+            file_paths = [self.list_model.data(i, QtCore.Qt.DisplayRole) for i in indexes]
+            t = my_threads.XmlConvertThread(file_paths, parent=self)
+            t.signal.connect(self.on_thread_signal, QtCore.Qt.QueuedConnection)
+            t.finished.connect(self.on_xml_convert_thread_finished)
+            print('before start')
+            t.start()
+            print('after start', t.isRunning())
             logging.info('converting xmls END')
-            progress_bar.hide()
-            self.main_window.statusBar().showMessage('Операция завершена')
         else:
             QtWidgets.QMessageBox.information(self.parent(), 'Ошибка', 'Выберите один или несколько xml из списка!')
             logging.info('converting xmls: file not selected')
+
+    def on_xml_convert_thread_finished(self):
+        self.progress_bar.hide()
+        self.main_window.statusBar().showMessage('Операция завершена')
 
 
 class MyDxfListView(MyListView):
@@ -154,22 +163,19 @@ class MyDxfListView(MyListView):
         if len(indexes):
             my_dxf_file_paths = [self.list_model.data(i, 0) for i in indexes]
             xml_file_pathes = self.parent().xml_view.list_model.stringList()
-            self.progress_bar = self.main_window.statusBar().reset_progress_bar(len(indexes))
+            self.main_window.statusBar().reset_progress_bar(len(indexes))
             t = my_threads.MyDxfCheckThread(my_dxf_file_paths, xml_file_pathes, self.on_my_dxf_check_thread_finished,
                                             self)
-            t.signal.connect(self.on_my_dxf_check_thread_signal, QtCore.Qt.QueuedConnection)
+            t.signal.connect(self.on_thread_signal, QtCore.Qt.QueuedConnection)
             t.start()
             logging.info('checking dxf in xmls END')
         else:
             QtWidgets.QMessageBox.information(self.parent(), 'Ошибка', 'Выберите один или несколько dxf из списка!')
             logging.info('checking dxf in xmls: file not selected')
 
-    def on_my_dxf_check_thread_signal(self, s):
-        self.progress_bar.setFormat(s)
-        self.progress_bar.setValue(self.progress_bar.value() + 1)
-
     def on_my_dxf_check_thread_finished(self, s):
         self.progress_bar.hide()
+        self.main_window.statusBar().showMessage('Операция завершена')
         self.parent().output_view.output.setPlainText(s)
 
 

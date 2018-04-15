@@ -1,6 +1,6 @@
 from PyQt5 import QtCore
 
-from scripts import actions, my_dxf_file
+from scripts import actions, my_dxf_file, xml_file
 
 
 class MyDxfCheckThread(QtCore.QThread):
@@ -8,7 +8,7 @@ class MyDxfCheckThread(QtCore.QThread):
     finished = QtCore.pyqtSignal(str)
 
     def __init__(self, my_dxf_file_paths, xml_file_pathes, callback, parent=None):
-        QtCore.QThread.__init__(self, parent)
+        super().__init__(parent)
         self.my_dxf_file_paths = my_dxf_file_paths
         self.xml_file_pathes = xml_file_pathes
         self.finished.connect(callback)
@@ -26,3 +26,21 @@ class MyDxfCheckThread(QtCore.QThread):
             actions.update(all_checks, checks)
         checks_formatted = my_dxf_file.checks_to_formatted_string(source=all_checks)
         return checks_formatted
+
+
+class XmlConvertThread(QtCore.QThread):
+    signal = QtCore.pyqtSignal(str)
+
+    def __init__(self, file_paths, parent=None):
+        super().__init__(parent)
+
+        self.file_paths = file_paths
+
+    def run(self):
+        self.convert()
+
+    def convert(self):
+        for file_path in self.file_paths:
+            self.signal.emit('Обрабатываю %s' % file_path)
+            xml = xml_file.XmlFile(file_path, self.parent().settings)
+            xml.convert_to_dxffile()

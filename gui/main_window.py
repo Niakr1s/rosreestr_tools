@@ -12,10 +12,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.setWindowTitle('Rosreestr Tools')
         self.setWindowIcon(QtGui.QIcon(r'static\rt.ico'))
 
-        self.setCentralWidget(CentralWidget(self))
         self.setStatusBar(StatusBar(self))
         self.setMenuBar(MenuBar(self))
-        # self.addToolBar(ToolBar(self))
+        self.setCentralWidget(CentralWidget(self))
 
 
 class StatusBar(QtWidgets.QStatusBar):
