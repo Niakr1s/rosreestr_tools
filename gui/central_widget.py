@@ -2,7 +2,6 @@ import logging
 
 from PyQt5 import QtWidgets, QtCore
 
-from gui.merge_dxf_thread import MergeDxfsThread
 from scripts import xml_file, settings, my_dxf_file, actions
 
 
@@ -111,12 +110,6 @@ class XmlListView(MyListView):
         self.bot_layout.addWidget(self.btn_rename)
         self.bot_layout.addWidget(self.btn_convert_selected)
 
-    def on_merge_dxf_thread_started(self, length):
-        merge_progress_bar = self.main_window.statusBar().get_merge_progress_bar(length)
-
-    def on_merge_dxf_thread_finished(self):
-        self.main_window.statusBar().merge_progress_bar.hide()
-
     def on_btn_rename_click(self):
         logging.info('renaming xmls START')
         for i in range(self.list_model.rowCount()):
@@ -130,32 +123,16 @@ class XmlListView(MyListView):
     def on_btn_convert_clicked(self):
         logging.info('converting xmls START')
         indexes = self.list_view.selectedIndexes()
-
         if len(indexes):
-            choice = QtWidgets.QMessageBox.question(self, 'Вопрос', 'Объединить в один dxf?',
-                                                    buttons=QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
-
-            if choice == QtWidgets.QMessageBox.Yes:
-                merged_file_path = QtWidgets.QFileDialog.getSaveFileName(filter='Чертеж (*.dxf)')[0]
-                print(merged_file_path)
             progress_bar = self.main_window.statusBar().get_progress_bar(len(indexes))
-            dxf_paths = []
             for i, index in enumerate(indexes):
                 progress_bar.setValue(i + 1)
                 file_path = self.list_model.data(index, QtCore.Qt.DisplayRole)
                 xml = xml_file.XmlFile(file_path, self.settings)
-                dxf_path = xml.convert_to_dxffile()
-                if dxf_path:
-                    dxf_paths.append(dxf_path)
+                xml.convert_to_dxffile()
             logging.info('converting xmls END')
             progress_bar.hide()
             self.main_window.statusBar().showMessage('Операция завершена')
-            if choice == QtWidgets.QMessageBox.Yes:
-                merge_dxf_thread = MergeDxfsThread(self.settings, source=dxf_paths, merged_path=merged_file_path,
-                                                   parent=self)
-                merge_dxf_thread.started.connect(lambda: self.on_merge_dxf_thread_started(len(dxf_paths)))
-                merge_dxf_thread.finished.connect(self.on_merge_dxf_thread_finished)
-                merge_dxf_thread.start()
         else:
             QtWidgets.QMessageBox.information(self.parent(), 'Ошибка', 'Выберите один или несколько xml из списка!')
             logging.info('converting xmls: file not selected')

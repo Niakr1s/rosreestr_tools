@@ -1,6 +1,6 @@
 import sys
 
-from PyQt5 import QtWidgets, QtGui, QtCore
+from PyQt5 import QtWidgets, QtGui
 
 from gui.central_widget import CentralWidget
 
@@ -22,27 +22,15 @@ class StatusBar(QtWidgets.QStatusBar):
     def __init__(self, parent=None):
         QtWidgets.QStatusBar.__init__(self, parent)
         self.showMessage('Добро пожаловать.')
-
         self.progress_bar = QtWidgets.QProgressBar(self)
         self.addWidget(self.progress_bar)
         self.progress_bar.hide()
-
-        self.merge_progress_bar = QtWidgets.QProgressBar(self)
-        self.merge_progress_bar.setAlignment(QtCore.Qt.AlignRight)
-        self.addWidget(self.merge_progress_bar)
-        self.merge_progress_bar.hide()
 
     def get_progress_bar(self, maximum):
         self.progress_bar.reset()
         self.progress_bar.setMaximum(maximum)
         self.progress_bar.show()
         return self.progress_bar
-
-    def get_merge_progress_bar(self, maximum):
-        self.merge_progress_bar.reset()
-        self.merge_progress_bar.setMaximum(maximum)
-        self.merge_progress_bar.show()
-        return self.merge_progress_bar
 
 
 class MenuBar(QtWidgets.QMenuBar):

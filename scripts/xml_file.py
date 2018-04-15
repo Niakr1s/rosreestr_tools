@@ -64,10 +64,9 @@ class XmlFile:
 
     def convert_to_dxffile(self):
         if not self.parcels:
-            return None
+            return
         dxffile = DxfFile(self)
         dxffile.draw_conturs_and_save()
-        return dxffile.output_file_path
 
     def pretty_rename(self):
         dirpath = os.path.dirname(self.file_path)
