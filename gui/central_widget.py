@@ -44,10 +44,10 @@ class MyListView(QtWidgets.QWidget):
         self.list_view.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
 
         # buttons section
-        self.btn_add = QtWidgets.QPushButton('добавить')
+        self.btn_add = QtWidgets.QPushButton('Добавить')
         self.btn_add.clicked.connect(self.on_btn_add_click)
 
-        self.btn_delete = QtWidgets.QPushButton('удалить')
+        self.btn_delete = QtWidgets.QPushButton('Удалить')
         self.btn_delete.clicked.connect(self.on_btn_delete_click)
 
         # Top layout with buttons
