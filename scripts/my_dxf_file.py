@@ -223,14 +223,16 @@ def is_equal(lst: list):
     return True
 
 
-def get_list_of_MyDxfFiles(settings, source='settings'):
-    """ Returns list of XmlFile class objects """
-    # if source == 'settings':
-    #     file_paths = settings.get_mydxf_list()
-    #     # TODO get file_paths from qt window
-    # else:
-    #     raise WrongArguments
-    mydxf_list = settings.get_file_list('my_dxf_file_path', '.dxf')
+def get_list_of_MyDxfFiles(settings, source=None):
+    """
+    Returns list of XmlFile class objects
+    If source is None - takes list from settings
+    else you should pass list of file paths
+    """
+    if source is None:
+        mydxf_list = settings.get_file_list('my_dxf_file_path', '.dxf')
+    else:
+        mydxf_list = source
     res = []
     for file in mydxf_list:
         mydxf_file = MyDxfFile(file, settings)

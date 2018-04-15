@@ -9,33 +9,32 @@ from scripts.my_dxf_file import get_list_of_MyDxfFiles, txts_to_formatted_string
 from scripts.xml_file import get_list_of_XmlFiles
 
 
-def check_mydxfs(settings, source='settings'):
+def check_mydxfs(settings, source=None):
     """ Checks all mydxf files from:
-    if source='settings' - from settings.settings['my_dxf_file_path']
-    if source='qt' - from list of xml_paths from QT window (TODO)
-    in settings.settings['xml_folder_path']
-    or if source='qt' - from QT window (TODO)"""
+    If source is None - takes list from settings and converts in settings.settings['xml_folder_path']
+    else you should pass list of file paths
+    """
     list_of_MyDxfFiles = get_list_of_MyDxfFiles(settings, source)
     list_of_tasks = [(i.checks, (source,)) for i in list_of_MyDxfFiles]
     execute_list_of_tasks(list_of_tasks, 5)
     txts_to_formatted_string(settings)
 
 
-def convert_xmlfiles_to_dxffiles(settings, source='settings'):
+def convert_xmlfiles_to_dxffiles(settings, source=None):
     """ Converts all xml files from:
-    if source='settings' - from settings.settings['xml_folder_path']
-    if source='qt' - from list of xml_paths from QT window (TODO)
-    to settings.settings['dxf_folder_path'] """
+    If source is None - takes list from settings and converts to settings.settings['dxf_folder_path']
+    else you should pass list of file paths
+    """
     list_of_XmlFiles = get_list_of_XmlFiles(settings, source)
     list_of_tasks = [i.convert_to_dxffile for i in list_of_XmlFiles]
     execute_list_of_tasks(list_of_tasks, 1)
 
 
-def merge_dxfs(settings, source='settings'):
+def merge_dxfs(settings, source=None):
     """ Merging all dxfs
-    if source='settings' - from settings.settings['dxf_folder_path']
-    if source='qt' - from list of xml_paths from QT window (TODO)
-    into merged.dxf"""
+    If source is None - takes list from settings and converts into merged.dxf
+    else you should pass list of file paths
+    """
     def import_and_save(dxf, target_dxf):
         try:
             source_dwg = ezdxf.readfile(dxf)
@@ -57,8 +56,11 @@ def merge_dxfs(settings, source='settings'):
     execute_list_of_tasks(list_of_tasks, 1)
 
 
-def pretty_rename_xmls(settings, source='settings'):
-    """ Renames list of dxfs to a pretty format """
+def pretty_rename_xmls(settings, source=None):
+    """
+    If source is None - takes list from settings
+    else you should pass list of file paths
+    """
     list_of_XmlFiles = get_list_of_XmlFiles(settings, source)
     list_of_tasks = [i.pretty_rename for i in list_of_XmlFiles]
     execute_list_of_tasks(list_of_tasks, 10, with_bar=False)

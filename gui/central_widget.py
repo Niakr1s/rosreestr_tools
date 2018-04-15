@@ -2,6 +2,8 @@ import logging
 
 from PyQt5 import QtWidgets, QtCore
 
+from scripts import xml_file, settings
+
 
 class CentralWidget(QtWidgets.QWidget):
     def __init__(self, parent=None):
@@ -26,6 +28,8 @@ class CentralWidget(QtWidgets.QWidget):
 
 
 class MyListView(QtWidgets.QWidget):
+    settings = settings.Settings()
+
     def __init__(self, file_type, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
         self.file_type = file_type
@@ -95,12 +99,25 @@ class XmlListView(MyListView):
         MyListView.__init__(self, 'xml', parent)
 
         self.btn_rename = QtWidgets.QPushButton('Переименовать')
+        self.btn_rename.clicked.connect(self.on_btn_rename_click)
         self.btn_convert = QtWidgets.QPushButton('Выделенное 2dxf')
         self.btn_convert_all = QtWidgets.QPushButton('Все 2dxf')
 
         self.bot_layout.addWidget(self.btn_rename)
         self.bot_layout.addWidget(self.btn_convert)
         self.bot_layout.addWidget(self.btn_convert_all)
+
+    def on_btn_rename_click(self):
+        logging.info('start renaming xmls')
+        for i in range(self.list_model.rowCount()):
+            index = self.list_model.index(i)
+            print(index)
+            file_path = self.list_model.data(index, QtCore.Qt.DisplayRole)
+            print(file_path)
+            new_file_path = xml_file.XmlFile(file_path, self.settings).pretty_rename()
+            print(new_file_path)
+            self.list_model.setData(index, new_file_path)
+        logging.info('xmls renamed')
 
 
 class MyDxfListView(MyListView):

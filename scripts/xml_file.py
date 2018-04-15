@@ -72,17 +72,25 @@ class XmlFile:
         dirpath = os.path.dirname(self.file_path)
         cadastral_number_spaced = self.cadastral_number.replace(':', ' ') + '.xml'
         pretty_basename = ' '.join((self.xml_type, self.xml_subtype, cadastral_number_spaced))
+        pretty_fullname = os.path.join(dirpath, pretty_basename)
         try:
-            os.rename(self.file_path, os.path.join(dirpath, pretty_basename))
+            os.rename(self.file_path, pretty_fullname)
         except FileExistsError as err:
             os.remove(os.path.join(dirpath, pretty_basename))
-            os.rename(self.file_path, os.path.join(dirpath, pretty_basename))
+            os.rename(self.file_path, pretty_fullname)
+        return pretty_fullname
 
 
-def get_list_of_XmlFiles(settings, source='settings'):
-    """ Returns list of XmlFile class objects
-    if settings='gui' - get list from gui"""
-    xml_paths = settings.get_file_list('xml_folder_path', '.xml')
+def get_list_of_XmlFiles(settings, source=None):
+    """
+    Returns list of XmlFile class objects
+    If source is None - takes list from settings
+    else you should pass list of file paths
+    """
+    if source is None:
+        xml_paths = settings.get_file_list('xml_folder_path', '.xml')
+    else:
+        xml_paths = source
     res = []
     for file in xml_paths:
         xml_file = XmlFile(file, settings)
