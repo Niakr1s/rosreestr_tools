@@ -1,6 +1,6 @@
-import logging
+import sys
 
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtGui
 
 from gui.central_widget import CentralWidget
 
@@ -9,6 +9,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
         QtWidgets.QMainWindow.__init__(self)
         self.resize(1000, 600)
+        self.setWindowTitle('Rosreestr Tools')
+        self.setWindowIcon(QtGui.QIcon(r'static\rt.ico'))
 
         self.setCentralWidget(CentralWidget(self))
         self.setStatusBar(StatusBar(self))
@@ -36,13 +38,26 @@ class MenuBar(QtWidgets.QMenuBar):
         QtWidgets.QMenuBar.__init__(self, parent)
 
         file_menu = QtWidgets.QMenu('&Файл', self)
-        file_menu.addAction('&Выход')
+        file_menu.addAction('&Выход').triggered.connect(sys.exit)
         self.addMenu(file_menu)
 
         help_menu = QtWidgets.QMenu('&Справка', self)
-        help_menu.addAction('&Помощь')
-        help_menu.addAction('&О программе')
+        help_menu.addAction('&О программе').triggered.connect(self.about)
         self.addMenu(help_menu)
+
+    def about(self):
+        about_text = """
+Rosreestr Tools предназначена для кадастровых инженеров.
+
+Данная программа может следующее:
+Проверять вхождения dxf файлов (контуров объектов капитального строительства) в кадастровые участки (содержащиеся в xml выписках из Росреестра).
+Переименовывать xml выписки из "абракадабры" в читаемые названия.
+Конвертировать xml выписки из Росреестра в dxf формат.
+Объединять получившиеся dxf файлы в один.
+
+Домашняя страница: https://github.com/Niakr1s/rosreestr_tools/releases
+        """
+        QtWidgets.QMessageBox().about(self, 'О программе', about_text)
 
 
 class ToolBar(QtWidgets.QToolBar):
@@ -50,13 +65,3 @@ class ToolBar(QtWidgets.QToolBar):
         QtWidgets.QToolBar.__init__(self, parent)
 
         self.addAction('Очистить')
-
-if __name__ == '__main__':
-    import sys
-
-    logging.basicConfig(level=logging.INFO)
-    app = QtWidgets.QApplication(sys.argv)
-    main_window = MainWindow()
-    main_window.move(-1200, 200)
-    main_window.show()
-    sys.exit(app.exec())

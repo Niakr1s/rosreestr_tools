@@ -42,10 +42,10 @@ class MyListView(QtWidgets.QWidget):
         self.list_view.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
 
         # buttons section
-        self.btn_add = QtWidgets.QPushButton('add')
+        self.btn_add = QtWidgets.QPushButton('добавить')
         self.btn_add.clicked.connect(self.on_btn_add_click)
 
-        self.btn_delete = QtWidgets.QPushButton('delete')
+        self.btn_delete = QtWidgets.QPushButton('удалить')
         self.btn_delete.clicked.connect(self.on_btn_delete_click)
 
         # Top layout with buttons
@@ -180,7 +180,7 @@ class OutputView(QtWidgets.QWidget):
         # json output
         self.output = QtWidgets.QPlainTextEdit(self)
         self.output.setPlainText('Откройте несколько xml и dxf в панелях слева, \
-        выберите нужный dxf и нажмите "Проверить вхождения"')
+        выберите один или несколько dxf и нажмите "Проверить вхождения"')
         self.output.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 
         box = QtWidgets.QVBoxLayout()
