@@ -50,4 +50,5 @@ class XmlConvertThread(QtCore.QThread):
                 dxf_file_paths.append(dxf_file_path)
         if self.merge and len(dxf_file_paths) > 0:
             print('merging: ', dxf_file_paths, self.merged_path)
+            self.signal.emit('Объединяю в один чертеж %s' % self.merged_path)
             actions.merge_dxfs(self.parent().settings, dxf_file_paths, self.merged_path)

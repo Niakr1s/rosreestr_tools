@@ -20,7 +20,6 @@ class MainWindow(QtWidgets.QMainWindow):
 class StatusBar(QtWidgets.QStatusBar):
     def __init__(self, parent=None):
         QtWidgets.QStatusBar.__init__(self, parent)
-        self.showMessage('Добро пожаловать.')
         self.progress_bar = QtWidgets.QProgressBar(self)
         self.addWidget(self.progress_bar, 1)
         self.progress_bar.hide()
