@@ -3,7 +3,7 @@ import logging
 
 from PyQt5 import QtWidgets, QtCore
 
-from scripts import xml_file, settings, my_dxf_file
+from scripts import xml_file, settings, my_dxf_file, actions
 
 
 class CentralWidget(QtWidgets.QWidget):
@@ -39,6 +39,7 @@ class MyListView(QtWidgets.QWidget):
         self.list_model = QtCore.QStringListModel()
         self.list_view = QtWidgets.QListView(self)
         self.list_view.setModel(self.list_model)
+        self.list_view.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
 
         # buttons section
         self.btn_add = QtWidgets.QPushButton('add')
@@ -99,20 +100,15 @@ class XmlListView(MyListView):
     # Xml list view
     def __init__(self, parent=None):
         MyListView.__init__(self, 'xml', parent)
-        self.list_view.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
 
-        self.btn_rename = QtWidgets.QPushButton('Переименовать')
+        self.btn_rename = QtWidgets.QPushButton('Переименовать все')
         self.btn_rename.clicked.connect(self.on_btn_rename_click)
 
-        self.btn_convert_selected = QtWidgets.QPushButton('Выделенное 2dxf')
-        self.btn_convert_selected.clicked.connect(self.on_btn_convert_selected_clicked)
-
-        self.btn_convert_all = QtWidgets.QPushButton('Все 2dxf')
-        self.btn_convert_all.clicked.connect(self.on_btn_convert_all_clicked)
+        self.btn_convert_selected = QtWidgets.QPushButton('Выделенное в dxf')
+        self.btn_convert_selected.clicked.connect(self.on_btn_convert_clicked)
 
         self.bot_layout.addWidget(self.btn_rename)
         self.bot_layout.addWidget(self.btn_convert_selected)
-        self.bot_layout.addWidget(self.btn_convert_all)
 
     def on_btn_rename_click(self):
         logging.info('renaming xmls START')
@@ -124,19 +120,9 @@ class XmlListView(MyListView):
             self.list_model.setData(index, new_file_path)
         logging.info('renaming xmls END')
 
-    def on_btn_convert_selected_clicked(self):
+    def on_btn_convert_clicked(self):
         logging.info('converting xmls START')
         for index in self.list_view.selectedIndexes():
-            file_path = self.list_model.data(index, QtCore.Qt.DisplayRole)
-            xml = xml_file.XmlFile(file_path, self.settings)
-            xml.convert_to_dxffile()
-        logging.info('converting xmls END')
-        QtWidgets.QMessageBox.information(self.parent(), 'Информация', 'Операция выполнена')
-
-    def on_btn_convert_all_clicked(self):
-        logging.info('converting xmls START')
-        for i in range(self.list_model.rowCount()):
-            index = self.list_model.index(i)
             file_path = self.list_model.data(index, QtCore.Qt.DisplayRole)
             xml = xml_file.XmlFile(file_path, self.settings)
             xml.convert_to_dxffile()
@@ -156,17 +142,25 @@ class MyDxfListView(MyListView):
 
     def on_btn_check_click(self):
         logging.info('checking dxf in xmls START')
-        try:
-            my_dxf_file_path = self.list_model.data(self.list_view.selectedIndexes()[0], 0)
-        except IndexError as e:
-            QtWidgets.QMessageBox.information(self.parent(), 'Ошибка', 'Выберите dxf из списка!')
-            logging.info('checking dxf in xmls: dxf not selected')
-        else:
+        indexes = self.list_view.selectedIndexes()
+        print(indexes)
+        if len(indexes):
+            my_dxf_file_paths = [self.list_model.data(i, 0) for i in indexes]
+            print(my_dxf_file_paths)
             xml_file_pathes = self.parent().xml_view.list_model.stringList()
-            my_dxf = my_dxf_file.MyDxfFile(my_dxf_file_path, self.settings)
-            checks = my_dxf.checks(xml_file_pathes, save_to_file=False)
-            self.parent().output_view.output.setPlainText(json.dumps(checks, indent=' '))
-            logging.info('checking dxf in xmls END')
+            all_checks = {}
+            for my_dxf_file_path in my_dxf_file_paths:
+                my_dxf = my_dxf_file.MyDxfFile(my_dxf_file_path, self.settings)
+                checks = my_dxf.checks(xml_file_pathes, save_to_file=False)
+                print('updating %s with %s' % (json.dumps(all_checks, indent=' '), json.dumps(checks, indent=' ')))
+                actions.update(all_checks, checks)
+            self.parent().output_view.output.setPlainText(json.dumps(all_checks, indent=' '))
+
+        else:
+            QtWidgets.QMessageBox.information(self.parent(), 'Ошибка', 'Выберите один или несколько dxf из списка!')
+            logging.info('checking dxf in xmls: dxf not selected')
+            return
+        logging.info('checking dxf in xmls END')
 
 
 class OutputView(QtWidgets.QWidget):
@@ -176,13 +170,19 @@ class OutputView(QtWidgets.QWidget):
 
         label = QtWidgets.QLabel('Результаты проверки вхождения')
 
+        # json output
         self.output = QtWidgets.QPlainTextEdit(self)
         self.output.setPlainText('Откройте несколько xml и dxf в панелях слева, \
         выберите нужный dxf и нажмите "Проверить вхождения"')
         self.output.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 
+        self.rosreestr_output = QtWidgets.QPlainTextEdit(self)
+        self.rosreestr_output.setPlainText('Здесь будет выводиться строчка для удобного заказывания из росреестра')
+        self.rosreestr_output.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+
         box = QtWidgets.QVBoxLayout()
         box.addWidget(label)
         box.addWidget(self.output)
+        box.addWidget(self.rosreestr_output)
 
         self.setLayout(box)

@@ -253,9 +253,13 @@ def append_if(lst, k, v):
     return lst
 
 
-def txts_to_formatted_string(settings):
-    """Converts all directory of txts into one string format:
-    number1, number2, ... and saves to settings['formatted_txt_path']"""
+def txts_to_formatted_string(settings=None, source=None):
+    """
+    if settings not None: Converts all directory of txts into one string format:
+    number1, number2, ... and saves to settings['formatted_txt_path']
+    if source not None: Converts all source to formatted string and returns it
+    source is json
+    """
     file_list = settings.get_file_list('check_txt_path', '.txt')
     res = dict()
     for file in file_list:
