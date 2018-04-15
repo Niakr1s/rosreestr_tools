@@ -10,7 +10,7 @@ class MainWindow(QtWidgets.QMainWindow):
         QtWidgets.QMainWindow.__init__(self)
         self.resize(1000, 600)
         self.setWindowTitle('Rosreestr Tools')
-        self.setWindowIcon(QtGui.QIcon(r'static\rt.ico'))
+        self.setWindowIcon(QtGui.QIcon(r'static\rt.png'))
 
         self.setStatusBar(StatusBar(self))
         self.setMenuBar(MenuBar(self))
