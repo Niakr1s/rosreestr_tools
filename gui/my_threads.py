@@ -31,16 +31,23 @@ class MyDxfCheckThread(QtCore.QThread):
 class XmlConvertThread(QtCore.QThread):
     signal = QtCore.pyqtSignal(str)
 
-    def __init__(self, file_paths, parent=None):
+    def __init__(self, file_paths, merge=False, merged_path=None, parent=None):
         super().__init__(parent)
-
         self.file_paths = file_paths
+        self.merge = merge
+        self.merged_path = merged_path
 
     def run(self):
         self.convert()
 
     def convert(self):
+        dxf_file_paths = []
         for file_path in self.file_paths:
             self.signal.emit('Обрабатываю %s' % file_path)
             xml = xml_file.XmlFile(file_path, self.parent().settings)
-            xml.convert_to_dxffile()
+            dxf_file_path = xml.convert_to_dxffile()
+            if dxf_file_path is not None:
+                dxf_file_paths.append(dxf_file_path)
+        if self.merge and len(dxf_file_paths) > 0:
+            print('merging: ', dxf_file_paths, self.merged_path)
+            actions.merge_dxfs(self.parent().settings, dxf_file_paths, self.merged_path)

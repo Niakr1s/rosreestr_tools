@@ -129,14 +129,18 @@ class XmlListView(MyListView):
         logging.info('converting xmls START')
         indexes = self.list_view.selectedIndexes()
         if len(indexes):
+            merge = QtWidgets.QMessageBox().question(self, 'Вопрос', 'Объединять в один файл?',
+                                                     buttons=QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No) == QtWidgets.QMessageBox().Yes
+            if merge:
+                merged_path = QtWidgets.QFileDialog().getSaveFileName(self, filter='Чертеж (*.dxf)')[0]
+            else:
+                merged_path = None
             self.main_window.statusBar().reset_progress_bar(len(indexes))
             file_paths = [self.list_model.data(i, QtCore.Qt.DisplayRole) for i in indexes]
-            t = my_threads.XmlConvertThread(file_paths, parent=self)
+            t = my_threads.XmlConvertThread(file_paths, merge, merged_path, parent=self)
             t.signal.connect(self.on_thread_signal, QtCore.Qt.QueuedConnection)
             t.finished.connect(self.on_xml_convert_thread_finished)
-            print('before start')
             t.start()
-            print('after start', t.isRunning())
             logging.info('converting xmls END')
         else:
             QtWidgets.QMessageBox.information(self.parent(), 'Ошибка', 'Выберите один или несколько xml из списка!')
