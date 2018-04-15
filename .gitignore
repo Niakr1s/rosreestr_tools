@@ -6,3 +6,5 @@ dist/*
 rosreestr_tools.spec
 *.bak
 *.dwg
+.venv/*
+*.spec
