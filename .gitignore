@@ -4,3 +4,5 @@ build/*
 *.dxf
 dist/*
 rosreestr_tools.spec
+*.bak
+*.dwg

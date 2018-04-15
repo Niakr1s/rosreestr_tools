@@ -75,13 +75,20 @@ class MyDxfFile:
                 result[name] = [[(y, x) for x, y in i] for i in conturs]
         return result
 
-    def checks(self, source='settings'):
-        """ Main function for checking dxf file in xmls """
-        settings = self.settings
-        XmlFiles = scripts.xml_file.get_list_of_XmlFiles(settings, source)
+    def checks(self, source=None, save_to_file=True):
+        """
+        Main function for checking dxf file in xmls
+        If source is None - takes list from settings
+        else you should pass list of file paths
+        """
+        XmlFiles = scripts.xml_file.get_list_of_XmlFiles(self.settings, source)
+
         # Checking for is_intersect and is_inpolygon
         self.geometry_checks(XmlFiles)  # This function updates XmlFiles.check
-        self.save_checks_to_file(XmlFiles)
+        checks = self.get_checks(XmlFiles)
+        if save_to_file:
+            self.save_checks_to_file(checks)
+        return checks
 
     def geometry_checks(self, XmlFiles):
         """Checks for multiple files both is_intersect and is_inpolygon checks."""
@@ -186,9 +193,8 @@ class MyDxfFile:
                 XmlFile.check.add(parcel_name)
                 break
 
-    def save_checks_to_file(self, XmlFiles):
+    def save_checks_to_file(self, checks):
         """ Saves SORTED check() result to file and prints in console """
-        checks = self.get_checks(XmlFiles)
         basename = os.path.basename(self.file_path).replace('.dxf', '.txt')
         output_path = os.path.join(self.settings.settings['check_txt_path'], basename)
         with open(output_path, 'w') as file:
