@@ -32,6 +32,7 @@ class MyListView(QtWidgets.QWidget):
 
     def __init__(self, file_type, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
+        self.main_window = self.parent().parent()
         self.file_type = file_type
 
         # Creating list view
@@ -123,12 +124,15 @@ class XmlListView(MyListView):
         logging.info('converting xmls START')
         indexes = self.list_view.selectedIndexes()
         if len(indexes):
-            for index in indexes:
+            progress_bar = self.main_window.statusBar().get_progress_bar(len(indexes))
+            for i, index in enumerate(indexes):
+                progress_bar.setValue(i + 1)
                 file_path = self.list_model.data(index, QtCore.Qt.DisplayRole)
                 xml = xml_file.XmlFile(file_path, self.settings)
                 xml.convert_to_dxffile()
             logging.info('converting xmls END')
-            QtWidgets.QMessageBox.information(self.parent(), 'Информация', 'Операция выполнена')
+            progress_bar.hide()
+            self.main_window.statusBar().showMessage('Операция завершена')
         else:
             QtWidgets.QMessageBox.information(self.parent(), 'Ошибка', 'Выберите один или несколько xml из списка!')
             logging.info('converting xmls: file not selected')
@@ -147,22 +151,23 @@ class MyDxfListView(MyListView):
     def on_btn_check_click(self):
         logging.info('checking dxf in xmls START')
         indexes = self.list_view.selectedIndexes()
-        print(indexes)
         if len(indexes):
             my_dxf_file_paths = [self.list_model.data(i, 0) for i in indexes]
-            print(my_dxf_file_paths)
             xml_file_pathes = self.parent().xml_view.list_model.stringList()
             all_checks = {}
-            for my_dxf_file_path in my_dxf_file_paths:
+            progress_bar = self.main_window.statusBar().get_progress_bar(len(indexes))
+            for i, my_dxf_file_path in enumerate(my_dxf_file_paths):
+                progress_bar.setValue(i + 1)
                 my_dxf = my_dxf_file.MyDxfFile(my_dxf_file_path, self.settings)
                 checks = my_dxf.checks(xml_file_pathes, save_to_file=False)
                 actions.update(all_checks, checks)
+            progress_bar.hide()
+            self.main_window.statusBar().showMessage('Операция завершена')
             self.parent().output_view.output.setPlainText(my_dxf_file.checks_to_formatted_string(source=all_checks))
             logging.info('checking dxf in xmls END')
         else:
             QtWidgets.QMessageBox.information(self.parent(), 'Ошибка', 'Выберите один или несколько dxf из списка!')
             logging.info('checking dxf in xmls: file not selected')
-
 
 
 class OutputView(QtWidgets.QWidget):

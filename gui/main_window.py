@@ -13,13 +13,22 @@ class MainWindow(QtWidgets.QMainWindow):
         self.setCentralWidget(CentralWidget(self))
         self.setStatusBar(StatusBar(self))
         self.setMenuBar(MenuBar(self))
-        self.addToolBar(ToolBar(self))
+        # self.addToolBar(ToolBar(self))
 
 
 class StatusBar(QtWidgets.QStatusBar):
     def __init__(self, parent=None):
         QtWidgets.QStatusBar.__init__(self, parent)
         self.showMessage('Добро пожаловать.')
+        self.progress_bar = QtWidgets.QProgressBar(self)
+        self.addWidget(self.progress_bar)
+        self.progress_bar.hide()
+
+    def get_progress_bar(self, maximum):
+        self.progress_bar.reset()
+        self.progress_bar.setMaximum(maximum)
+        self.progress_bar.show()
+        return self.progress_bar
 
 
 class MenuBar(QtWidgets.QMenuBar):
