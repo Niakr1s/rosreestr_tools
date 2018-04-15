@@ -15,8 +15,11 @@ class DxfFile:
         self.settings = XmlFile.settings
         self.parcels = self.XmlFile.parcels
         self.parcels_add_reversed_coordinates()  # parcels now contain ['reversed_coordinates'] key
-        self.output_file_path = path.join(self.settings.settings['dxf_folder_path'],
-            self.XmlFile.basename_file_path.replace('.xml', '.dxf'))
+        if 'dxf_folder_path' not in self.settings.settings:
+            self.output_file_path = self.XmlFile.file_path.replace('.xml', '.dxf')
+        else:
+            self.output_file_path = path.join(self.settings.settings['dxf_folder_path'],
+                                              self.XmlFile.basename_file_path.replace('.xml', '.dxf'))
 
     def draw_conturs_and_save(self):
         """ Draws iterables from dictionary to modelspace.
@@ -34,7 +37,8 @@ class DxfFile:
             if text_attrib:
                 text_coords, text_height = text_attrib
                 dxf_block.add_text(' '.join((cadastral_number, cadastral_attributes['type'])),
-                                   dxfattribs={'height': text_height, 'color': attribs['color']}).set_pos((text_coords), align='MIDDLE_CENTER')
+                                   dxfattribs={'height': text_height, 'color': attribs['color']}).set_pos((text_coords),
+                                                                                                          align='MIDDLE_CENTER')
             # Adding block to modelspace
             self.msp.add_blockref(block_name, insert=(0, 0))
             # saving

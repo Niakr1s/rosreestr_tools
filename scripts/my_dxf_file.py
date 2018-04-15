@@ -3,8 +3,8 @@ import os
 
 import ezdxf
 
+import scripts.xml_file
 from scripts.geometry_checks import is_intersect, inside_polygon, circle_intersect
-from scripts.xml_file import get_list_of_XmlFiles
 
 
 class MyDxfFile:
@@ -78,7 +78,7 @@ class MyDxfFile:
     def checks(self, source='settings'):
         """ Main function for checking dxf file in xmls """
         settings = self.settings
-        XmlFiles = get_list_of_XmlFiles(settings, source)
+        XmlFiles = scripts.xml_file.get_list_of_XmlFiles(settings, source)
         # Checking for is_intersect and is_inpolygon
         self.geometry_checks(XmlFiles)  # This function updates XmlFiles.check
         self.save_checks_to_file(XmlFiles)

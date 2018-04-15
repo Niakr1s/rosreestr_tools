@@ -4,9 +4,9 @@ from queue import Queue
 import ezdxf
 from progressbar import ProgressBar
 
+import scripts.xml_file
 from scripts import thread_handling
 from scripts.my_dxf_file import get_list_of_MyDxfFiles, txts_to_formatted_string
-from scripts.xml_file import get_list_of_XmlFiles
 
 
 def check_mydxfs(settings, source=None):
@@ -25,7 +25,7 @@ def convert_xmlfiles_to_dxffiles(settings, source=None):
     If source is None - takes list from settings and converts to settings.settings['dxf_folder_path']
     else you should pass list of file paths
     """
-    list_of_XmlFiles = get_list_of_XmlFiles(settings, source)
+    list_of_XmlFiles = scripts.xml_file.get_list_of_XmlFiles(settings, source)
     list_of_tasks = [i.convert_to_dxffile for i in list_of_XmlFiles]
     execute_list_of_tasks(list_of_tasks, 1)
 
@@ -61,7 +61,7 @@ def pretty_rename_xmls(settings, source=None):
     If source is None - takes list from settings
     else you should pass list of file paths
     """
-    list_of_XmlFiles = get_list_of_XmlFiles(settings, source)
+    list_of_XmlFiles = scripts.xml_file.get_list_of_XmlFiles(settings, source)
     list_of_tasks = [i.pretty_rename for i in list_of_XmlFiles]
     execute_list_of_tasks(list_of_tasks, 10, with_bar=False)
     print('Файлы были успешно переименованы!')

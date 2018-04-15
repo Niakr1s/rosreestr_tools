@@ -10,7 +10,7 @@ from scripts.exceptions import NoCoordinates
 class XmlFile:
     """ Class for a single rosreestr xml file """
 
-    def __init__(self, file_path, settings):
+    def __init__(self, file_path, settings=None):
         self.settings = settings
         self.file_path = os.path.abspath(file_path)
         self.basename_file_path = os.path.basename(file_path)
@@ -104,6 +104,7 @@ def remove_namespace(not_pretty_tag):
 
 if __name__ == '__main__':
     from scripts.settings import Settings
+
     settings = Settings()
     xml = XmlFile(r'd:\github\rosreestr_tools\files\xml\KPT CadastralBlock 21 02 010103.xml', settings)
     xml.convert_to_dxffile()

@@ -28,7 +28,7 @@ class CentralWidget(QtWidgets.QWidget):
 
 
 class MyListView(QtWidgets.QWidget):
-    settings = settings.Settings()
+    settings = settings.Settings(with_pathes=False)
 
     def __init__(self, file_type, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
@@ -86,38 +86,61 @@ class MyListView(QtWidgets.QWidget):
 
     def on_btn_delete_click(self):
         # deleting items from list_view and list_model
-        file_indexes = self.list_view.selectedIndexes()
-        logging.info('start deleting %i of %i items' % (len(file_indexes), self.list_model.rowCount()))
+        file_indexes = [i.row() for i in self.list_view.selectedIndexes()]
+        file_indexes.sort(reverse=True)  # reversing to delete items from end
+        logging.info('start deleting %i' % len(file_indexes))
         for f in file_indexes:
-            self.list_model.removeRow(f.row())
-        logging.info('%i items deleted, remained %i items' % (len(file_indexes), self.list_model.rowCount()))
+            self.list_model.removeRow(f)
+        logging.info('items deleted')
 
 
 class XmlListView(MyListView):
     # Xml list view
     def __init__(self, parent=None):
         MyListView.__init__(self, 'xml', parent)
+        self.list_view.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
 
         self.btn_rename = QtWidgets.QPushButton('Переименовать')
         self.btn_rename.clicked.connect(self.on_btn_rename_click)
-        self.btn_convert = QtWidgets.QPushButton('Выделенное 2dxf')
+
+        self.btn_convert_selected = QtWidgets.QPushButton('Выделенное 2dxf')
+        self.btn_convert_selected.clicked.connect(self.on_btn_convert_selected_clicked)
+
         self.btn_convert_all = QtWidgets.QPushButton('Все 2dxf')
+        self.btn_convert_all.clicked.connect(self.on_btn_convert_all_clicked)
 
         self.bot_layout.addWidget(self.btn_rename)
-        self.bot_layout.addWidget(self.btn_convert)
+        self.bot_layout.addWidget(self.btn_convert_selected)
         self.bot_layout.addWidget(self.btn_convert_all)
 
     def on_btn_rename_click(self):
         logging.info('start renaming xmls')
         for i in range(self.list_model.rowCount()):
             index = self.list_model.index(i)
-            print(index)
             file_path = self.list_model.data(index, QtCore.Qt.DisplayRole)
-            print(file_path)
-            new_file_path = xml_file.XmlFile(file_path, self.settings).pretty_rename()
-            print(new_file_path)
+            xml = xml_file.XmlFile(file_path, self.settings)
+            new_file_path = xml.pretty_rename()
             self.list_model.setData(index, new_file_path)
         logging.info('xmls renamed')
+
+    def on_btn_convert_selected_clicked(self):
+        logging.info('start converting xmls')
+        for index in self.list_view.selectedIndexes():
+            file_path = self.list_model.data(index, QtCore.Qt.DisplayRole)
+            xml = xml_file.XmlFile(file_path, self.settings)
+            xml.convert_to_dxffile()
+        logging.info('end converting xmls')
+        QtWidgets.QMessageBox.information(self.parent(), 'Информация', 'Операция выполнена')
+
+    def on_btn_convert_all_clicked(self):
+        logging.info('start converting xmls')
+        for i in range(self.list_model.rowCount()):
+            index = self.list_model.index(i)
+            file_path = self.list_model.data(index, QtCore.Qt.DisplayRole)
+            xml = xml_file.XmlFile(file_path, self.settings)
+            xml.convert_to_dxffile()
+        logging.info('end converting xmls')
+        QtWidgets.QMessageBox.information(self.parent(), 'Информация', 'Операция выполнена')
 
 
 class MyDxfListView(MyListView):
