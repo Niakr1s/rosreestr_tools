@@ -30,7 +30,7 @@ def convert_xmlfiles_to_dxffiles(settings, source=None):
     execute_list_of_tasks(list_of_tasks, 1)
 
 
-def merge_dxfs(settings, source=None):
+def merge_dxfs(settings, source=None, merged_path=None):
     """ Merging all dxfs
     If source is None - takes list from settings and converts into merged.dxf
     else you should pass list of file paths
@@ -46,10 +46,14 @@ def merge_dxfs(settings, source=None):
         importer.import_all()
         target_dxf.save()
 
-    dxf_list = settings.get_file_list('dxf_folder_path', '.dxf')
+    if source is None:
+        dxf_list = settings.get_file_list('dxf_folder_path', '.dxf')
+    else:
+        dxf_list = source
     # Creating clear dxf file
     dwg = ezdxf.new('R2000')
-    merged_path = settings.settings['merged_dxf_path']
+    if not merged_path:
+        merged_path = settings.settings['merged_dxf_path']
     dwg.saveas(merged_path)
     target_dxf = ezdxf.readfile(merged_path)
     list_of_tasks = [(import_and_save, (dxf, target_dxf)) for dxf in dxf_list]
