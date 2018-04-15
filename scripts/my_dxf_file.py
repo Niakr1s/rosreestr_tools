@@ -253,26 +253,31 @@ def append_if(lst, k, v):
     return lst
 
 
-def txts_to_formatted_string(settings=None, source=None):
+def checks_to_formatted_string(settings=None, source=None):
     """
     if settings not None: Converts all directory of txts into one string format:
     number1, number2, ... and saves to settings['formatted_txt_path']
     if source not None: Converts all source to formatted string and returns it
     source is json
     """
-    file_list = settings.get_file_list('check_txt_path', '.txt')
-    res = dict()
-    for file in file_list:
-        # title = ''
-        with open(file) as f:
-            j = json.load(f)
-            for k, v in j.items():
-                if k in res:
-                    res[k] |= set(v)
-                else:
-                    res[k] = set(v)
+    if settings is not None:
+        file_list = settings.get_file_list('check_txt_path', '.txt')
+        res = dict()
+        for file in file_list:
+            # title = ''
+            with open(file) as f:
+                j = json.load(f)
+                for k, v in j.items():
+                    if k in res:
+                        res[k] |= set(v)
+                    else:
+                        res[k] = set(v)
+    else:
+        res = source
     for k, v in res.items():
         res[k] = '; '.join(sort_result(v))
-
-    with open(settings.settings['formatted_txt_path'], 'w') as f:
-        json.dump(res, f, indent=' ')
+    if settings is not None:
+        with open(settings.settings['formatted_txt_path'], 'w') as f:
+            json.dump(res, f, indent=' ')
+    else:
+        return json.dumps(res, indent=' ')

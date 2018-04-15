@@ -6,7 +6,7 @@ from progressbar import ProgressBar
 
 import scripts.xml_file
 from scripts import thread_handling
-from scripts.my_dxf_file import get_list_of_MyDxfFiles, txts_to_formatted_string
+from scripts.my_dxf_file import get_list_of_MyDxfFiles, checks_to_formatted_string
 
 
 def check_mydxfs(settings, source=None):
@@ -17,7 +17,7 @@ def check_mydxfs(settings, source=None):
     list_of_MyDxfFiles = get_list_of_MyDxfFiles(settings, source)
     list_of_tasks = [(i.checks, (source,)) for i in list_of_MyDxfFiles]
     execute_list_of_tasks(list_of_tasks, 5)
-    txts_to_formatted_string(settings)
+    checks_to_formatted_string(settings)
 
 
 def convert_xmlfiles_to_dxffiles(settings, source=None):
