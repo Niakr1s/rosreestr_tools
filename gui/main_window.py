@@ -23,12 +23,13 @@ class StatusBar(QtWidgets.QStatusBar):
         QtWidgets.QStatusBar.__init__(self, parent)
         self.showMessage('Добро пожаловать.')
         self.progress_bar = QtWidgets.QProgressBar(self)
-        self.addWidget(self.progress_bar)
+        self.addWidget(self.progress_bar, 1)
         self.progress_bar.hide()
 
-    def get_progress_bar(self, maximum):
+    def reset_progress_bar(self, maximum):
         self.progress_bar.reset()
         self.progress_bar.setMaximum(maximum)
+        self.progress_bar.setValue(0)
         self.progress_bar.show()
         return self.progress_bar
 

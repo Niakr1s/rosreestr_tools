@@ -2,7 +2,8 @@ import logging
 
 from PyQt5 import QtWidgets, QtCore
 
-from scripts import xml_file, settings, my_dxf_file, actions
+from gui import my_threads
+from scripts import xml_file, settings
 
 
 class CentralWidget(QtWidgets.QWidget):
@@ -78,7 +79,6 @@ class MyListView(QtWidgets.QWidget):
             filter_string = 'Чертеж (*.%s)' % self.file_type
 
         file_names = QtWidgets.QFileDialog(self).getOpenFileNames(self, 'Добавить файлы', '', filter_string)[0]
-        logging.info('selected files: %s' % str(file_names))
         for file in file_names:
             length = self.list_model.rowCount()
             self.list_model.insertRow(length)
@@ -124,7 +124,7 @@ class XmlListView(MyListView):
         logging.info('converting xmls START')
         indexes = self.list_view.selectedIndexes()
         if len(indexes):
-            progress_bar = self.main_window.statusBar().get_progress_bar(len(indexes))
+            progress_bar = self.main_window.statusBar().reset_progress_bar(len(indexes))
             for i, index in enumerate(indexes):
                 progress_bar.setValue(i + 1)
                 file_path = self.list_model.data(index, QtCore.Qt.DisplayRole)
@@ -154,20 +154,23 @@ class MyDxfListView(MyListView):
         if len(indexes):
             my_dxf_file_paths = [self.list_model.data(i, 0) for i in indexes]
             xml_file_pathes = self.parent().xml_view.list_model.stringList()
-            all_checks = {}
-            progress_bar = self.main_window.statusBar().get_progress_bar(len(indexes))
-            for i, my_dxf_file_path in enumerate(my_dxf_file_paths):
-                progress_bar.setValue(i + 1)
-                my_dxf = my_dxf_file.MyDxfFile(my_dxf_file_path, self.settings)
-                checks = my_dxf.checks(xml_file_pathes, save_to_file=False)
-                actions.update(all_checks, checks)
-            progress_bar.hide()
-            self.main_window.statusBar().showMessage('Операция завершена')
-            self.parent().output_view.output.setPlainText(my_dxf_file.checks_to_formatted_string(source=all_checks))
+            self.progress_bar = self.main_window.statusBar().reset_progress_bar(len(indexes))
+            t = my_threads.MyDxfCheckThread(my_dxf_file_paths, xml_file_pathes, self.on_my_dxf_check_thread_finished,
+                                            self)
+            t.signal.connect(self.on_my_dxf_check_thread_signal, QtCore.Qt.QueuedConnection)
+            t.start()
             logging.info('checking dxf in xmls END')
         else:
             QtWidgets.QMessageBox.information(self.parent(), 'Ошибка', 'Выберите один или несколько dxf из списка!')
             logging.info('checking dxf in xmls: file not selected')
+
+    def on_my_dxf_check_thread_signal(self, s):
+        self.progress_bar.setFormat(s)
+        self.progress_bar.setValue(self.progress_bar.value() + 1)
+
+    def on_my_dxf_check_thread_finished(self, s):
+        self.progress_bar.hide()
+        self.parent().output_view.output.setPlainText(s)
 
 
 class OutputView(QtWidgets.QWidget):
