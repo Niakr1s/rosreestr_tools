@@ -1,24 +1,27 @@
 import os
 import platform
 
-COLORS = {'color_type': {'block': 7, 'parcel': 8, 'oks': 63}}
+# This module only for console version, maybe except COLORS section, that affects GUI convert function too
+
+
+COLORS = {'color_type': {'block': 7, 'parcel': 8, 'oks': 63}}  # colors for dxf files, converted from xml files
 
 if platform.system() == 'Windows':
     DESKTOP_PATH = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop\\rosreestr_tools_files')
 else:
     DESKTOP_PATH = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop\\rosreestr_tools_files')
 
-PATHS = {
-    'paths': {'xml_folder': os.path.join(DESKTOP_PATH, 'xml'), 'mydxf_folder': os.path.join(DESKTOP_PATH, 'mydxf')}}
-FORMATTED_TXT = 'formatted.txt'
-MERGED_DXF = 'merged.dxf'
-
 
 class Settings:
-    def __init__(self):
-        """ settings is ConfigParser object """
+    def __init__(self, base_dir=DESKTOP_PATH):
+        self.base_dir = DESKTOP_PATH
+        paths = {
+            'paths': {'xml_folder': os.path.join(base_dir, 'xml'), 'mydxf_folder': os.path.join(base_dir, 'mydxf')}}
+        self.settings = paths
 
-        self.settings = PATHS
+        self.formatted_txt = os.path.join(self.base_dir, 'formatted.txt')
+        self.merged_dxf = os.path.join(self.base_dir, 'merged.dxf')
+
         self.check_paths()
 
     def check_paths(self):
@@ -35,11 +38,3 @@ class Settings:
                 if entry.is_file() and pattern in entry.name:
                     res.append(entry.path)
         return res
-
-    @staticmethod
-    def get_formatted_txt():
-        return os.path.join(DESKTOP_PATH, FORMATTED_TXT)
-
-    @staticmethod
-    def get_merged_dxf():
-        return os.path.join(DESKTOP_PATH, MERGED_DXF)

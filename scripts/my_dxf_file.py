@@ -275,7 +275,7 @@ def checks_to_formatted_string(checks_list=None, formatted_txt_path=None):
         checks_dict[k] = '; '.join(sort_result(v))
     # saving to file
     if formatted_txt_path is not None:
-        with open(Settings().get_formatted_txt(), 'w') as f:
+        with open(Settings().formatted_txt, 'w') as f:
             json.dump(checks_dict, f, indent=' ')
 
     return json.dumps(checks_dict, indent=' ')

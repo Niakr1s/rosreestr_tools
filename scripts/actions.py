@@ -21,7 +21,7 @@ def check_mydxfs(mydxf_paths=None, xml_paths=None):
     list_of_MyDxfFiles = get_list_of_MyDxfFiles(mydxf_paths)
     list_of_tasks = [(i.checks, (xml_paths,)) for i in list_of_MyDxfFiles]
     execute_list_of_tasks(list_of_tasks, 5)
-    checks_to_formatted_string(formatted_txt_path=Settings().get_formatted_txt())
+    checks_to_formatted_string(formatted_txt_path=Settings().formatted_txt)
 
 
 def convert_xmlfiles_to_dxffiles(xml_paths=None):
@@ -49,7 +49,7 @@ def merge_dxfs(dxf_paths=None, merged_path=None):
     if dxf_paths is None:
         dxf_paths = Settings().get_file_list('xml_folder', '.dxf')
     if merged_path is None:
-        merged_path = Settings().get_merged_dxf()
+        merged_path = Settings().merged_dxf
 
     # Creating clear dxf file
     dwg = ezdxf.new('R2000')

@@ -13,8 +13,8 @@ Rosreestr tools created by Pavel Koshelev.
 
 %s - объединенный dxf
 %s - общая строка проверок dxf с xml
-""" % (settings.settings['paths']['xml_folder'], settings.settings['paths']['mydxf_folder'], settings.get_merged_dxf(),
-       settings.get_formatted_txt()))
+""" % (settings.settings['paths']['xml_folder'], settings.settings['paths']['mydxf_folder'], settings.merged_dxf,
+       settings.formatted_txt))
 
 
 def short_input():
