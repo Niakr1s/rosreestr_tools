@@ -5,13 +5,13 @@ from lxml import etree
 from scripts import actions
 from scripts.dxf_file import DxfFile
 from scripts.exceptions import NoCoordinates
+from settings import Settings
 
 
 class XmlFile:
     """ Class for a single rosreestr xml file """
 
-    def __init__(self, file_path, settings=None):
-        self.settings = settings
+    def __init__(self, file_path):
         self.file_path = os.path.abspath(file_path)
         self.basename_file_path = os.path.basename(file_path)
         self.tree = etree.parse(file_path)
@@ -58,6 +58,7 @@ class XmlFile:
     def get_block_conturs(self, parcel):
         """ Subfunction for get_blocks function
         returns list of conturs with tuple of coords """
+        result = []
         for contur in parcel.iterchildren('{*}SpatialData'):
             result = self.get_parcel_conturs(contur)
         return result
@@ -76,38 +77,28 @@ class XmlFile:
         pretty_fullname = os.path.join(dirpath, pretty_basename)
         try:
             os.rename(self.file_path, pretty_fullname)
-        except FileExistsError as err:
+        except FileExistsError:
             os.remove(os.path.join(dirpath, pretty_basename))
             os.rename(self.file_path, pretty_fullname)
         return pretty_fullname
 
 
-def get_list_of_XmlFiles(settings, source=None):
+def get_list_of_XmlFiles(source=None):
     """
     Returns list of XmlFile class objects
     If source is None - takes list from settings
     else you should pass list of file paths
     """
     if source is None:
-        xml_paths = settings.get_file_list('xml_folder_path', '.xml')
+        xml_paths = Settings().get_file_list('xml_folder_path', '.xml')
     else:
         xml_paths = source
     res = []
     for file in xml_paths:
-        xml_file = XmlFile(file, settings)
+        xml_file = XmlFile(file)
         res.append(xml_file)
     return res
 
 
 def remove_namespace(not_pretty_tag):
     return not_pretty_tag.split('}')[-1]
-
-
-if __name__ == '__main__':
-    from scripts.settings import Settings
-
-    settings = Settings()
-    xml = XmlFile(r'd:\github\rosreestr_tools\files\xml\KPT CadastralBlock 21 02 010103.xml', settings)
-    xml.convert_to_dxffile()
-    xml = XmlFile(r'd:\Dropbox\xml\зд.xml', settings)
-    xml.convert_to_dxffile()

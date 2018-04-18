@@ -7,30 +7,35 @@ from progressbar import ProgressBar
 import scripts.xml_file
 from scripts import thread_handling
 from scripts.my_dxf_file import get_list_of_MyDxfFiles, checks_to_formatted_string
+from settings import Settings
 
 
-def check_mydxfs(settings, source=None):
+def check_mydxfs(mydxf_paths=None, xml_paths=None):
     """ Checks all mydxf files from:
     If source is None - takes list from settings and converts in settings.settings['xml_folder_path']
     else you should pass list of file paths
     """
-    list_of_MyDxfFiles = get_list_of_MyDxfFiles(settings, source)
-    list_of_tasks = [(i.checks, (source,)) for i in list_of_MyDxfFiles]
+    if mydxf_paths is None:
+        mydxf_paths = Settings().get_file_list('my_dxf_file_path', '.dxf')
+    if xml_paths is None:
+        xml_paths = Settings().get_file_list('xml_folder_path', '.xml')
+    list_of_MyDxfFiles = get_list_of_MyDxfFiles(mydxf_paths)
+    list_of_tasks = [(i.checks, (xml_paths,)) for i in list_of_MyDxfFiles]
     execute_list_of_tasks(list_of_tasks, 5)
-    checks_to_formatted_string(settings)
+    checks_to_formatted_string(formatted_txt=Settings().get_formatted_txt())
 
 
-def convert_xmlfiles_to_dxffiles(settings, source=None):
+def convert_xmlfiles_to_dxffiles(source=None):
     """ Converts all xml files from:
     If source is None - takes list from settings and converts to settings.settings['dxf_folder_path']
     else you should pass list of file paths
     """
-    list_of_XmlFiles = scripts.xml_file.get_list_of_XmlFiles(settings, source)
+    list_of_XmlFiles = scripts.xml_file.get_list_of_XmlFiles(source)
     list_of_tasks = [i.convert_to_dxffile for i in list_of_XmlFiles]
     execute_list_of_tasks(list_of_tasks, 1)
 
 
-def merge_dxfs(settings, dxf_list=None, merged_path=None):
+def merge_dxfs(dxf_list=None, merged_path=None):
     """ Merging all dxfs
     If source is None - takes list from settings and converts into merged.dxf
     else you should pass list of file paths
@@ -47,23 +52,23 @@ def merge_dxfs(settings, dxf_list=None, merged_path=None):
         target_dxf.save()
 
     if dxf_list is None:
-        dxf_list = settings.get_file_list('dxf_folder_path', '.dxf')
+        dxf_list = Settings().get_file_list('xml_folder_path', '.dxf')
     # Creating clear dxf file
     dwg = ezdxf.new('R2000')
     if merged_path is None:
-        merged_path = settings.settings['merged_dxf_path']
+        merged_path = Settings().get_merged_dxf()
     dwg.saveas(merged_path)
     target_dxf = ezdxf.readfile(merged_path)
     list_of_tasks = [(import_and_save, (dxf, target_dxf)) for dxf in dxf_list]
     execute_list_of_tasks(list_of_tasks, 1)
 
 
-def pretty_rename_xmls(settings, source=None):
+def pretty_rename_xmls(xml_paths=None):
     """
     If source is None - takes list from settings
     else you should pass list of file paths
     """
-    list_of_XmlFiles = scripts.xml_file.get_list_of_XmlFiles(settings, source)
+    list_of_XmlFiles = scripts.xml_file.get_list_of_XmlFiles(xml_paths)
     list_of_tasks = [i.pretty_rename for i in list_of_XmlFiles]
     execute_list_of_tasks(list_of_tasks, 10, with_bar=False)
     print('Файлы были успешно переименованы!')

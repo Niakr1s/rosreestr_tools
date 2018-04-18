@@ -7,15 +7,14 @@ if platform.system() == 'Windows':
 elif platform.system() == 'Linux':
     DESKTOP_PATH = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop\\rosreestr_tools_files')
 
-PATHS = {'paths': {'dxf_folder_path': os.path.join(DESKTOP_PATH, 'dxf'),
-                   'xml_folder_path': os.path.join(DESKTOP_PATH, 'xml'),
+PATHS = {'paths': {'xml_folder_path': os.path.join(DESKTOP_PATH, 'xml'),
                    'my_dxf_file_path': os.path.join(DESKTOP_PATH, 'mydxf'),
                    'check_txt_path': os.path.join(DESKTOP_PATH, 'txt'),
                    'formatted_txt_path': os.path.join(DESKTOP_PATH), 'merged_dxf_path': os.path.join(DESKTOP_PATH)}}
 
 INI = 'settings.ini'
-FORMATTED = 'formatted.txt'
-MERGED = 'merged.dxf'
+FORMATTED_TXT = os.path.join(PATHS['paths']['formatted_txt_path'], 'formatted.txt')
+MERGED_DXF = os.path.join(PATHS['paths']['merged_dxf_path'], 'merged.dxf')
 
 
 class Settings:
@@ -26,7 +25,6 @@ class Settings:
             self.settings.read_file(open(INI))
         except FileNotFoundError:
             self.settings = self.init_defaults()
-        self.check_paths()
 
     def check_paths(self):
         for i in self.settings['paths'].values():
@@ -42,6 +40,12 @@ class Settings:
                 if entry.is_file() and pattern in entry.name:
                     res.append(entry.path)
         return res
+
+    def get_formatted_txt(self):
+        return os.path.join(self.settings['paths']['formatted_txt_path'], FORMATTED_TXT)
+
+    def get_merged_dxf(self):
+        return os.path.join(self.settings['paths']['merged_dxf_path'], MERGED_DXF)
 
     @staticmethod
     def init_defaults():

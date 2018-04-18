@@ -2,8 +2,9 @@ import logging
 
 from PyQt5 import QtWidgets, QtCore
 
+import settings
 from gui import my_threads
-from scripts import xml_file, settings
+from scripts import xml_file
 
 
 class CentralWidget(QtWidgets.QWidget):

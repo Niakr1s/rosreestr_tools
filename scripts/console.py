@@ -1,7 +1,7 @@
 import os
 
 from scripts import actions
-from scripts.settings import Settings
+from settings import Settings
 
 
 def help_screen(settings):
@@ -14,10 +14,9 @@ Rosreestr tools created by Pavel Koshelev.
 %s - ваши dxf, которые нужно проверить на пересечения в xml
 %s - результаты проверок dxf с xml
 %s - общая строка проверок dxf с xml
-""" % (
-        settings.settings['xml_folder_path'], settings.settings['dxf_folder_path'],
-        settings.settings['merged_dxf_path'], settings.settings['my_dxf_file_path'],
-        settings.settings['check_txt_path'], settings.settings['formatted_txt_path']))
+""" % (settings.settings['paths']['xml_folder_path'], settings.settings['paths']['xml_folder_path'],
+       settings.settings['paths']['merged_dxf_path'], settings.settings['paths']['my_dxf_file_path'],
+       settings.settings['paths']['check_txt_path'], settings.settings['paths']['formatted_txt_path']))
 
 
 def short_input():
@@ -46,23 +45,27 @@ def cls():
 
 def menu():
     cls()
+
     settings = Settings()
+    settings.check_paths()
+
     help_screen(settings)
+
     while True:
         inp = short_input()
         settings.check_paths()
         if inp == '1':
             cls()
-            actions.check_mydxfs(settings)
+            actions.check_mydxfs()
         elif inp == '2':
             cls()
-            actions.pretty_rename_xmls(settings)
+            actions.pretty_rename_xmls()
         elif inp == '3':
             cls()
-            actions.convert_xmlfiles_to_dxffiles(settings)
+            actions.convert_xmlfiles_to_dxffiles()
         elif inp == '4':
             cls()
-            actions.merge_dxfs(settings)
+            actions.merge_dxfs()
         elif inp in ('q', 'Q'):
             cls()
             break

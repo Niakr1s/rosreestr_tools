@@ -1,5 +1,3 @@
-from os import path
-
 import ezdxf
 
 from scripts import actions
@@ -14,14 +12,9 @@ class DxfFile:
         self.dwg = ezdxf.new('R2000')  # create R2000 drawing
         self.msp = self.dwg.modelspace()  # modelspace for dwg
         self.XmlFile = XmlFile
-        self.settings = XmlFile.settings
         self.parcels = self.XmlFile.parcels
         self.parcels_add_reversed_coordinates()  # parcels now contain ['reversed_coordinates'] key
-        if 'dxf_folder_path' not in self.settings.settings:
-            self.output_file_path = self.XmlFile.file_path.replace('.xml', '.dxf')
-        else:
-            self.output_file_path = path.join(self.settings.settings['dxf_folder_path'],
-                                              self.XmlFile.basename_file_path.replace('.xml', '.dxf'))
+        self.output_file_path = self.XmlFile.file_path.replace('.xml', '.dxf')
 
     def draw_conturs_and_save(self):
         """ Draws iterables from dictionary to modelspace.

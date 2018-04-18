@@ -5,11 +5,11 @@ import ezdxf
 
 import scripts.xml_file
 from scripts.geometry_checks import is_intersect, inside_polygon, circle_intersect
+from settings import Settings
 
 
 class MyDxfFile:
-    def __init__(self, file_path, settings):
-        self.settings = settings
+    def __init__(self, file_path):
         self.file_path = file_path
         self.my_dxf_file = ezdxf.readfile(self.file_path)
         self.msp = self.my_dxf_file.modelspace()
@@ -75,13 +75,13 @@ class MyDxfFile:
                 result[name] = [[(y, x) for x, y in i] for i in conturs]
         return result
 
-    def checks(self, source=None, save_to_file=True):
+    def checks(self, xml_paths=None, save_to_file=True):
         """
         Main function for checking dxf file in xmls
         If source is None - takes list from settings
         else you should pass list of file paths
         """
-        XmlFiles = scripts.xml_file.get_list_of_XmlFiles(self.settings, source)
+        XmlFiles = scripts.xml_file.get_list_of_XmlFiles(xml_paths)
 
         # Checking for is_intersect and is_inpolygon
         self.geometry_checks(XmlFiles)  # This function updates XmlFiles.check
@@ -196,7 +196,7 @@ class MyDxfFile:
     def save_checks_to_file(self, checks):
         """ Saves SORTED check() result to file and prints in console """
         basename = os.path.basename(self.file_path).replace('.dxf', '.txt')
-        output_path = os.path.join(self.settings.settings['check_txt_path'], basename)
+        output_path = os.path.join(Settings().settings['paths']['check_txt_path'], basename)
         with open(output_path, 'w') as file:
             json.dump(checks, file, indent=' ')
 
@@ -229,19 +229,19 @@ def is_equal(lst: list):
     return True
 
 
-def get_list_of_MyDxfFiles(settings, source=None):
+def get_list_of_MyDxfFiles(source=None):
     """
     Returns list of XmlFile class objects
     If source is None - takes list from settings
     else you should pass list of file paths
     """
     if source is None:
-        mydxf_list = settings.get_file_list('my_dxf_file_path', '.dxf')
+        mydxf_list = Settings().get_file_list('my_dxf_file_path', '.dxf')
     else:
         mydxf_list = source
     res = []
     for file in mydxf_list:
-        mydxf_file = MyDxfFile(file, settings)
+        mydxf_file = MyDxfFile(file)
         res.append(mydxf_file)
     return res
 
@@ -253,31 +253,30 @@ def append_if(lst, k, v):
     return lst
 
 
-def checks_to_formatted_string(settings=None, source=None):
+def checks_to_formatted_string(source=None, formatted_txt=None):
     """
     if settings not None: Converts all directory of txts into one string format:
     number1, number2, ... and saves to settings['formatted_txt_path']
     if source not None: Converts all source to formatted string and returns it
     source is json
     """
-    if settings is not None:
-        file_list = settings.get_file_list('check_txt_path', '.txt')
-        res = dict()
+    if source is None:
+        file_list = Settings().get_file_list('check_txt_path', '.txt')
+        source = dict()
         for file in file_list:
             # title = ''
             with open(file) as f:
                 j = json.load(f)
                 for k, v in j.items():
-                    if k in res:
-                        res[k] |= set(v)
+                    if k in source:
+                        source[k] |= set(v)
                     else:
-                        res[k] = set(v)
+                        source[k] = set(v)
+    for k, v in source.items():
+        source[k] = '; '.join(sort_result(v))
+
+    if formatted_txt is not None:
+        with open(Settings().get_formatted_txt(), 'w') as f:
+            json.dump(source, f, indent=' ')
     else:
-        res = source
-    for k, v in res.items():
-        res[k] = '; '.join(sort_result(v))
-    if settings is not None:
-        with open(settings.settings['formatted_txt_path'], 'w') as f:
-            json.dump(res, f, indent=' ')
-    else:
-        return json.dumps(res, indent=' ')
+        return json.dumps(source, indent=' ')
