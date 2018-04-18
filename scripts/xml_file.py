@@ -1,16 +1,15 @@
 import os
 
 from lxml import etree
+from settings import Settings
 
 from scripts import actions
 from scripts.dxf_file import DxfFile
 from scripts.exceptions import NoCoordinates
-from settings import Settings
 
 
 class XmlFile:
     """ Class for a single rosreestr xml file """
-
     def __init__(self, file_path):
         self.file_path = os.path.abspath(file_path)
         self.basename_file_path = os.path.basename(file_path)
@@ -90,7 +89,7 @@ def get_list_of_XmlFiles(source=None):
     else you should pass list of file paths
     """
     if source is None:
-        xml_paths = Settings().get_file_list('xml_folder_path', '.xml')
+        xml_paths = Settings().get_file_list('xml_folder', '.xml')
     else:
         xml_paths = source
     res = []

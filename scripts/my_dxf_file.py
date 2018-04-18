@@ -2,10 +2,10 @@ import json
 import os
 
 import ezdxf
+from settings import Settings
 
 import scripts.xml_file
 from scripts.geometry_checks import is_intersect, inside_polygon, circle_intersect
-from settings import Settings
 
 
 class MyDxfFile:
@@ -196,7 +196,7 @@ class MyDxfFile:
     def save_checks_to_file(self, checks):
         """ Saves SORTED check() result to file and prints in console """
         basename = os.path.basename(self.file_path).replace('.dxf', '.txt')
-        output_path = os.path.join(Settings().settings['paths']['check_txt_path'], basename)
+        output_path = os.path.join(Settings().settings['paths']['mydxf_folder'], basename)
         with open(output_path, 'w') as file:
             json.dump(checks, file, indent=' ')
 
@@ -236,7 +236,7 @@ def get_list_of_MyDxfFiles(source=None):
     else you should pass list of file paths
     """
     if source is None:
-        mydxf_list = Settings().get_file_list('my_dxf_file_path', '.dxf')
+        mydxf_list = Settings().get_file_list('mydxf_folder', '.dxf')
     else:
         mydxf_list = source
     res = []
@@ -261,7 +261,7 @@ def checks_to_formatted_string(source=None, formatted_txt=None):
     source is json
     """
     if source is None:
-        file_list = Settings().get_file_list('check_txt_path', '.txt')
+        file_list = Settings().get_file_list('mydxf_folder', '.txt')
         source = dict()
         for file in file_list:
             # title = ''

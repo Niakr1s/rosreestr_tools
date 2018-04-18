@@ -1,22 +1,21 @@
 import os
 
-from scripts import actions
 from settings import Settings
+
+from scripts import actions
 
 
 def help_screen(settings):
     print("""
 Rosreestr tools created by Pavel Koshelev.
 
-%s - исходные xml файлы
-%s - сконвертированные dxf файлы
+%s - исходные xml файлы, сконвертированные dxf файлы хранятся там же
+%s - ваши dxf, которые нужно проверить на пересечения в xml, результаты проверок хранятся там же
+
 %s - объединенный dxf
-%s - ваши dxf, которые нужно проверить на пересечения в xml
-%s - результаты проверок dxf с xml
 %s - общая строка проверок dxf с xml
-""" % (settings.settings['paths']['xml_folder_path'], settings.settings['paths']['xml_folder_path'],
-       settings.settings['paths']['merged_dxf_path'], settings.settings['paths']['my_dxf_file_path'],
-       settings.settings['paths']['check_txt_path'], settings.settings['paths']['formatted_txt_path']))
+""" % (settings.settings['paths']['xml_folder'], settings.settings['paths']['mydxf_folder'], settings.get_merged_dxf(),
+       settings.get_formatted_txt()))
 
 
 def short_input():
@@ -45,9 +44,7 @@ def cls():
 
 def menu():
     cls()
-
     settings = Settings()
-    settings.check_paths()
 
     help_screen(settings)
 

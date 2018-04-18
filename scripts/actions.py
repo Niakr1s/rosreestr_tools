@@ -3,22 +3,22 @@ from queue import Queue
 
 import ezdxf
 from progressbar import ProgressBar
+from settings import Settings
 
 import scripts.xml_file
 from scripts import thread_handling
 from scripts.my_dxf_file import get_list_of_MyDxfFiles, checks_to_formatted_string
-from settings import Settings
 
 
 def check_mydxfs(mydxf_paths=None, xml_paths=None):
     """ Checks all mydxf files from:
-    If source is None - takes list from settings and converts in settings.settings['xml_folder_path']
+    If source is None - takes list from settings and converts in settings.settings['xml_folder']
     else you should pass list of file paths
     """
     if mydxf_paths is None:
-        mydxf_paths = Settings().get_file_list('my_dxf_file_path', '.dxf')
+        mydxf_paths = Settings().get_file_list('mydxf_folder', '.dxf')
     if xml_paths is None:
-        xml_paths = Settings().get_file_list('xml_folder_path', '.xml')
+        xml_paths = Settings().get_file_list('xml_folder', '.xml')
     list_of_MyDxfFiles = get_list_of_MyDxfFiles(mydxf_paths)
     list_of_tasks = [(i.checks, (xml_paths,)) for i in list_of_MyDxfFiles]
     execute_list_of_tasks(list_of_tasks, 5)
@@ -52,7 +52,7 @@ def merge_dxfs(dxf_list=None, merged_path=None):
         target_dxf.save()
 
     if dxf_list is None:
-        dxf_list = Settings().get_file_list('xml_folder_path', '.dxf')
+        dxf_list = Settings().get_file_list('xml_folder', '.dxf')
     # Creating clear dxf file
     dwg = ezdxf.new('R2000')
     if merged_path is None:
