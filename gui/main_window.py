@@ -20,11 +20,15 @@ class MainWindow(QtWidgets.QMainWindow):
 class StatusBar(QtWidgets.QStatusBar):
     def __init__(self, parent=None):
         QtWidgets.QStatusBar.__init__(self, parent)
+
         self.progress_bar = QtWidgets.QProgressBar(self)
+
+        # init progressbar for future use and hide it
         self.addWidget(self.progress_bar, 1)
         self.progress_bar.hide()
 
     def reset_progress_bar(self, maximum):
+        # resets progress_bar with maximum value
         self.progress_bar.reset()
         self.progress_bar.setMaximum(maximum)
         self.progress_bar.setValue(0)
@@ -45,6 +49,7 @@ class MenuBar(QtWidgets.QMenuBar):
         self.addMenu(help_menu)
 
     def about(self):
+        # simple about window
         about_text = """
 Rosreestr Tools предназначена для кадастровых инженеров.
 
@@ -60,6 +65,7 @@ Rosreestr Tools предназначена для кадастровых инж�
 
 
 class ToolBar(QtWidgets.QToolBar):
+    # add toolbar here
     def __init__(self, parent=None):
         QtWidgets.QToolBar.__init__(self, parent)
 

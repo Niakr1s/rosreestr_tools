@@ -96,9 +96,14 @@ class MyListView(QtWidgets.QWidget):
             self.list_model.removeRow(f)
         logging.info('items deleted')
 
-    def on_thread_signal(self, s):
-        self.progress_bar.setFormat(s)
+    def on_thread_signal(self, msg):
+        # common signal handler, adding +1 to value and prints msg to statusbar
+        self.progress_bar.setFormat(msg)
         self.progress_bar.setValue(self.progress_bar.value() + 1)
+
+    def on_thread_finished(self):
+        self.progress_bar.hide()
+        self.main_window.statusBar().showMessage('Операция завершена')
 
 
 class XmlListView(MyListView):
@@ -116,6 +121,7 @@ class XmlListView(MyListView):
         self.bot_layout.addWidget(self.btn_convert_selected)
 
     def on_btn_rename_click(self):
+        # renaming all XMLs to pretty format
         logging.info('renaming xmls START')
         for i in range(self.list_model.rowCount()):
             index = self.list_model.index(i)
@@ -126,29 +132,33 @@ class XmlListView(MyListView):
         logging.info('renaming xmls END')
 
     def on_btn_convert_clicked(self):
+        # converting selected XMLs to DXFs to same folder and merging it in one file if user wants
         logging.info('converting xmls START')
         indexes = self.list_view.selectedIndexes()
         if len(indexes):
+            # if user wants to merge all dxfs in one file
             merge = QtWidgets.QMessageBox().question(self, 'Вопрос', 'Объединять в один файл?',
                                                      buttons=QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No) == QtWidgets.QMessageBox().Yes
             if merge:
                 merged_path = QtWidgets.QFileDialog().getSaveFileName(self, filter='Чертеж (*.dxf)')[0]
             else:
                 merged_path = None
+
+            # preparing progressbar
             self.main_window.statusBar().reset_progress_bar(len(indexes))
+            # getting xml file list from model
             file_paths = [self.list_model.data(i, QtCore.Qt.DisplayRole) for i in indexes]
+
+            # starting thread
             t = my_threads.XmlConvertThread(file_paths, merge, merged_path, parent=self)
             t.signal.connect(self.on_thread_signal, QtCore.Qt.QueuedConnection)
-            t.finished.connect(self.on_xml_convert_thread_finished)
+            t.finished.connect(self.on_thread_finished)
             t.start()
+
             logging.info('converting xmls END')
         else:
             QtWidgets.QMessageBox.information(self.parent(), 'Ошибка', 'Выберите один или несколько xml из списка!')
             logging.info('converting xmls: file not selected')
-
-    def on_xml_convert_thread_finished(self):
-        self.progress_bar.hide()
-        self.main_window.statusBar().showMessage('Операция завершена')
 
 
 class MyDxfListView(MyListView):
@@ -162,25 +172,26 @@ class MyDxfListView(MyListView):
         self.bot_layout.addWidget(self.btn_check)
 
     def on_btn_check_click(self):
+        # checks selected myDxfs in all XMLs
         logging.info('checking dxf in xmls START')
         indexes = self.list_view.selectedIndexes()
         if len(indexes):
             my_dxf_file_paths = [self.list_model.data(i, 0) for i in indexes]
             xml_file_pathes = self.parent().xml_view.list_model.stringList()
+
+            # preparing progressbar
             self.main_window.statusBar().reset_progress_bar(len(indexes))
+
+            # starting thread
             t = my_threads.MyDxfCheckThread(my_dxf_file_paths, xml_file_pathes, self.on_my_dxf_check_thread_finished,
                                             self)
             t.signal.connect(self.on_thread_signal, QtCore.Qt.QueuedConnection)
             t.start()
+
             logging.info('checking dxf in xmls END')
         else:
             QtWidgets.QMessageBox.information(self.parent(), 'Ошибка', 'Выберите один или несколько dxf из списка!')
             logging.info('checking dxf in xmls: file not selected')
-
-    def on_my_dxf_check_thread_finished(self, s):
-        self.progress_bar.hide()
-        self.main_window.statusBar().showMessage('Операция завершена')
-        self.parent().output_view.output.setPlainText(s)
 
 
 class OutputView(QtWidgets.QWidget):

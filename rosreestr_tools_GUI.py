@@ -14,6 +14,7 @@ if __name__ == '__main__':
     # main_window.move(-1200, 200)
     main_window.show()
 
+    # exception hook to correctly show within idea
     if QtCore.QT_VERSION >= 0x50501:
         def excepthook(type_, value, traceback_):
             traceback.print_exception(type_, value, traceback_)

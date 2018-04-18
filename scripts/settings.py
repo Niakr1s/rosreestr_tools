@@ -8,24 +8,6 @@ elif platform.system() == 'Linux':
     DESKTOP_PATH = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop\\rosreestr_tools_files')
 
 
-def init_defaults(with_pathes):
-    """ color_iter, colors: colors in dxf file
-    dxf_folder_path - for dxf output files
-    xml_folder_path - for xml input files
-    my_dxf_file_path - for user file to check in xmls
-    check_txt_path - result of my file check """
-    defaults = {'color_type': {'block': 7, 'parcel': 8, 'oks': 63}}
-    if with_pathes:
-        pathes = {'dxf_folder_path': os.path.join(DESKTOP_PATH, 'dxf'),
-                  'xml_folder_path': os.path.join(DESKTOP_PATH, 'xml'),
-                  'my_dxf_file_path': os.path.join(DESKTOP_PATH, 'mydxf'),
-                  'check_txt_path': os.path.join(DESKTOP_PATH, 'txt'),
-                  'formatted_txt_path': os.path.join(DESKTOP_PATH, 'formatted.txt'),
-                  'merged_dxf_path': os.path.join(DESKTOP_PATH, 'merged.dxf')}
-        defaults.update(pathes)
-    return defaults
-
-
 class Settings:
     def __init__(self, with_pathes=True):
         """ settings.json should be in app path """
@@ -67,6 +49,24 @@ class Settings:
                 self.settings = json.load(file)
         except (FileNotFoundError, json.JSONDecodeError):
             self.dump_settings()
+
+
+def init_defaults(with_paths):
+    """ color_iter, colors: colors in dxf file
+    dxf_folder_path - for dxf output files
+    xml_folder_path - for xml input files
+    my_dxf_file_path - for user file to check in xmls
+    check_txt_path - result of my file check """
+    defaults = {'color_type': {'block': 7, 'parcel': 8, 'oks': 63}}
+    if with_paths:
+        paths = {'dxf_folder_path': os.path.join(DESKTOP_PATH, 'dxf'),
+                 'xml_folder_path': os.path.join(DESKTOP_PATH, 'xml'),
+                 'my_dxf_file_path': os.path.join(DESKTOP_PATH, 'mydxf'),
+                 'check_txt_path': os.path.join(DESKTOP_PATH, 'txt'),
+                 'formatted_txt_path': os.path.join(DESKTOP_PATH, 'formatted.txt'),
+                 'merged_dxf_path': os.path.join(DESKTOP_PATH, 'merged.dxf')}
+        defaults.update(paths)
+    return defaults
 
 
 if __name__ == '__main__':
