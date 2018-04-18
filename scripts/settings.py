@@ -25,7 +25,7 @@ class Settings:
         try:
             self.settings.read_file(open(INI))
         except FileNotFoundError:
-            self.settings = init_defaults()
+            self.settings = self.init_defaults()
         self.check_paths()
 
     def check_paths(self):
