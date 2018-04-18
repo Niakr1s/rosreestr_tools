@@ -11,16 +11,17 @@ if platform.system() == 'Windows':
 else:
     DESKTOP_PATH = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop\\rosreestr_tools_files')
 
+BASE_DIR = DESKTOP_PATH
+
 
 class Settings:
-    def __init__(self, base_dir=DESKTOP_PATH):
-        self.base_dir = DESKTOP_PATH
+    def __init__(self):
         paths = {
-            'paths': {'xml_folder': os.path.join(base_dir, 'xml'), 'mydxf_folder': os.path.join(base_dir, 'mydxf')}}
+            'paths': {'xml_folder': os.path.join(BASE_DIR, 'xml'), 'mydxf_folder': os.path.join(BASE_DIR, 'mydxf')}}
         self.settings = paths
 
-        self.formatted_txt = os.path.join(self.base_dir, 'formatted.txt')
-        self.merged_dxf = os.path.join(self.base_dir, 'merged.dxf')
+        self.formatted_txt = os.path.join(BASE_DIR, 'formatted.txt')
+        self.merged_dxf = os.path.join(BASE_DIR, 'merged.dxf')
 
         self.check_paths()
 
