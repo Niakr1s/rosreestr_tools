@@ -1,8 +1,7 @@
 import os
 
-from settings import Settings
-
 from scripts import actions
+from scripts.settings import Settings
 
 
 def help_screen(settings):

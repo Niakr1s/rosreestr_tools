@@ -1,8 +1,7 @@
 import ezdxf
 
 from scripts import actions
-
-COLORS = {'color_type': {'block': 7, 'parcel': 8, 'oks': 63}}
+from scripts.settings import COLORS
 
 
 class DxfFile:
@@ -84,6 +83,7 @@ def get_text_attrib(cadastral_attributes):
 
 
 def get_attributes(attributes):
+    """ Gets color and some other attributes from COLORS """
     if attributes['type'] == 'CadastralBlock':
         return {'color': COLORS['color_type']['block'], 'const_width': 2}
     elif attributes['type'] == 'Parcel':

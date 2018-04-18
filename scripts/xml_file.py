@@ -1,11 +1,11 @@
 import os
 
 from lxml import etree
-from settings import Settings
 
 from scripts import actions
 from scripts.dxf_file import DxfFile
 from scripts.exceptions import NoCoordinates
+from scripts.settings import Settings
 
 
 class XmlFile:
@@ -82,16 +82,13 @@ class XmlFile:
         return pretty_fullname
 
 
-def get_list_of_XmlFiles(source=None):
-    """
-    Returns list of XmlFile class objects
-    If source is None - takes list from settings
-    else you should pass list of file paths
-    """
-    if source is None:
+def get_list_of_XmlFiles(xml_paths=None):
+    """ Returns list of XmlFile class objects from xml_paths """
+
+    # getting paths from settings (for console version mainly)
+    if xml_paths is None:
         xml_paths = Settings().get_file_list('xml_folder', '.xml')
-    else:
-        xml_paths = source
+
     res = []
     for file in xml_paths:
         xml_file = XmlFile(file)

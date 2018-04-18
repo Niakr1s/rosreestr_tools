@@ -26,7 +26,7 @@ class MyDxfCheckThread(QtCore.QThread):
             my_dxf = my_dxf_file.MyDxfFile(my_dxf_file_path, self.parent().settings)
             checks = my_dxf.checks(self.xml_file_pathes, save_to_file=False)
             actions.update(all_checks, checks)
-        checks_formatted = my_dxf_file.checks_to_formatted_string(source=all_checks)
+        checks_formatted = my_dxf_file.checks_to_formatted_string(checks_dict=all_checks)
         return checks_formatted
 
 

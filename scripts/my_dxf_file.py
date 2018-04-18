@@ -2,10 +2,10 @@ import json
 import os
 
 import ezdxf
-from settings import Settings
 
 import scripts.xml_file
 from scripts.geometry_checks import is_intersect, inside_polygon, circle_intersect
+from scripts.settings import Settings
 
 
 class MyDxfFile:
@@ -229,16 +229,14 @@ def is_equal(lst: list):
     return True
 
 
-def get_list_of_MyDxfFiles(source=None):
-    """
-    Returns list of XmlFile class objects
-    If source is None - takes list from settings
-    else you should pass list of file paths
-    """
-    if source is None:
+def get_list_of_MyDxfFiles(mydxf_paths=None):
+    """ Returns list of XmlFile class objects from mydxf_paths """
+    # getting paths from settings (for console version mainly)
+    if mydxf_paths is None:
         mydxf_list = Settings().get_file_list('mydxf_folder', '.dxf')
     else:
-        mydxf_list = source
+        mydxf_list = mydxf_paths
+
     res = []
     for file in mydxf_list:
         mydxf_file = MyDxfFile(file)
@@ -253,30 +251,30 @@ def append_if(lst, k, v):
     return lst
 
 
-def checks_to_formatted_string(source=None, formatted_txt=None):
+def checks_to_formatted_string(checks_dict=None, formatted_txt_path=None):
     """
     if settings not None: Converts all directory of txts into one string format:
-    number1, number2, ... and saves to settings['formatted_txt_path']
-    if source not None: Converts all source to formatted string and returns it
-    source is json
+    number1, number2, ... and saves to formatted_txt
     """
-    if source is None:
+    # getting dict from settings (for console version mainly)
+    if checks_dict is None:
         file_list = Settings().get_file_list('mydxf_folder', '.txt')
-        source = dict()
+        checks_dict = dict()
         for file in file_list:
             # title = ''
             with open(file) as f:
                 j = json.load(f)
                 for k, v in j.items():
-                    if k in source:
-                        source[k] |= set(v)
+                    if k in checks_dict:
+                        checks_dict[k] |= set(v)
                     else:
-                        source[k] = set(v)
-    for k, v in source.items():
-        source[k] = '; '.join(sort_result(v))
+                        checks_dict[k] = set(v)
 
-    if formatted_txt is not None:
+    for k, v in checks_dict.items():
+        checks_dict[k] = '; '.join(sort_result(v))
+
+    if formatted_txt_path is not None:
         with open(Settings().get_formatted_txt(), 'w') as f:
-            json.dump(source, f, indent=' ')
+            json.dump(checks_dict, f, indent=' ')
     else:
-        return json.dumps(source, indent=' ')
+        return json.dumps(checks_dict, indent=' ')
