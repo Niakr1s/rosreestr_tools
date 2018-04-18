@@ -20,13 +20,13 @@ class MyDxfCheckThread(QtCore.QThread):
         self.finished.emit(checks_formatted)
 
     def checks(self):
-        all_checks = {}
+        checks_list = []
         for my_dxf_file_path in self.my_dxf_file_paths:
             self.signal.emit('Обрабатываю %s' % my_dxf_file_path)
-            my_dxf = my_dxf_file.MyDxfFile(my_dxf_file_path, self.parent().settings)
+            my_dxf = my_dxf_file.MyDxfFile(my_dxf_file_path)
             checks = my_dxf.checks(self.xml_file_pathes, save_to_file=False)
-            actions.update(all_checks, checks)
-        checks_formatted = my_dxf_file.checks_to_formatted_string(checks_dict=all_checks)
+            checks_list.append(checks)
+        checks_formatted = my_dxf_file.checks_to_formatted_string(checks_list=checks_list)
         return checks_formatted
 
 
@@ -48,7 +48,7 @@ class XmlConvertThread(QtCore.QThread):
         dxf_file_paths = []  # dxf files for merging
         for file_path in self.file_paths:
             self.signal.emit('Обрабатываю %s' % file_path)
-            xml = xml_file.XmlFile(file_path, self.parent().settings)
+            xml = xml_file.XmlFile(file_path)
             dxf_file_path = xml.convert_to_dxffile()
 
             if dxf_file_path is not None:
@@ -58,7 +58,7 @@ class XmlConvertThread(QtCore.QThread):
             if self.merge:
                 print('merging: ', dxf_file_paths, self.merged_path)
                 self.signal.emit('Объединяю в один чертеж %s' % self.merged_path)
-                actions.merge_dxfs(self.parent().settings, dxf_file_paths, self.merged_path)
+                actions.merge_dxfs(dxf_file_paths, self.merged_path)
         else:
             # TODO: add some alert to show that selected XML files have no coordinates and nothing was done
             pass

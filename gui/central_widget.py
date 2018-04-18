@@ -1,6 +1,5 @@
 import logging
 
-import settings
 from PyQt5 import QtWidgets, QtCore
 
 from gui import my_threads
@@ -30,8 +29,6 @@ class CentralWidget(QtWidgets.QWidget):
 
 
 class MyListView(QtWidgets.QWidget):
-    settings = settings.Settings(with_paths=False)
-
     def __init__(self, file_type, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
         self.main_window = self.parent().parent()
@@ -127,7 +124,7 @@ class XmlListView(MyListView):
         for i in range(self.list_model.rowCount()):
             index = self.list_model.index(i)
             file_path = self.list_model.data(index, QtCore.Qt.DisplayRole)
-            xml = xml_file.XmlFile(file_path, self.settings)
+            xml = xml_file.XmlFile(file_path)
             new_file_path = xml.pretty_rename()
             self.list_model.setData(index, new_file_path)
         logging.info('renaming xmls END')
@@ -184,7 +181,7 @@ class MyDxfListView(MyListView):
             self.main_window.statusBar().reset_progress_bar(len(indexes))
 
             # starting thread
-            t = my_threads.MyDxfCheckThread(my_dxf_file_paths, xml_file_pathes, self.on_my_dxf_check_thread_finished,
+            t = my_threads.MyDxfCheckThread(my_dxf_file_paths, xml_file_pathes, self.on_thread_finished,
                                             self)
             t.signal.connect(self.on_thread_signal, QtCore.Qt.QueuedConnection)
             t.start()
@@ -193,6 +190,10 @@ class MyDxfListView(MyListView):
         else:
             QtWidgets.QMessageBox.information(self.parent(), 'Ошибка', 'Выберите один или несколько dxf из списка!')
             logging.info('checking dxf in xmls: file not selected')
+
+    def on_thread_finished(self, str):
+        super().on_thread_finished()
+        self.parent().output_view.output.setPlainText(str)
 
 
 class OutputView(QtWidgets.QWidget):

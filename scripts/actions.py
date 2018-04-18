@@ -1,4 +1,3 @@
-import collections
 from queue import Queue
 
 import ezdxf
@@ -68,10 +67,20 @@ def pretty_rename_xmls(xml_paths=None):
     print('Файлы были успешно переименованы!')
 
 
+# def update(d, u):
+#     """Updates dictionary"""
+#     for k, v in u.items():
+#         if isinstance(v, collections.Mapping):
+#             d[k] = update(d.get(k, {}), v)
+#         else:
+#             d[k] = v
+#     return d
+
+
 def update(d, u):
     """Updates dictionary"""
     for k, v in u.items():
-        if isinstance(v, collections.Mapping):
+        if isinstance(v, dict):
             d[k] = update(d.get(k, {}), v)
         else:
             d[k] = v

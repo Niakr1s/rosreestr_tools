@@ -251,30 +251,31 @@ def append_if(lst, k, v):
     return lst
 
 
-def checks_to_formatted_string(checks_dict=None, formatted_txt_path=None):
-    """
-    if settings not None: Converts all directory of txts into one string format:
-    number1, number2, ... and saves to formatted_txt
-    """
+def checks_to_formatted_string(checks_list=None, formatted_txt_path=None):
+    """ Convert all checks from checks_list and returns result"""
     # getting dict from settings (for console version mainly)
-    if checks_dict is None:
+    if checks_list is None:
+        checks_list = []
         file_list = Settings().get_file_list('mydxf_folder', '.txt')
-        checks_dict = dict()
         for file in file_list:
-            # title = ''
             with open(file) as f:
                 j = json.load(f)
-                for k, v in j.items():
-                    if k in checks_dict:
-                        checks_dict[k] |= set(v)
-                    else:
-                        checks_dict[k] = set(v)
+                checks_list.append(j)
 
+    checks_dict = {}  # Will contain merged checks from checks_list
+    # start populating checks_dict
+    for j in checks_list:
+        for k, v in j.items():
+            if k in checks_dict:
+                checks_dict[k] |= set(v)
+            else:
+                checks_dict[k] = set(v)
+    # converting values from list to string, formatted with '; '
     for k, v in checks_dict.items():
         checks_dict[k] = '; '.join(sort_result(v))
-
+    # saving to file
     if formatted_txt_path is not None:
         with open(Settings().get_formatted_txt(), 'w') as f:
             json.dump(checks_dict, f, indent=' ')
-    else:
-        return json.dumps(checks_dict, indent=' ')
+
+    return json.dumps(checks_dict, indent=' ')
