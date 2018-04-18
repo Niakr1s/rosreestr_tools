@@ -1,0 +1,2013 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type="text/xsl" href="https://portal.rosreestr.ru/xsl/GKN/KPT/10/common.xsl"?>
+<KPT xmlns:ns2="urn://x-artefacts-rosreestr-ru/commons/complex-types/address-output/4.0.1"
+     xmlns:ns3="urn://x-artefacts-rosreestr-ru/commons/complex-types/entity-spatial/5.0.1"
+     xmlns:ns6="urn://x-artefacts-rosreestr-ru/commons/complex-types/certification-doc/1.0"
+     xmlns="urn://x-artefacts-rosreestr-ru/outgoing/kpt/10.0.1">
+    <CadastralBlocks>
+        <CadastralBlock CadastralNumber="21:02:010108">
+            <Area>
+                <Total>0</Total>
+                <Unit>059</Unit>
+            </Area>
+            <Parcels>
+                <Parcel CadastralNumber="21:02:010108:1" State="01" DateCreated="2003-11-28">
+                    <Area>
+                        <Area>679</Area>
+                        <Unit>055</Unit>
+                        <Inaccuracy>9.1</Inaccuracy>
+                    </Area>
+                    <Name>01</Name>
+                    <Location>
+                        <Address>
+                            <ns2:OKATO>97410000000</ns2:OKATO>
+                            <ns2:KLADR>21000024000002000</ns2:KLADR>
+                            <ns2:Region>21</ns2:Region>
+                            <ns2:City Name="Новочебоксарск" Type="г"/>
+                            <ns2:Street Name="Набережная" Type="ул"/>
+                            <ns2:Apartment Type="кв" Value="34"/>
+                            <ns2:Note>Чувашская Республика - Чувашия, г. Новочебоксарск, ул. Набережная, 34</ns2:Note>
+                        </Address>
+                    </Location>
+                    <Category>003002000000</Category>
+                    <Utilization Utilization="143007000000"
+                                 ByDoc="Для размещения электростанций, обслуживающих их сооружений и объектов"/>
+                    <CadastralCost Value="823627" Unit="383"/>
+                    <EntitySpatial EntSys="ID0">
+                        <ns3:SpatialElement>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="408627.5" Y="1244920.13" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="2">
+                                <ns3:Ordinate X="408615.69" Y="1244920.91" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="3">
+                                <ns3:Ordinate X="408616.45" Y="1244929.38" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="4">
+                                <ns3:Ordinate X="408615.76" Y="1244952.78" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="5">
+                                <ns3:Ordinate X="408616.56" Y="1244976.26" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="6">
+                                <ns3:Ordinate X="408613.38" Y="1244994.14" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="7">
+                                <ns3:Ordinate X="408568.25" Y="1244990.69" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="8">
+                                <ns3:Ordinate X="408567.14" Y="1244994.43" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="9">
+                                <ns3:Ordinate X="408558.82" Y="1244993.3" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="10">
+                                <ns3:Ordinate X="408559.04" Y="1244989.35" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="11">
+                                <ns3:Ordinate X="408543.71" Y="1244987.15" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="12">
+                                <ns3:Ordinate X="408544.1" Y="1244983.17" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="13">
+                                <ns3:Ordinate X="408565.33" Y="1244986.44" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="14">
+                                <ns3:Ordinate X="408610.07" Y="1244989.86" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="15">
+                                <ns3:Ordinate X="408612.53" Y="1244975.93" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="16">
+                                <ns3:Ordinate X="408611.86" Y="1244956.42" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="17">
+                                <ns3:Ordinate X="408609.14" Y="1244956.15" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="18">
+                                <ns3:Ordinate X="408608.88" Y="1244947.58" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="19">
+                                <ns3:Ordinate X="408611.84" Y="1244947.54" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="20">
+                                <ns3:Ordinate X="408612.45" Y="1244929.5" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="21">
+                                <ns3:Ordinate X="408611.33" Y="1244917.18" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="22">
+                                <ns3:Ordinate X="408627.22" Y="1244916.14" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="408627.5" Y="1244920.13" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                        </ns3:SpatialElement>
+                    </EntitySpatial>
+                </Parcel>
+                <Parcel CadastralNumber="21:02:010108:10" State="01" DateCreated="2007-07-05">
+                    <Area>
+                        <Area>202908</Area>
+                        <Unit>055</Unit>
+                        <Inaccuracy>158</Inaccuracy>
+                    </Area>
+                    <Name>01</Name>
+                    <Location>
+                        <Address>
+                            <ns2:OKATO>97410000000</ns2:OKATO>
+                            <ns2:KLADR>21000024000003100</ns2:KLADR>
+                            <ns2:Region>21</ns2:Region>
+                            <ns2:City Name="Новочебоксарск" Type="г"/>
+                            <ns2:Street Name="Советская" Type="ул"/>
+                            <ns2:Apartment Type="кв" Value="л.48"/>
+                            <ns2:Note>Чувашская - Чувашия респ, г Новочебоксарск, ул Советская, вл. 48</ns2:Note>
+                        </Address>
+                    </Location>
+                    <Category>003002000000</Category>
+                    <Utilization ByDoc="Для строительства конно-спортивного комплекса"/>
+                    <CadastralCost Value="136433310.12" Unit="383"/>
+                    <EntitySpatial EntSys="ID0">
+                        <ns3:SpatialElement>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="408025.84" Y="1244893.19" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="2">
+                                <ns3:Ordinate X="407544.78" Y="1244811.88" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="3">
+                                <ns3:Ordinate X="407509.26" Y="1244805.56" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="4">
+                                <ns3:Ordinate X="407513.38" Y="1244777.88" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="5">
+                                <ns3:Ordinate X="407589.78" Y="1244272.01" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="6">
+                                <ns3:Ordinate X="407787.46" Y="1244296.06" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="7">
+                                <ns3:Ordinate X="407792.62" Y="1244296.69" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="8">
+                                <ns3:Ordinate X="407824.2" Y="1244300.41" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="9">
+                                <ns3:Ordinate X="407825.94" Y="1244319.67" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="10">
+                                <ns3:Ordinate X="407830.2" Y="1244366.98" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="11">
+                                <ns3:Ordinate X="407836.69" Y="1244424.03" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="12">
+                                <ns3:Ordinate X="407848.96" Y="1244477.82" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="13">
+                                <ns3:Ordinate X="407869.61" Y="1244546.46" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="14">
+                                <ns3:Ordinate X="407891" Y="1244598.58" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="15">
+                                <ns3:Ordinate X="407908.48" Y="1244628.27" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="16">
+                                <ns3:Ordinate X="407922.95" Y="1244652.82" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="17">
+                                <ns3:Ordinate X="407938.78" Y="1244671.87" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="18">
+                                <ns3:Ordinate X="407975.13" Y="1244715.53" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="19">
+                                <ns3:Ordinate X="408038.29" Y="1244781.28" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="20">
+                                <ns3:Ordinate X="408034.55" Y="1244815.04" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="21">
+                                <ns3:Ordinate X="408033.93" Y="1244820.05" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="408025.84" Y="1244893.19" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                        </ns3:SpatialElement>
+                    </EntitySpatial>
+                </Parcel>
+                <Parcel CadastralNumber="21:02:010108:2" State="01" DateCreated="2003-02-14">
+                    <Area>
+                        <Area>671</Area>
+                        <Unit>055</Unit>
+                        <Inaccuracy>9.1</Inaccuracy>
+                    </Area>
+                    <Name>01</Name>
+                    <Location>
+                        <Address>
+                            <ns2:OKATO>97410000000</ns2:OKATO>
+                            <ns2:KLADR>21000024000002000</ns2:KLADR>
+                            <ns2:Region>21</ns2:Region>
+                            <ns2:City Name="Новочебоксарск" Type="г"/>
+                            <ns2:Street Name="Набережная" Type="ул"/>
+                            <ns2:Apartment Type="кв" Value="34"/>
+                            <ns2:Note>Чувашская Республика - Чувашия, г. Новочебоксарск, ул. Набережная, 34</ns2:Note>
+                        </Address>
+                    </Location>
+                    <Category>003002000000</Category>
+                    <Utilization Utilization="142007000000"
+                                 ByDoc="Для размещения электростанций, обслуживающих их сооружений и объектов"/>
+                    <CadastralCost Value="813923" Unit="383"/>
+                    <EntitySpatial EntSys="ID0">
+                        <ns3:SpatialElement>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="408514.63" Y="1244973.39" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="2">
+                                <ns3:Ordinate X="408498.04" Y="1244971.22" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="3">
+                                <ns3:Ordinate X="408489.33" Y="1244968.38" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="4">
+                                <ns3:Ordinate X="408484.38" Y="1244963.59" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="5">
+                                <ns3:Ordinate X="408483.22" Y="1244961.02" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="6">
+                                <ns3:Ordinate X="408484.91" Y="1244947.62" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="7">
+                                <ns3:Ordinate X="408517.36" Y="1244951.87" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="408514.63" Y="1244973.39" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                        </ns3:SpatialElement>
+                    </EntitySpatial>
+                </Parcel>
+                <Parcel CadastralNumber="21:02:010108:3" State="01" DateCreated="2005-07-18">
+                    <Area>
+                        <Area>1704</Area>
+                        <Unit>055</Unit>
+                        <Inaccuracy>14</Inaccuracy>
+                    </Area>
+                    <Name>04</Name>
+                    <Location>
+                        <Address>
+                            <ns2:OKATO>97410000000</ns2:OKATO>
+                            <ns2:KLADR>21000024000002000</ns2:KLADR>
+                            <ns2:Region>21</ns2:Region>
+                            <ns2:City Name="Новочебоксарск" Type="г"/>
+                            <ns2:Street Name="Набережная" Type="ул"/>
+                            <ns2:Apartment Type="кв" Value="38"/>
+                            <ns2:Note>на правом берегу р. Волга</ns2:Note>
+                        </Address>
+                    </Location>
+                    <Category>003002000000</Category>
+                    <Utilization Utilization="143006010100"
+                                 ByDoc="Для осуществления бесперебойного и безопасного судопропуска, содержания и эксплуатации гидротехнических сооружений и оборудования, расположенных на правом берегу реки Волга"/>
+                    <ParentCadastralNumbers>
+                        <CadastralNumber>21:02:000000:41</CadastralNumber>
+                    </ParentCadastralNumbers>
+                    <CadastralCost Value="895043.04" Unit="383"/>
+                    <EntitySpatial EntSys="ID0">
+                        <ns3:SpatialElement>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="408627.5" Y="1244920.13" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="2">
+                                <ns3:Ordinate X="408627.22" Y="1244916.14" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="3">
+                                <ns3:Ordinate X="408626.08" Y="1244899.72" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="4">
+                                <ns3:Ordinate X="408624.28" Y="1244873.18" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="5">
+                                <ns3:Ordinate X="408618.97" Y="1244873.3" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="6">
+                                <ns3:Ordinate X="408617.13" Y="1244796.9" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="7">
+                                <ns3:Ordinate X="408635.77" Y="1244798.38" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="8">
+                                <ns3:Ordinate X="408630.67" Y="1244840.12" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="9">
+                                <ns3:Ordinate X="408631.15" Y="1244904.2" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="10">
+                                <ns3:Ordinate X="408629.67" Y="1244904.22" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="11">
+                                <ns3:Ordinate X="408629.88" Y="1244916.07" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="12">
+                                <ns3:Ordinate X="408631.24" Y="1244916.03" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="13">
+                                <ns3:Ordinate X="408631.46" Y="1244944.54" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="14">
+                                <ns3:Ordinate X="408621.23" Y="1244976.37" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="15">
+                                <ns3:Ordinate X="408621.87" Y="1244969.46" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="16">
+                                <ns3:Ordinate X="408621.23" Y="1244949.48" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="17">
+                                <ns3:Ordinate X="408620.6" Y="1244920.59" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="408627.5" Y="1244920.13" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                        </ns3:SpatialElement>
+                    </EntitySpatial>
+                </Parcel>
+                <Parcel CadastralNumber="21:02:010108:37" State="06" DateCreated="2014-08-12">
+                    <Area>
+                        <Area>6918</Area>
+                        <Unit>055</Unit>
+                        <Inaccuracy>19</Inaccuracy>
+                    </Area>
+                    <Name>01</Name>
+                    <Location>
+                        <Address>
+                            <ns2:OKATO>97410000000</ns2:OKATO>
+                            <ns2:KLADR>2100002400000</ns2:KLADR>
+                            <ns2:PostalCode>429950</ns2:PostalCode>
+                            <ns2:Region>21</ns2:Region>
+                            <ns2:City Name="Новочебоксарск" Type="г"/>
+                            <ns2:Note>Чувашская Республика - Чувашия, г Новочебоксарск</ns2:Note>
+                        </Address>
+                    </Location>
+                    <Category>003002000000</Category>
+                    <Utilization Utilization="142001020300" ByDoc="Для строительства 10-эт. жилого дома (поз. 12)"/>
+                    <CadastralCost Value="21977863.38" Unit="383"/>
+                    <EntitySpatial EntSys="ID0">
+                        <ns3:SpatialElement>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407419.71" Y="1244439.25" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="2">
+                                <ns3:Ordinate X="407414.63" Y="1244476.86" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="3">
+                                <ns3:Ordinate X="407413.01" Y="1244488.01" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="4">
+                                <ns3:Ordinate X="407409.14" Y="1244514.8" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="5">
+                                <ns3:Ordinate X="407398.06" Y="1244559.42" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="6">
+                                <ns3:Ordinate X="407337.09" Y="1244551.5" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="7">
+                                <ns3:Ordinate X="407351.52" Y="1244451.63" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="8">
+                                <ns3:Ordinate X="407385.84" Y="1244456.59" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="9">
+                                <ns3:Ordinate X="407415.66" Y="1244438.66" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407419.71" Y="1244439.25" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                        </ns3:SpatialElement>
+                    </EntitySpatial>
+                </Parcel>
+                <Parcel CadastralNumber="21:02:010108:38" State="06" DateCreated="2014-09-11">
+                    <Area>
+                        <Area>15391</Area>
+                        <Unit>055</Unit>
+                        <Inaccuracy>25</Inaccuracy>
+                    </Area>
+                    <Name>01</Name>
+                    <Location>
+                        <Address>
+                            <ns2:OKATO>97410000000</ns2:OKATO>
+                            <ns2:KLADR>2100002400000</ns2:KLADR>
+                            <ns2:PostalCode>429950</ns2:PostalCode>
+                            <ns2:Region>21</ns2:Region>
+                            <ns2:City Name="Новочебоксарск" Type="г"/>
+                            <ns2:Note>Чувашская Республика - Чувашия, г Новочебоксарск</ns2:Note>
+                        </Address>
+                    </Location>
+                    <Category>003002000000</Category>
+                    <Utilization Utilization="141001000000" ByDoc="Для ведения сельскохозяйственного производства"/>
+                    <CadastralCost Value="55869.33" Unit="383"/>
+                    <EntitySpatial EntSys="ID0">
+                        <ns3:SpatialElement>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407732.38" Y="1244142.18" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="2">
+                                <ns3:Ordinate X="407713.17" Y="1244267.43" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="3">
+                                <ns3:Ordinate X="407593.61" Y="1244251.16" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="4">
+                                <ns3:Ordinate X="407611.91" Y="1244125.13" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407732.38" Y="1244142.18" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                        </ns3:SpatialElement>
+                    </EntitySpatial>
+                </Parcel>
+                <Parcel CadastralNumber="21:02:010108:40" State="06" DateCreated="2014-11-18">
+                    <Area>
+                        <Area>16074</Area>
+                        <Unit>055</Unit>
+                        <Inaccuracy>27</Inaccuracy>
+                    </Area>
+                    <Name>01</Name>
+                    <Location>
+                        <Address>
+                            <ns2:OKATO>97410000000</ns2:OKATO>
+                            <ns2:KLADR>2100002400000</ns2:KLADR>
+                            <ns2:PostalCode>429950</ns2:PostalCode>
+                            <ns2:Region>21</ns2:Region>
+                            <ns2:City Name="Новочебоксарск" Type="г"/>
+                            <ns2:Note>Чувашская Республика - Чувашия, г Новочебоксарск</ns2:Note>
+                        </Address>
+                    </Location>
+                    <Category>003002000000</Category>
+                    <Utilization Utilization="142001020300"
+                                 ByDoc="Для строительства 12-13-14-16-эт. жилого дома со встроенными помещениями (поз. 24)"/>
+                    <CadastralCost Value="51065651.34" Unit="383"/>
+                    <EntitySpatial EntSys="ID0">
+                        <ns3:SpatialElement>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407500.11" Y="1244673.15" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="2">
+                                <ns3:Ordinate X="407480.55" Y="1244802.83" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="3">
+                                <ns3:Ordinate X="407363.38" Y="1244791.67" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="4">
+                                <ns3:Ordinate X="407384.4" Y="1244646.27" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="5">
+                                <ns3:Ordinate X="407404.58" Y="1244649.19" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="6">
+                                <ns3:Ordinate X="407415.37" Y="1244660.88" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407500.11" Y="1244673.15" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                        </ns3:SpatialElement>
+                    </EntitySpatial>
+                </Parcel>
+                <Parcel CadastralNumber="21:02:010108:42" State="06" DateCreated="2015-02-05">
+                    <Area>
+                        <Area>5640</Area>
+                        <Unit>055</Unit>
+                        <Inaccuracy>15</Inaccuracy>
+                    </Area>
+                    <Name>01</Name>
+                    <Location>
+                        <Address>
+                            <ns2:OKATO>97410000000</ns2:OKATO>
+                            <ns2:KLADR>2100002400000</ns2:KLADR>
+                            <ns2:PostalCode>429950</ns2:PostalCode>
+                            <ns2:Region>21</ns2:Region>
+                            <ns2:City Name="Новочебоксарск" Type="г"/>
+                            <ns2:Note>Чувашская Республика - Чувашия, г Новочебоксарск</ns2:Note>
+                        </Address>
+                    </Location>
+                    <Category>003002000000</Category>
+                    <Utilization Utilization="142001020300" ByDoc="многоэтажная жилая застройка (высотная застройка)"/>
+                    <CadastralCost Value="17917772.4" Unit="383"/>
+                    <EntitySpatial EntSys="ID0">
+                        <ns3:SpatialElement>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407349.49" Y="1244385.16" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="2">
+                                <ns3:Ordinate X="407340.12" Y="1244449.98" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="3">
+                                <ns3:Ordinate X="407328.08" Y="1244457.06" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="4">
+                                <ns3:Ordinate X="407263.98" Y="1244448.06" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="5">
+                                <ns3:Ordinate X="407267.14" Y="1244426.2" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="6">
+                                <ns3:Ordinate X="407254.82" Y="1244424.41" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="7">
+                                <ns3:Ordinate X="407262.55" Y="1244370.96" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="8">
+                                <ns3:Ordinate X="407276.9" Y="1244373.08" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="9">
+                                <ns3:Ordinate X="407275.69" Y="1244381.48" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="10">
+                                <ns3:Ordinate X="407327.4" Y="1244388.97" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="11">
+                                <ns3:Ordinate X="407328.39" Y="1244382.11" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407349.49" Y="1244385.16" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                        </ns3:SpatialElement>
+                        <ns3:SpatialElement>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407331.38" Y="1244430.44" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="2">
+                                <ns3:Ordinate X="407329.3" Y="1244444.83" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="3">
+                                <ns3:Ordinate X="407312.43" Y="1244442.39" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="4">
+                                <ns3:Ordinate X="407314.51" Y="1244428" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407331.38" Y="1244430.44" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                        </ns3:SpatialElement>
+                    </EntitySpatial>
+                </Parcel>
+                <Parcel CadastralNumber="21:02:010108:43" State="06" DateCreated="2015-02-05">
+                    <Area>
+                        <Area>275</Area>
+                        <Unit>055</Unit>
+                        <Inaccuracy>4</Inaccuracy>
+                    </Area>
+                    <Name>01</Name>
+                    <Location>
+                        <Address>
+                            <ns2:OKATO>97410000000</ns2:OKATO>
+                            <ns2:KLADR>2100002400000</ns2:KLADR>
+                            <ns2:PostalCode>429950</ns2:PostalCode>
+                            <ns2:Region>21</ns2:Region>
+                            <ns2:City Name="Новочебоксарск" Type="г"/>
+                            <ns2:Note>Чувашская Республика - Чувашия, г Новочебоксарск</ns2:Note>
+                        </Address>
+                    </Location>
+                    <Category>003002000000</Category>
+                    <Utilization Utilization="141001000000" ByDoc="Для ведения сельскохозяйственного производства"/>
+                    <CadastralCost Value="998.25" Unit="383"/>
+                    <EntitySpatial EntSys="ID0">
+                        <ns3:SpatialElement>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407267.14" Y="1244426.2" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="2">
+                                <ns3:Ordinate X="407263.98" Y="1244448.06" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="3">
+                                <ns3:Ordinate X="407251.65" Y="1244446.32" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="4">
+                                <ns3:Ordinate X="407254.82" Y="1244424.41" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407267.14" Y="1244426.2" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                        </ns3:SpatialElement>
+                    </EntitySpatial>
+                </Parcel>
+                <Parcel CadastralNumber="21:02:010108:45" State="06" DateCreated="2015-02-05">
+                    <Area>
+                        <Area>248</Area>
+                        <Unit>055</Unit>
+                        <Inaccuracy>3</Inaccuracy>
+                    </Area>
+                    <Name>01</Name>
+                    <Location>
+                        <Address>
+                            <ns2:OKATO>97410000000</ns2:OKATO>
+                            <ns2:KLADR>2100002400000</ns2:KLADR>
+                            <ns2:PostalCode>429950</ns2:PostalCode>
+                            <ns2:Region>21</ns2:Region>
+                            <ns2:City Name="Новочебоксарск" Type="г"/>
+                            <ns2:Note>Чувашская Республика - Чувашия, г Новочебоксарск</ns2:Note>
+                        </Address>
+                    </Location>
+                    <Category>003002000000</Category>
+                    <Utilization Utilization="141001000000" ByDoc="Для ведения сельскохозяйственного производства"/>
+                    <CadastralCost Value="900.24" Unit="383"/>
+                    <EntitySpatial EntSys="ID0">
+                        <ns3:SpatialElement>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407331.38" Y="1244430.44" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="2">
+                                <ns3:Ordinate X="407329.3" Y="1244444.83" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="3">
+                                <ns3:Ordinate X="407312.43" Y="1244442.39" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="4">
+                                <ns3:Ordinate X="407314.51" Y="1244428" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407331.38" Y="1244430.44" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                        </ns3:SpatialElement>
+                    </EntitySpatial>
+                </Parcel>
+                <Parcel CadastralNumber="21:02:010108:48" State="06" DateCreated="2015-04-27">
+                    <Area>
+                        <Area>4742</Area>
+                        <Unit>055</Unit>
+                        <Inaccuracy>14</Inaccuracy>
+                    </Area>
+                    <Name>01</Name>
+                    <Location>
+                        <Address>
+                            <ns2:OKATO>97410000000</ns2:OKATO>
+                            <ns2:KLADR>2100002400000</ns2:KLADR>
+                            <ns2:PostalCode>429950</ns2:PostalCode>
+                            <ns2:Region>21</ns2:Region>
+                            <ns2:City Name="Новочебоксарск" Type="г"/>
+                            <ns2:Note>Чувашская Республика - Чувашия, г Новочебоксарск</ns2:Note>
+                        </Address>
+                    </Location>
+                    <Category>003002000000</Category>
+                    <Utilization Utilization="142001020300" ByDoc="многоэтажная жилая застройка (высотная застройка)"/>
+                    <CadastralCost Value="15064907.22" Unit="383"/>
+                    <EntitySpatial EntSys="ID0">
+                        <ns3:SpatialElement>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407353.12" Y="1244359.19" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="2">
+                                <ns3:Ordinate X="407349.49" Y="1244385.16" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="3">
+                                <ns3:Ordinate X="407328.39" Y="1244382.11" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="4">
+                                <ns3:Ordinate X="407327.4" Y="1244388.97" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="5">
+                                <ns3:Ordinate X="407275.69" Y="1244381.48" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="6">
+                                <ns3:Ordinate X="407276.9" Y="1244373.08" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="7">
+                                <ns3:Ordinate X="407262.55" Y="1244370.96" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="8">
+                                <ns3:Ordinate X="407271.52" Y="1244308.93" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="9">
+                                <ns3:Ordinate X="407285.88" Y="1244311.01" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="10">
+                                <ns3:Ordinate X="407284.66" Y="1244319.44" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="11">
+                                <ns3:Ordinate X="407336.37" Y="1244326.93" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="12">
+                                <ns3:Ordinate X="407332.14" Y="1244356.16" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407353.12" Y="1244359.19" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                        </ns3:SpatialElement>
+                    </EntitySpatial>
+                </Parcel>
+                <Parcel CadastralNumber="21:02:010108:5" State="01" DateCreated="2005-10-29">
+                    <Area>
+                        <Area>4945</Area>
+                        <Unit>055</Unit>
+                        <Inaccuracy>24</Inaccuracy>
+                    </Area>
+                    <Name>01</Name>
+                    <Location>
+                        <Address>
+                            <ns2:OKATO>97410000000</ns2:OKATO>
+                            <ns2:KLADR>21000024000002400</ns2:KLADR>
+                            <ns2:Region>21</ns2:Region>
+                            <ns2:City Name="Новочебоксарск" Type="г"/>
+                            <ns2:Street Name="Первомайская" Type="ул"/>
+                            <ns2:Level1 Type="д" Value="вл.1"/>
+                            <ns2:Note>Чувашская Республика - Чувашия, г Новочебоксарск, ул Первомайская, вл.1</ns2:Note>
+                        </Address>
+                    </Location>
+                    <Category>003002000000</Category>
+                    <Utilization Utilization="142007000000"
+                                 ByDoc="Для содержания и эксплуатации контрольного поста ГАИ"/>
+                    <CadastralCost Value="3324968.55" Unit="383"/>
+                    <EntitySpatial EntSys="ID0">
+                        <ns3:SpatialElement>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407836.23" Y="1244178.27" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="2">
+                                <ns3:Ordinate X="407835.54" Y="1244235.15" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="3">
+                                <ns3:Ordinate X="407835.91" Y="1244259.7" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="4">
+                                <ns3:Ordinate X="407835.92" Y="1244260.08" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="5">
+                                <ns3:Ordinate X="407820.99" Y="1244260.79" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="6">
+                                <ns3:Ordinate X="407776.64" Y="1244262.86" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="7">
+                                <ns3:Ordinate X="407776.84" Y="1244177.98" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="8">
+                                <ns3:Ordinate X="407820.93" Y="1244178.19" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="9">
+                                <ns3:Ordinate X="407829.76" Y="1244176.71" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="10">
+                                <ns3:Ordinate X="407836.26" Y="1244175.62" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407836.23" Y="1244178.27" OrdNmb="1" DeltaGeopoint="0.3"/>
+                            </ns3:SpelementUnit>
+                        </ns3:SpatialElement>
+                    </EntitySpatial>
+                </Parcel>
+                <Parcel CadastralNumber="21:02:010108:51" State="06" DateCreated="2015-06-26">
+                    <Area>
+                        <Area>10244</Area>
+                        <Unit>055</Unit>
+                        <Inaccuracy>21</Inaccuracy>
+                    </Area>
+                    <Name>01</Name>
+                    <Location>
+                        <Address>
+                            <ns2:OKATO>97410000000</ns2:OKATO>
+                            <ns2:KLADR>2100002400000</ns2:KLADR>
+                            <ns2:PostalCode>429950</ns2:PostalCode>
+                            <ns2:Region>21</ns2:Region>
+                            <ns2:City Name="Новочебоксарск" Type="г"/>
+                            <ns2:Note>Чувашская Республика - Чувашия, г Новочебоксарск</ns2:Note>
+                        </Address>
+                    </Location>
+                    <Category>003002000000</Category>
+                    <Utilization Utilization="141001000000" ByDoc="Для ведения сельскохозяйственного производства"/>
+                    <CadastralCost Value="37185.72" Unit="383"/>
+                    <EntitySpatial EntSys="ID0">
+                        <ns3:SpatialElement>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407435.08" Y="1244333.02" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="2">
+                                <ns3:Ordinate X="407422.91" Y="1244417.12" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="3">
+                                <ns3:Ordinate X="407419.71" Y="1244439.25" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="4">
+                                <ns3:Ordinate X="407415.66" Y="1244438.66" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="5">
+                                <ns3:Ordinate X="407385.84" Y="1244456.59" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="6">
+                                <ns3:Ordinate X="407351.52" Y="1244451.63" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="7">
+                                <ns3:Ordinate X="407340.12" Y="1244449.98" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="8">
+                                <ns3:Ordinate X="407349.49" Y="1244385.16" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="9">
+                                <ns3:Ordinate X="407353.12" Y="1244359.19" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="10">
+                                <ns3:Ordinate X="407332.14" Y="1244356.16" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="11">
+                                <ns3:Ordinate X="407336.37" Y="1244326.93" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="12">
+                                <ns3:Ordinate X="407337.17" Y="1244321.39" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="13">
+                                <ns3:Ordinate X="407360.62" Y="1244324.79" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="14">
+                                <ns3:Ordinate X="407399.86" Y="1244330.36" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="15">
+                                <ns3:Ordinate X="407406.16" Y="1244328.85" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407435.08" Y="1244333.02" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                        </ns3:SpatialElement>
+                    </EntitySpatial>
+                </Parcel>
+                <Parcel CadastralNumber="21:02:010108:52" State="06" DateCreated="2015-06-26">
+                    <Area>
+                        <Area>12185</Area>
+                        <Unit>055</Unit>
+                        <Inaccuracy>23</Inaccuracy>
+                    </Area>
+                    <Name>01</Name>
+                    <Location>
+                        <Address>
+                            <ns2:OKATO>97410000000</ns2:OKATO>
+                            <ns2:KLADR>2100002400000</ns2:KLADR>
+                            <ns2:PostalCode>429950</ns2:PostalCode>
+                            <ns2:Region>21</ns2:Region>
+                            <ns2:City Name="Новочебоксарск" Type="г"/>
+                            <ns2:Note>Чувашская Республика - Чувашия, г Новочебоксарск</ns2:Note>
+                        </Address>
+                    </Location>
+                    <Category>003002000000</Category>
+                    <Utilization Utilization="141001000000" ByDoc="Для ведения сельскохозяйственного производства"/>
+                    <CadastralCost Value="44231.55" Unit="383"/>
+                    <EntitySpatial EntSys="ID0">
+                        <ns3:SpatialElement>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407437.73" Y="1244176.92" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="2">
+                                <ns3:Ordinate X="407429.58" Y="1244233.19" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="3">
+                                <ns3:Ordinate X="407446.97" Y="1244250.92" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="4">
+                                <ns3:Ordinate X="407435.93" Y="1244327.16" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="5">
+                                <ns3:Ordinate X="407435.08" Y="1244333.02" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="6">
+                                <ns3:Ordinate X="407406.16" Y="1244328.85" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="7">
+                                <ns3:Ordinate X="407399.86" Y="1244330.36" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="8">
+                                <ns3:Ordinate X="407360.62" Y="1244324.79" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="9">
+                                <ns3:Ordinate X="407364.36" Y="1244298.92" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="10">
+                                <ns3:Ordinate X="407340.91" Y="1244295.53" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="11">
+                                <ns3:Ordinate X="407342.72" Y="1244283.01" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="12">
+                                <ns3:Ordinate X="407345.35" Y="1244264.89" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="13">
+                                <ns3:Ordinate X="407346.78" Y="1244254.99" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="14">
+                                <ns3:Ordinate X="407367.76" Y="1244258.03" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="15">
+                                <ns3:Ordinate X="407372.14" Y="1244227.77" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="16">
+                                <ns3:Ordinate X="407351.2" Y="1244224.52" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="17">
+                                <ns3:Ordinate X="407356.91" Y="1244185" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="18">
+                                <ns3:Ordinate X="407392.38" Y="1244190.28" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="19">
+                                <ns3:Ordinate X="407395.2" Y="1244170.77" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407437.73" Y="1244176.92" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                        </ns3:SpatialElement>
+                    </EntitySpatial>
+                </Parcel>
+                <Parcel CadastralNumber="21:02:010108:53" State="06" DateCreated="2015-10-14">
+                    <Area>
+                        <Area>80</Area>
+                        <Unit>055</Unit>
+                        <Inaccuracy>3</Inaccuracy>
+                    </Area>
+                    <Name>01</Name>
+                    <Location>
+                        <Address>
+                            <ns2:OKATO>97410000000</ns2:OKATO>
+                            <ns2:KLADR>2100002400000</ns2:KLADR>
+                            <ns2:PostalCode>429950</ns2:PostalCode>
+                            <ns2:Region>21</ns2:Region>
+                            <ns2:City Name="Новочебоксарск" Type="г"/>
+                            <ns2:Note>Чувашская Республика - Чувашия, г Новочебоксарск</ns2:Note>
+                        </Address>
+                    </Location>
+                    <Category>003002000000</Category>
+                    <Utilization Utilization="142005000000" ByDoc="коммунальное обслуживание"/>
+                    <CadastralCost Value="254152.8" Unit="383"/>
+                    <EntitySpatial EntSys="ID0">
+                        <ns3:SpatialElement>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407348.26" Y="1244451.16" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="2">
+                                <ns3:Ordinate X="407347.02" Y="1244459.57" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="3">
+                                <ns3:Ordinate X="407337.61" Y="1244458.21" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="4">
+                                <ns3:Ordinate X="407338.69" Y="1244450.82" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="5">
+                                <ns3:Ordinate X="407340.12" Y="1244449.98" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407348.26" Y="1244451.16" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                        </ns3:SpatialElement>
+                    </EntitySpatial>
+                </Parcel>
+                <Parcel CadastralNumber="21:02:010108:54" State="06" DateCreated="2015-10-14">
+                    <Area>
+                        <Area>9309</Area>
+                        <Unit>055</Unit>
+                        <Inaccuracy>34</Inaccuracy>
+                    </Area>
+                    <Name>01</Name>
+                    <Location>
+                        <Address>
+                            <ns2:OKATO>97410000000</ns2:OKATO>
+                            <ns2:KLADR>2100002400000</ns2:KLADR>
+                            <ns2:PostalCode>429950</ns2:PostalCode>
+                            <ns2:Region>21</ns2:Region>
+                            <ns2:City Name="Новочебоксарск" Type="г"/>
+                            <ns2:Note>Чувашская Республика - Чувашия, г Новочебоксарск</ns2:Note>
+                        </Address>
+                    </Location>
+                    <Category>003002000000</Category>
+                    <Utilization Utilization="142001020000"
+                                 ByDoc="для строительства 12-16-эт. жилого дома со встроенно-пристроенными помещениями (поз. 6)"/>
+                    <CadastralCost Value="29573855.19" Unit="383"/>
+                    <EntitySpatial EntSys="ID0">
+                        <ns3:SpatialElement>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407351.52" Y="1244451.63" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="2">
+                                <ns3:Ordinate X="407337.09" Y="1244551.5" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="3">
+                                <ns3:Ordinate X="407238.3" Y="1244538.67" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="4">
+                                <ns3:Ordinate X="407238.47" Y="1244537.52" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="5">
+                                <ns3:Ordinate X="407251.65" Y="1244446.32" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="6">
+                                <ns3:Ordinate X="407263.98" Y="1244448.06" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="7">
+                                <ns3:Ordinate X="407328.08" Y="1244457.06" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="8">
+                                <ns3:Ordinate X="407338.69" Y="1244450.82" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="9">
+                                <ns3:Ordinate X="407337.61" Y="1244458.21" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="10">
+                                <ns3:Ordinate X="407347.02" Y="1244459.57" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="11">
+                                <ns3:Ordinate X="407348.26" Y="1244451.16" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407351.52" Y="1244451.63" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                        </ns3:SpatialElement>
+                    </EntitySpatial>
+                </Parcel>
+                <Parcel CadastralNumber="21:02:010108:55" State="06" DateCreated="2016-05-24">
+                    <Area>
+                        <Area>46647</Area>
+                        <Unit>055</Unit>
+                        <Inaccuracy>76</Inaccuracy>
+                    </Area>
+                    <Name>01</Name>
+                    <Location>
+                        <Address>
+                            <ns2:OKATO>97410000000</ns2:OKATO>
+                            <ns2:KLADR>2100002400000</ns2:KLADR>
+                            <ns2:PostalCode>429950</ns2:PostalCode>
+                            <ns2:Region>21</ns2:Region>
+                            <ns2:City Name="Новочебоксарск" Type="г"/>
+                            <ns2:Note>Чувашская Республика - Чувашия, г Новочебоксарск</ns2:Note>
+                        </Address>
+                    </Location>
+                    <Category>003002000000</Category>
+                    <Utilization Utilization="141001000000" ByDoc="Сельскохозяйственное использование"/>
+                    <CadastralCost Value="169328.61" Unit="383"/>
+                    <EntitySpatial EntSys="ID0">
+                        <ns3:SpatialElement>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="408526.23" Y="1244993.76" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="2">
+                                <ns3:Ordinate X="408526.63" Y="1244996.33" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="3">
+                                <ns3:Ordinate X="408526.26" Y="1245008.67" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="4">
+                                <ns3:Ordinate X="408523.41" Y="1245026.96" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="5">
+                                <ns3:Ordinate X="408511.4" Y="1245086.11" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="6">
+                                <ns3:Ordinate X="408475.05" Y="1245079.75" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="7">
+                                <ns3:Ordinate X="408248.77" Y="1244993.08" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="8">
+                                <ns3:Ordinate X="408168.29" Y="1244953.4" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="9">
+                                <ns3:Ordinate X="408097.47" Y="1244929.22" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="10">
+                                <ns3:Ordinate X="408023.58" Y="1244913.37" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="11">
+                                <ns3:Ordinate X="408025.84" Y="1244893.19" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="12">
+                                <ns3:Ordinate X="408033.93" Y="1244820.05" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="13">
+                                <ns3:Ordinate X="408034.55" Y="1244815.04" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="14">
+                                <ns3:Ordinate X="408038.29" Y="1244781.28" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="15">
+                                <ns3:Ordinate X="408092.04" Y="1244828.81" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="16">
+                                <ns3:Ordinate X="408140.75" Y="1244864.21" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="17">
+                                <ns3:Ordinate X="408188.87" Y="1244889.23" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="18">
+                                <ns3:Ordinate X="408297.08" Y="1244927.89" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="19">
+                                <ns3:Ordinate X="408350.68" Y="1244944.51" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="20">
+                                <ns3:Ordinate X="408394.64" Y="1244953.43" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="21">
+                                <ns3:Ordinate X="408418.48" Y="1244954.12" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="22">
+                                <ns3:Ordinate X="408474.35" Y="1244946.54" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="23">
+                                <ns3:Ordinate X="408475.45" Y="1244960.16" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="24">
+                                <ns3:Ordinate X="408493.71" Y="1244976.82" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="25">
+                                <ns3:Ordinate X="408512.08" Y="1244979.55" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="408526.23" Y="1244993.76" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="-"/>
+                            </ns3:SpelementUnit>
+                        </ns3:SpatialElement>
+                    </EntitySpatial>
+                </Parcel>
+                <Parcel CadastralNumber="21:02:010108:56" State="06" DateCreated="2016-08-01">
+                    <Area>
+                        <Area>93732</Area>
+                        <Unit>055</Unit>
+                        <Inaccuracy>107</Inaccuracy>
+                    </Area>
+                    <Name>01</Name>
+                    <Location>
+                        <Address>
+                            <ns2:OKATO>97410000000</ns2:OKATO>
+                            <ns2:KLADR>2100002400000</ns2:KLADR>
+                            <ns2:Region>21</ns2:Region>
+                            <ns2:City Name="Новочебоксарск" Type="г"/>
+                            <ns2:Note>Чувашская Республика - Чувашия, г Новочебоксарск</ns2:Note>
+                        </Address>
+                    </Location>
+                    <Category>003002000000</Category>
+                    <Utilization Utilization="141001000000" ByDoc="Для ведения сельскохозяйственного производства"/>
+                    <CadastralCost Value="340247.16" Unit="383"/>
+                    <EntitySpatial EntSys="ID0">
+                        <ns3:SpatialElement>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407713.17" Y="1244267.43" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="2">
+                                <ns3:Ordinate X="407710.22" Y="1244286.66" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="3">
+                                <ns3:Ordinate X="407589.78" Y="1244272.01" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="4">
+                                <ns3:Ordinate X="407513.38" Y="1244777.88" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="5">
+                                <ns3:Ordinate X="407509.26" Y="1244805.56" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="6">
+                                <ns3:Ordinate X="407480.55" Y="1244802.83" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="7">
+                                <ns3:Ordinate X="407500.11" Y="1244673.15" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="8">
+                                <ns3:Ordinate X="407510.56" Y="1244603.84" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="9">
+                                <ns3:Ordinate X="407392.82" Y="1244588.07" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="10">
+                                <ns3:Ordinate X="407245.71" Y="1244568.48" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="11">
+                                <ns3:Ordinate X="407234.21" Y="1244566.94" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="12">
+                                <ns3:Ordinate X="407238.3" Y="1244538.67" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="13">
+                                <ns3:Ordinate X="407337.09" Y="1244551.5" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="14">
+                                <ns3:Ordinate X="407398.06" Y="1244559.42" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="15">
+                                <ns3:Ordinate X="407515.87" Y="1244574.72" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="16">
+                                <ns3:Ordinate X="407533.58" Y="1244455.72" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="17">
+                                <ns3:Ordinate X="407516.79" Y="1244453.31" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="18">
+                                <ns3:Ordinate X="407519.92" Y="1244432.61" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="19">
+                                <ns3:Ordinate X="407422.91" Y="1244417.12" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="20">
+                                <ns3:Ordinate X="407435.08" Y="1244333.04" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="21">
+                                <ns3:Ordinate X="407435.93" Y="1244327.16" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="22">
+                                <ns3:Ordinate X="407446.97" Y="1244250.91" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="23">
+                                <ns3:Ordinate X="407429.58" Y="1244233.19" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="24">
+                                <ns3:Ordinate X="407437.73" Y="1244176.92" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="25">
+                                <ns3:Ordinate X="407395.2" Y="1244170.77" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="26">
+                                <ns3:Ordinate X="407392.38" Y="1244190.28" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="27">
+                                <ns3:Ordinate X="407356.91" Y="1244185" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="28">
+                                <ns3:Ordinate X="407351.19" Y="1244224.51" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="29">
+                                <ns3:Ordinate X="407372.14" Y="1244227.77" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="30">
+                                <ns3:Ordinate X="407367.76" Y="1244258.03" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="31">
+                                <ns3:Ordinate X="407346.78" Y="1244254.99" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="32">
+                                <ns3:Ordinate X="407345.35" Y="1244264.89" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="33">
+                                <ns3:Ordinate X="407342.72" Y="1244283.01" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="34">
+                                <ns3:Ordinate X="407340.91" Y="1244295.53" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="35">
+                                <ns3:Ordinate X="407364.36" Y="1244298.92" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="36">
+                                <ns3:Ordinate X="407360.62" Y="1244324.79" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="37">
+                                <ns3:Ordinate X="407337.17" Y="1244321.39" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="38">
+                                <ns3:Ordinate X="407336.37" Y="1244326.93" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="39">
+                                <ns3:Ordinate X="407284.66" Y="1244319.44" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="40">
+                                <ns3:Ordinate X="407285.88" Y="1244311.01" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="41">
+                                <ns3:Ordinate X="407271.52" Y="1244308.93" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="42">
+                                <ns3:Ordinate X="407304.38" Y="1244081.6" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="43">
+                                <ns3:Ordinate X="407611.91" Y="1244125.13" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="44">
+                                <ns3:Ordinate X="407593.61" Y="1244251.16" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407713.17" Y="1244267.43" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                        </ns3:SpatialElement>
+                    </EntitySpatial>
+                </Parcel>
+                <Parcel CadastralNumber="21:02:010108:57" State="06" DateCreated="2016-08-01">
+                    <Area>
+                        <Area>7970</Area>
+                        <Unit>055</Unit>
+                        <Inaccuracy>31</Inaccuracy>
+                    </Area>
+                    <Name>01</Name>
+                    <Location>
+                        <Address>
+                            <ns2:OKATO>97410000000</ns2:OKATO>
+                            <ns2:KLADR>2100002400000</ns2:KLADR>
+                            <ns2:Region>21</ns2:Region>
+                            <ns2:City Name="Новочебоксарск" Type="г"/>
+                            <ns2:Note>Чувашская Республика - Чувашия, г Новочебоксарск</ns2:Note>
+                        </Address>
+                    </Location>
+                    <Category>003002000000</Category>
+                    <Utilization Utilization="141001000000" ByDoc="Для ведения сельскохозяйственного производства"/>
+                    <CadastralCost Value="28931.1" Unit="383"/>
+                    <EntitySpatial EntSys="ID0">
+                        <ns3:SpatialElement>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407510.56" Y="1244603.84" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="2">
+                                <ns3:Ordinate X="407500.11" Y="1244673.15" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="3">
+                                <ns3:Ordinate X="407415.37" Y="1244660.88" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="4">
+                                <ns3:Ordinate X="407404.58" Y="1244649.19" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="5">
+                                <ns3:Ordinate X="407384.41" Y="1244646.27" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="6">
+                                <ns3:Ordinate X="407392.82" Y="1244588.07" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407510.56" Y="1244603.84" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                        </ns3:SpatialElement>
+                    </EntitySpatial>
+                </Parcel>
+                <Parcel CadastralNumber="21:02:010108:58" State="06" DateCreated="2016-08-01">
+                    <Area>
+                        <Area>85</Area>
+                        <Unit>055</Unit>
+                        <Inaccuracy>3</Inaccuracy>
+                    </Area>
+                    <Name>01</Name>
+                    <Location>
+                        <Address>
+                            <ns2:OKATO>97410000000</ns2:OKATO>
+                            <ns2:KLADR>2100002400000</ns2:KLADR>
+                            <ns2:Region>21</ns2:Region>
+                            <ns2:City Name="Новочебоксарск" Type="г"/>
+                            <ns2:Note>Чувашская Республика - Чувашия, г Новочебоксарск</ns2:Note>
+                        </Address>
+                    </Location>
+                    <Category>003002000000</Category>
+                    <Utilization Utilization="141001000000" ByDoc="Для ведения сельскохозяйственного производства"/>
+                    <CadastralCost Value="308.55" Unit="383"/>
+                    <EntitySpatial EntSys="ID0">
+                        <ns3:SpatialElement>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407414.63" Y="1244476.86" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="2">
+                                <ns3:Ordinate X="407422.07" Y="1244477.93" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="3">
+                                <ns3:Ordinate X="407420.46" Y="1244489.08" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="4">
+                                <ns3:Ordinate X="407413.01" Y="1244488.01" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407414.63" Y="1244476.86" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                        </ns3:SpatialElement>
+                    </EntitySpatial>
+                </Parcel>
+                <Parcel CadastralNumber="21:02:010108:59" State="06" DateCreated="2016-08-01">
+                    <Area>
+                        <Area>16015</Area>
+                        <Unit>055</Unit>
+                        <Inaccuracy>44</Inaccuracy>
+                    </Area>
+                    <Name>01</Name>
+                    <Location>
+                        <Address>
+                            <ns2:OKATO>97410000000</ns2:OKATO>
+                            <ns2:KLADR>2100002400000</ns2:KLADR>
+                            <ns2:Region>21</ns2:Region>
+                            <ns2:City Name="Новочебоксарск" Type="г"/>
+                            <ns2:Note>Чувашская Республика - Чувашия, г Новочебоксарск</ns2:Note>
+                        </Address>
+                    </Location>
+                    <Category>003002000000</Category>
+                    <Utilization Utilization="141001000000" ByDoc="Для ведения сельскохозяйственного производства"/>
+                    <CadastralCost Value="58134.45" Unit="383"/>
+                    <EntitySpatial EntSys="ID0">
+                        <ns3:SpatialElement>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407519.92" Y="1244432.61" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="2">
+                                <ns3:Ordinate X="407516.79" Y="1244453.31" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="3">
+                                <ns3:Ordinate X="407533.58" Y="1244455.72" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="4">
+                                <ns3:Ordinate X="407515.87" Y="1244574.72" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="5">
+                                <ns3:Ordinate X="407398.06" Y="1244559.42" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="6">
+                                <ns3:Ordinate X="407409.14" Y="1244514.8" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="7">
+                                <ns3:Ordinate X="407413.01" Y="1244488.01" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="8">
+                                <ns3:Ordinate X="407420.46" Y="1244489.08" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="9">
+                                <ns3:Ordinate X="407422.07" Y="1244477.93" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="10">
+                                <ns3:Ordinate X="407414.63" Y="1244476.86" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="11">
+                                <ns3:Ordinate X="407419.71" Y="1244439.25" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="12">
+                                <ns3:Ordinate X="407422.91" Y="1244417.12" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                            <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                <ns3:Ordinate X="407519.92" Y="1244432.61" OrdNmb="1" DeltaGeopoint="0.1"
+                                              GeopointZacrep="Закрепление отсутствует"/>
+                            </ns3:SpelementUnit>
+                        </ns3:SpatialElement>
+                    </EntitySpatial>
+                </Parcel>
+            </Parcels>
+            <ObjectsRealty>
+                <ObjectRealty>
+                    <Building CadastralNumber="21:02:000000:1788">
+                        <ObjectType>002001002000</ObjectType>
+                        <AssignationBuilding>204001000000</AssignationBuilding>
+                        <Area>36</Area>
+                        <Address>
+                            <ns2:OKATO>97410000000</ns2:OKATO>
+                            <ns2:KLADR>21000024000002300</ns2:KLADR>
+                            <ns2:Region>21</ns2:Region>
+                            <ns2:City Name="Новочебоксарск" Type="г"/>
+                            <ns2:Street Name="Парковая" Type="ул"/>
+                            <ns2:Level1 Type="д" Value="19А"/>
+                        </Address>
+                        <CadastralCost Value="185514.84" Unit="383"/>
+                    </Building>
+                </ObjectRealty>
+                <ObjectRealty>
+                    <Building CadastralNumber="21:02:010108:32">
+                        <ObjectType>002001002000</ObjectType>
+                        <AssignationBuilding>204001000000</AssignationBuilding>
+                        <Area>1607.6</Area>
+                        <Address>
+                            <ns2:OKATO>97410000000</ns2:OKATO>
+                            <ns2:KLADR>21000024000003100</ns2:KLADR>
+                            <ns2:Region>21</ns2:Region>
+                            <ns2:City Name="Новочебоксарск" Type="г"/>
+                            <ns2:Street Name="Советская" Type="ул"/>
+                            <ns2:Level1 Type="вл" Value="48"/>
+                        </Address>
+                        <CadastralCost Value="1286481.9" Unit="383"/>
+                        <EntitySpatial EntSys="ID0">
+                            <ns3:SpatialElement>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                    <ns3:Ordinate X="407823.5" Y="1244747.82" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="2">
+                                    <ns3:Ordinate X="407821.38" Y="1244759.9" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="3">
+                                    <ns3:Ordinate X="407779.97" Y="1244753.1" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="4">
+                                    <ns3:Ordinate X="407776.83" Y="1244772.22" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="5">
+                                    <ns3:Ordinate X="407818.33" Y="1244779.28" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="6">
+                                    <ns3:Ordinate X="407816.31" Y="1244791.14" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="7">
+                                    <ns3:Ordinate X="407774.82" Y="1244784.16" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="8">
+                                    <ns3:Ordinate X="407771.57" Y="1244803.52" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="9">
+                                    <ns3:Ordinate X="407813.07" Y="1244810.5" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="10">
+                                    <ns3:Ordinate X="407811.09" Y="1244822.41" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="11">
+                                    <ns3:Ordinate X="407762.63" Y="1244814.36" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="12">
+                                    <ns3:Ordinate X="407774.97" Y="1244739.65" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                    <ns3:Ordinate X="407823.5" Y="1244747.82" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                            </ns3:SpatialElement>
+                        </EntitySpatial>
+                    </Building>
+                </ObjectRealty>
+                <ObjectRealty>
+                    <Building CadastralNumber="21:02:010108:33">
+                        <ObjectType>002001002000</ObjectType>
+                        <AssignationBuilding>204001000000</AssignationBuilding>
+                        <Area>538.9</Area>
+                        <Address>
+                            <ns2:OKATO>97410000000</ns2:OKATO>
+                            <ns2:KLADR>21000024000003100</ns2:KLADR>
+                            <ns2:Region>21</ns2:Region>
+                            <ns2:City Name="Новочебоксарск" Type="г"/>
+                            <ns2:Street Name="Советская" Type="ул"/>
+                            <ns2:Level1 Type="д" Value="48"/>
+                            <ns2:Note>Чувашская Республика, г.Новочебоксарск, ул.Советская, вл.48</ns2:Note>
+                        </Address>
+                        <CadastralCost Value="431254.73" Unit="383"/>
+                    </Building>
+                </ObjectRealty>
+                <ObjectRealty>
+                    <Building CadastralNumber="21:02:010108:46">
+                        <ObjectType>002001002000</ObjectType>
+                        <AssignationBuilding>204001000000</AssignationBuilding>
+                        <Area>531</Area>
+                        <Address>
+                            <ns2:OKATO>97410000000</ns2:OKATO>
+                            <ns2:KLADR>21000024000003100</ns2:KLADR>
+                            <ns2:Region>21</ns2:Region>
+                            <ns2:City Name="Новочебоксарск" Type="г"/>
+                            <ns2:Street Name="Советская" Type="ул"/>
+                            <ns2:Level1 Type="вл" Value="48"/>
+                        </Address>
+                        <CadastralCost Value="424932.75" Unit="383"/>
+                        <EntitySpatial EntSys="ID0">
+                            <ns3:SpatialElement>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                    <ns3:Ordinate X="407873.05" Y="1244817.75" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="2">
+                                    <ns3:Ordinate X="407868.03" Y="1244847.76" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="3">
+                                    <ns3:Ordinate X="407849.78" Y="1244844.71" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="4">
+                                    <ns3:Ordinate X="407854.9" Y="1244814.62" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                    <ns3:Ordinate X="407873.05" Y="1244817.75" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                            </ns3:SpatialElement>
+                        </EntitySpatial>
+                    </Building>
+                </ObjectRealty>
+                <ObjectRealty>
+                    <Building CadastralNumber="21:02:010108:47">
+                        <ObjectType>002001002000</ObjectType>
+                        <AssignationBuilding>204001000000</AssignationBuilding>
+                        <Area>2806.5</Area>
+                        <Address>
+                            <ns2:OKATO>97410000000</ns2:OKATO>
+                            <ns2:KLADR>21000024000003100</ns2:KLADR>
+                            <ns2:Region>21</ns2:Region>
+                            <ns2:City Name="Новочебоксарск" Type="г"/>
+                            <ns2:Street Name="Советская" Type="ул"/>
+                            <ns2:Level1 Type="вл" Value="48"/>
+                        </Address>
+                        <CadastralCost Value="2245901.63" Unit="383"/>
+                        <EntitySpatial EntSys="ID0">
+                            <ns3:SpatialElement>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                    <ns3:Ordinate X="407747.76" Y="1244796.24" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="2">
+                                    <ns3:Ordinate X="407743.36" Y="1244823.18" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="3">
+                                    <ns3:Ordinate X="407743.48" Y="1244823.2" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="4">
+                                    <ns3:Ordinate X="407742.41" Y="1244829.72" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="5">
+                                    <ns3:Ordinate X="407721.93" Y="1244826.38" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="6">
+                                    <ns3:Ordinate X="407721.79" Y="1244827.28" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="7">
+                                    <ns3:Ordinate X="407719.42" Y="1244828.76" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="8">
+                                    <ns3:Ordinate X="407698.52" Y="1244825.35" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="9">
+                                    <ns3:Ordinate X="407696.76" Y="1244823.18" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="10">
+                                    <ns3:Ordinate X="407696.9" Y="1244822.29" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="11">
+                                    <ns3:Ordinate X="407676.35" Y="1244818.93" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="12">
+                                    <ns3:Ordinate X="407677.41" Y="1244812.4" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="13">
+                                    <ns3:Ordinate X="407677.53" Y="1244812.42" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="14">
+                                    <ns3:Ordinate X="407681.94" Y="1244785.48" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                    <ns3:Ordinate X="407747.76" Y="1244796.24" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                            </ns3:SpatialElement>
+                        </EntitySpatial>
+                    </Building>
+                </ObjectRealty>
+                <ObjectRealty>
+                    <Building CadastralNumber="21:02:010108:60">
+                        <ObjectType>002001002000</ObjectType>
+                        <AssignationBuilding>204003000000</AssignationBuilding>
+                        <Area>9280.6</Area>
+                        <Address>
+                            <ns2:OKATO>97410000000</ns2:OKATO>
+                            <ns2:KLADR>21000024000003300</ns2:KLADR>
+                            <ns2:Region>21</ns2:Region>
+                            <ns2:City Name="Новочебоксарск" Type="г"/>
+                            <ns2:Street Name="Строителей" Type="ул"/>
+                            <ns2:Level1 Type="д" Value="6"/>
+                            <ns2:Other>городской округ Новочебоксарск, г. Новочебоксарск, ул. Строителей, д. 6
+                            </ns2:Other>
+                            <ns2:Note>Чувашская Республика - Чувашия, городской округ Новочебоксарск, г. Новочебоксарск,
+                                ул. Строителей, д. 6
+                            </ns2:Note>
+                        </Address>
+                        <CadastralCost Value="22956863.38" Unit="383"/>
+                        <EntitySpatial EntSys="ID0">
+                            <ns3:SpatialElement>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                    <ns3:Ordinate X="407252.77" Y="1244460.75" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="2">
+                                    <ns3:Ordinate X="407274.24" Y="1244463.91" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="3">
+                                    <ns3:Ordinate X="407272.7" Y="1244474.66" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="4">
+                                    <ns3:Ordinate X="407269.15" Y="1244474.15" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="5">
+                                    <ns3:Ordinate X="407265.86" Y="1244497.4" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="6">
+                                    <ns3:Ordinate X="407268.29" Y="1244497.72" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="7">
+                                    <ns3:Ordinate X="407271.28" Y="1244499.5" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="8">
+                                    <ns3:Ordinate X="407265.13" Y="1244510.22" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="9">
+                                    <ns3:Ordinate X="407264.41" Y="1244509.26" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="10">
+                                    <ns3:Ordinate X="407246.21" Y="1244506.78" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                                <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                                    <ns3:Ordinate X="407252.77" Y="1244460.75" OrdNmb="1" DeltaGeopoint="0.1"/>
+                                </ns3:SpelementUnit>
+                            </ns3:SpatialElement>
+                        </EntitySpatial>
+                    </Building>
+                </ObjectRealty>
+            </ObjectsRealty>
+            <SpatialData>
+                <EntitySpatial EntSys="ID0">
+                    <ns3:SpatialElement>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                            <ns3:Ordinate X="407906.63" Y="1244474.26" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="2">
+                            <ns3:Ordinate X="407874.86" Y="1244372.6" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="3">
+                            <ns3:Ordinate X="407887.42" Y="1244042.1" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="4">
+                            <ns3:Ordinate X="407838.76" Y="1244039.08" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="5">
+                            <ns3:Ordinate X="407753.97" Y="1244028.86" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="6">
+                            <ns3:Ordinate X="407621.9" Y="1244017.05" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="7">
+                            <ns3:Ordinate X="407325.91" Y="1243967.99" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="8">
+                            <ns3:Ordinate X="407271.46" Y="1243976.88" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="9">
+                            <ns3:Ordinate X="407258.98" Y="1244062.95" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="10">
+                            <ns3:Ordinate X="407193.37" Y="1244523.7" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="11">
+                            <ns3:Ordinate X="407152.52" Y="1244777.37" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="12">
+                            <ns3:Ordinate X="407504.16" Y="1244812.82" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="13">
+                            <ns3:Ordinate X="407669.54" Y="1244837.43" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="14">
+                            <ns3:Ordinate X="408097.47" Y="1244929.22" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="15">
+                            <ns3:Ordinate X="408168.29" Y="1244953.4" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="16">
+                            <ns3:Ordinate X="408248.77" Y="1244993.08" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="17">
+                            <ns3:Ordinate X="408475.05" Y="1245079.75" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="18">
+                            <ns3:Ordinate X="408582" Y="1245098.47" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="19">
+                            <ns3:Ordinate X="408631.46" Y="1244944.54" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="20">
+                            <ns3:Ordinate X="408620.84" Y="1244873.4" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="21">
+                            <ns3:Ordinate X="408614.42" Y="1244873.41" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="22">
+                            <ns3:Ordinate X="408597.39" Y="1244873.8" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="23">
+                            <ns3:Ordinate X="408582.33" Y="1244874.14" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="24">
+                            <ns3:Ordinate X="408415.61" Y="1244872.41" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="25">
+                            <ns3:Ordinate X="408316.71" Y="1244856.77" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="26">
+                            <ns3:Ordinate X="408222.56" Y="1244826.04" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="27">
+                            <ns3:Ordinate X="408138.46" Y="1244780.21" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="28">
+                            <ns3:Ordinate X="408111.64" Y="1244758.49" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="29">
+                            <ns3:Ordinate X="408051.16" Y="1244709.53" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="30">
+                            <ns3:Ordinate X="408001.43" Y="1244655.33" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="31">
+                            <ns3:Ordinate X="407965.38" Y="1244603.09" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="32">
+                            <ns3:Ordinate X="407926.55" Y="1244537.99" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                        <ns3:SpelementUnit TypeUnit="Точка" SuNmb="1">
+                            <ns3:Ordinate X="407906.63" Y="1244474.26" OrdNmb="1"/>
+                        </ns3:SpelementUnit>
+                    </ns3:SpatialElement>
+                </EntitySpatial>
+            </SpatialData>
+            <CoordSystems>
+                <ns3:CoordSystem Name="СК кадастрового округа" CsId="ID0"/>
+            </CoordSystems>
+        </CadastralBlock>
+    </CadastralBlocks>
+    <CertificationDoc>
+        <ns6:Organization>ФГИС ЕГРН</ns6:Organization>
+        <ns6:Date>2018-02-08</ns6:Date>
+        <ns6:Number>99/2018/78199124</ns6:Number>
+    </CertificationDoc>
+</KPT>
