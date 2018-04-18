@@ -29,7 +29,7 @@ class CentralWidget(QtWidgets.QWidget):
 
 
 class MyListView(QtWidgets.QWidget):
-    settings = settings.Settings(with_pathes=False)
+    settings = settings.Settings(with_paths=False)
 
     def __init__(self, file_type, parent=None):
         QtWidgets.QWidget.__init__(self, parent)

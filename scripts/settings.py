@@ -1,4 +1,4 @@
-import json
+import configparser
 import os
 import platform
 
@@ -7,67 +7,52 @@ if platform.system() == 'Windows':
 elif platform.system() == 'Linux':
     DESKTOP_PATH = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop\\rosreestr_tools_files')
 
+PATHS = {'paths': {'dxf_folder_path': os.path.join(DESKTOP_PATH, 'dxf'),
+                   'xml_folder_path': os.path.join(DESKTOP_PATH, 'xml'),
+                   'my_dxf_file_path': os.path.join(DESKTOP_PATH, 'mydxf'),
+                   'check_txt_path': os.path.join(DESKTOP_PATH, 'txt'),
+                   'formatted_txt_path': os.path.join(DESKTOP_PATH), 'merged_dxf_path': os.path.join(DESKTOP_PATH)}}
+
+INI = 'settings.ini'
+FORMATTED = 'formatted.txt'
+MERGED = 'merged.dxf'
+
 
 class Settings:
-    def __init__(self, with_pathes=True):
-        """ settings.json should be in app path """
-        # self.json_settings_path = os.path.abspath('settings.json')
-        self.settings = init_defaults(with_pathes)
-        # self.update_settings_from_json()
-        if with_pathes:
-            self.check_paths()
+    def __init__(self):
+        """ settings is ConfigParser object """
+        self.settings = configparser.ConfigParser()
+        try:
+            self.settings.read_file(open(INI))
+        except FileNotFoundError:
+            self.settings = init_defaults()
+        self.check_paths()
 
     def check_paths(self):
-        os.makedirs(self.settings['xml_folder_path'], exist_ok=True)
-        os.makedirs(self.settings['dxf_folder_path'], exist_ok=True)
-        os.makedirs(self.settings['my_dxf_file_path'], exist_ok=True)
-        os.makedirs(self.settings['check_txt_path'], exist_ok=True)
-        os.makedirs(os.path.dirname(self.settings['merged_dxf_path']), exist_ok=True)
+        for i in self.settings['paths'].values():
+            os.makedirs(i, exist_ok=True)
 
     def get_file_list(self, key, pattern):
-        """ Key is from self.settings dict,
+        """ Key is from self.settings['paths'],
         for example 'xml_folder_path', 'check_txt_path' etc
         pattern is '.dxf' string """
         res = []
-        with os.scandir(self.settings[key]) as it:
+        with os.scandir(self.settings['paths'][key]) as it:
             for entry in it:
                 if entry.is_file() and pattern in entry.name:
                     res.append(entry.path)
         return res
 
-    def dump_settings(self):
-        """ Dumps to json_file settings,
-        recommended to call this when adding new setting"""
-        with open(self.json_settings_path, 'w') as file:
-            # json.dump(attrs, file, indent='    ')
-            json.dump(self.settings, file, indent='    ')
-
-    def update_settings_from_json(self):
-        """ Load settings from json_file and initialize with them """
-        try:
-            with open(self.json_settings_path) as file:
-                self.settings = json.load(file)
-        except (FileNotFoundError, json.JSONDecodeError):
-            self.dump_settings()
-
-
-def init_defaults(with_paths):
-    """ color_iter, colors: colors in dxf file
-    dxf_folder_path - for dxf output files
-    xml_folder_path - for xml input files
-    my_dxf_file_path - for user file to check in xmls
-    check_txt_path - result of my file check """
-    defaults = {'color_type': {'block': 7, 'parcel': 8, 'oks': 63}}
-    if with_paths:
-        paths = {'dxf_folder_path': os.path.join(DESKTOP_PATH, 'dxf'),
-                 'xml_folder_path': os.path.join(DESKTOP_PATH, 'xml'),
-                 'my_dxf_file_path': os.path.join(DESKTOP_PATH, 'mydxf'),
-                 'check_txt_path': os.path.join(DESKTOP_PATH, 'txt'),
-                 'formatted_txt_path': os.path.join(DESKTOP_PATH, 'formatted.txt'),
-                 'merged_dxf_path': os.path.join(DESKTOP_PATH, 'merged.dxf')}
-        defaults.update(paths)
-    return defaults
+    @staticmethod
+    def init_defaults():
+        defaults = PATHS
+        settings = configparser.ConfigParser()
+        settings.read_dict(defaults)
+        settings.write(open(INI, 'w'))
+        return settings
 
 
 if __name__ == '__main__':
-    pass
+    s = Settings()
+    print(str(s.settings['paths']))
+    print(s.get_file_list('dxf_folder_path', 'dxf'))

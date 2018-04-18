@@ -4,6 +4,8 @@ import ezdxf
 
 from scripts import actions
 
+COLORS = {'color_type': {'block': 7, 'parcel': 8, 'oks': 63}}
+
 
 class DxfFile:
     """This class represents """
@@ -29,7 +31,7 @@ class DxfFile:
             block_name = cadastral_number.replace(':', ' ')
             dxf_block = self.dwg.blocks.new(name=block_name)
             # Different color and width for parcels, blocks and other
-            attribs = get_attributes(self.settings, cadastral_attributes)
+            attribs = get_attributes(cadastral_attributes)
             for contur in cadastral_attributes['reversed_coordinates']:
                 dxf_block.add_lwpolyline(contur, dxfattribs=attribs)
             # Adding text description
@@ -37,7 +39,7 @@ class DxfFile:
             if text_attrib:
                 text_coords, text_height = text_attrib
                 dxf_block.add_text(' '.join((cadastral_number, cadastral_attributes['type'])),
-                                   dxfattribs={'height': text_height, 'color': attribs['color']}).set_pos((text_coords),
+                                   dxfattribs={'height': text_height, 'color': attribs['color']}).set_pos(text_coords,
                                                                                                           align='MIDDLE_CENTER')
             # Adding block to modelspace
             self.msp.add_blockref(block_name, insert=(0, 0))
@@ -88,10 +90,10 @@ def get_text_attrib(cadastral_attributes):
     return (int(mid_x), int(mid_y)), height
 
 
-def get_attributes(settings, attributes):
+def get_attributes(attributes):
     if attributes['type'] == 'CadastralBlock':
-        return {'color': settings.settings['color_type']['block'], 'const_width': 2}
+        return {'color': COLORS['color_type']['block'], 'const_width': 2}
     elif attributes['type'] == 'Parcel':
-        return {'color': settings.settings['color_type']['parcel']}
+        return {'color': COLORS['color_type']['parcel']}
     else:
-        return {'color': settings.settings['color_type']['oks']}
+        return {'color': COLORS['color_type']['oks']}
