@@ -138,9 +138,10 @@ class XmlListView(MyListView):
             merge = QtWidgets.QMessageBox().question(self, 'Вопрос', 'Объединять в один файл?',
                                                      buttons=QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No) == QtWidgets.QMessageBox().Yes
             if merge:
-                merged_path = QtWidgets.QFileDialog().getSaveFileName(self, filter='Чертеж (*.dxf)')[0]
+                merged_path = \
+                    QtWidgets.QFileDialog().getSaveFileName(self, directory='merged.dxf', filter='Чертеж (*.dxf)')[0]
             else:
-                merged_path = None
+                merged_path = ''
 
             # preparing progressbar
             self.main_window.statusBar().reset_progress_bar(len(indexes))
@@ -148,7 +149,7 @@ class XmlListView(MyListView):
             file_paths = [self.list_model.data(i, QtCore.Qt.DisplayRole) for i in indexes]
 
             # starting thread
-            t = my_threads.XmlConvertThread(file_paths, merge, merged_path, parent=self)
+            t = my_threads.XmlConvertThread(file_paths, merged_path, parent=self)
             t.signal.connect(self.on_thread_signal, QtCore.Qt.QueuedConnection)
             t.finished.connect(self.on_thread_finished)
             t.start()
@@ -178,8 +179,7 @@ class MyDxfListView(MyListView):
             self.main_window.statusBar().reset_progress_bar(len(indexes))
 
             # starting thread
-            t = my_threads.MyDxfCheckThread(my_dxf_file_paths, xml_file_pathes, self.on_thread_finished,
-                                            self)
+            t = my_threads.MyDxfCheckThread(my_dxf_file_paths, xml_file_pathes, self.on_thread_finished, self)
             t.signal.connect(self.on_thread_signal, QtCore.Qt.QueuedConnection)
             t.start()
 

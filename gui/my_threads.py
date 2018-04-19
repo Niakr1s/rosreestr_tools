@@ -42,10 +42,9 @@ class XmlConvertThread(QtCore.QThread):
 
     signal = QtCore.pyqtSignal(str)  # standard signal emitted when one task completed
 
-    def __init__(self, file_paths, merge=False, merged_path=None, parent=None):
+    def __init__(self, file_paths, merged_path='', parent=None):
         super().__init__(parent)
         self.file_paths = file_paths
-        self.merge = merge
         self.merged_path = merged_path
 
     def run(self):
@@ -64,7 +63,7 @@ class XmlConvertThread(QtCore.QThread):
                 dxf_file_paths.append(dxf_file_path)
 
         if len(dxf_file_paths) > 0:
-            if self.merge:
+            if self.merged_path:
                 logging.info('merging %s to %s' % (dxf_file_paths, self.merged_path))
                 self.signal.emit('Объединяю в один чертеж %s' % self.merged_path)
                 actions.merge_dxfs(dxf_file_paths, self.merged_path)
