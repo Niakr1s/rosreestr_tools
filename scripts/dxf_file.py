@@ -1,6 +1,9 @@
+import logging
+
 import ezdxf
 
 from scripts import actions
+from scripts.log import log
 from scripts.settings import COLORS
 
 
@@ -15,6 +18,7 @@ class DxfFile:
         self.parcels_add_reversed_coordinates()  # parcels now contain ['reversed_coordinates'] key
         self.output_file_path = self.XmlFile.file_path.replace('.xml', '.dxf')
 
+    @log
     def draw_conturs_and_save(self):
         """ Draws iterables from dictionary to modelspace.
         CAUTION: Use with reversed coordinates"""
@@ -44,6 +48,7 @@ class DxfFile:
                         '\nФайл %s\nиспользуется!\nЗакройте файл и нажмите любую клавишу + Enter' % self.output_file_path)
                 else:
                     break
+        logging.info('file %s saved' % self.output_file_path)
 
     def parcels_add_reversed_coordinates(self):
         """ Getting reverse coords, need for dxf file """

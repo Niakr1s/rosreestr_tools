@@ -1,3 +1,4 @@
+import logging
 from queue import Queue
 
 import ezdxf
@@ -5,10 +6,12 @@ from progressbar import ProgressBar
 
 import scripts.xml_file
 from scripts import thread_handling
+from scripts.log import log
 from scripts.my_dxf_file import get_list_of_MyDxfFiles, checks_to_formatted_string
 from scripts.settings import Settings
 
 
+@log
 def check_mydxfs(mydxf_paths=None, xml_paths=None):
     """ Checks all mydxf files from mydxf_paths in xml files from xml_paths """
 
@@ -20,20 +23,25 @@ def check_mydxfs(mydxf_paths=None, xml_paths=None):
 
     list_of_MyDxfFiles = get_list_of_MyDxfFiles(mydxf_paths)
     list_of_tasks = [(i.checks, (xml_paths,)) for i in list_of_MyDxfFiles]
+    logging.info('checking %s in %s' % (mydxf_paths, xml_paths))
     execute_list_of_tasks(list_of_tasks, 5)
     checks_to_formatted_string(formatted_txt_path=Settings().formatted_txt)
 
 
+@log
 def convert_xmlfiles_to_dxffiles(xml_paths=None):
     """ Converts all xml files from xml_paths to same folder """
     list_of_XmlFiles = scripts.xml_file.get_list_of_XmlFiles(xml_paths)
     list_of_tasks = [i.convert_to_dxffile for i in list_of_XmlFiles]
+    logging.info('converting %s to dxf' % (xml_paths))
     execute_list_of_tasks(list_of_tasks, 1)
 
 
+@log
 def merge_dxfs(dxf_paths=None, merged_path=None):
     """ Merging all dxfs from dxf_list to merged_path
     """
+
     def import_and_save(dxf, target_dxf):
         try:
             source_dwg = ezdxf.readfile(dxf)
@@ -57,12 +65,15 @@ def merge_dxfs(dxf_paths=None, merged_path=None):
 
     target_dxf = ezdxf.readfile(merged_path)
     list_of_tasks = [(import_and_save, (dxf, target_dxf)) for dxf in dxf_paths]
+    logging.info('merging %s in %s' % (dxf_paths, merged_path))
     execute_list_of_tasks(list_of_tasks, 1)
 
 
+@log
 def pretty_rename_xmls(xml_paths=None):
     list_of_XmlFiles = scripts.xml_file.get_list_of_XmlFiles(xml_paths)
     list_of_tasks = [i.pretty_rename for i in list_of_XmlFiles]
+    logging.info('renaming %s to pretty names' % (xml_paths))
     execute_list_of_tasks(list_of_tasks, 10, with_bar=False)
     print('Файлы были успешно переименованы!')
 

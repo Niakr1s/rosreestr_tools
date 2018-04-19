@@ -1,10 +1,12 @@
 import json
+import logging
 import os
 
 import ezdxf
 
 import scripts.xml_file
 from scripts.geometry_checks import is_intersect, inside_polygon, circle_intersect
+from scripts.log import log
 from scripts.settings import Settings
 
 
@@ -75,6 +77,7 @@ class MyDxfFile:
                 result[name] = [[(y, x) for x, y in i] for i in conturs]
         return result
 
+    @log
     def checks(self, xml_paths=None, save_to_file=True):
         """
         Main function for checking dxf file in xmls
@@ -82,7 +85,6 @@ class MyDxfFile:
         else you should pass list of file paths
         """
         XmlFiles = scripts.xml_file.get_list_of_XmlFiles(xml_paths)
-
         # Checking for is_intersect and is_inpolygon
         self.geometry_checks(XmlFiles)  # This function updates XmlFiles.check
         checks = self.get_checks(XmlFiles)
@@ -193,10 +195,12 @@ class MyDxfFile:
                 XmlFile.check.add(parcel_name)
                 break
 
+    @log
     def save_checks_to_file(self, checks):
         """ Saves SORTED check() result to file and prints in console """
         basename = os.path.basename(self.file_path).replace('.dxf', '.txt')
         output_path = os.path.join(Settings().settings['paths']['mydxf_folder'], basename)
+        logging.info('checks for file %s saved to %s' % (self.file_path, output_path))
         with open(output_path, 'w') as file:
             json.dump(checks, file, indent=' ')
 
