@@ -1,4 +1,6 @@
+import datetime
 import logging
+import os
 import sys
 import traceback
 
@@ -6,8 +8,9 @@ from PyQt5 import QtWidgets, QtCore
 
 from gui.main_window import MainWindow
 
+os.makedirs('logs\\gui', exist_ok=True)
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(filename)s/%(lineno)d: %(levelname)s: %(message)s',
-                    filename='rosreestr_tools_GUI.log', filemode='w')
+                    filename='logs\\gui\\%s.log' % datetime.datetime.now().strftime('%Y-%m-%d %H-%M-%S'), filemode='w')
 
 
 if __name__ == '__main__':
