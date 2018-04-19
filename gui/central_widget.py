@@ -4,6 +4,7 @@ from PyQt5 import QtWidgets, QtCore
 
 from gui import my_threads
 from scripts import xml_file
+from scripts.log import log
 
 
 class CentralWidget(QtWidgets.QWidget):
@@ -68,7 +69,8 @@ class MyListView(QtWidgets.QWidget):
 
         self.setLayout(main_layout)
 
-    def on_btn_add_click(self):
+    @log
+    def on_btn_add_click(self, checked):
         # adding items to list_view and list_model
 
         # Making filter_string for QFileDialog
@@ -79,20 +81,19 @@ class MyListView(QtWidgets.QWidget):
 
         file_names = QtWidgets.QFileDialog(self).getOpenFileNames(self, 'Добавить файлы', '', filter_string)[0]
         for file in file_names:
+            logging.info('adding %s' % str(file))
             length = self.list_model.rowCount()
             self.list_model.insertRow(length)
             self.list_model.setData(self.list_model.index(length), file)
 
-        logging.info('files added, current rowCount = %i' % self.list_model.rowCount())
-
-    def on_btn_delete_click(self):
+    @log
+    def on_btn_delete_click(self, checked):
         # deleting items from list_view and list_model
         file_indexes = [i.row() for i in self.list_view.selectedIndexes()]
         file_indexes.sort(reverse=True)  # reversing to delete items from end
-        logging.info('start deleting %i' % len(file_indexes))
         for f in file_indexes:
+            logging.info('deleting %i row' % f)
             self.list_model.removeRow(f)
-        logging.info('items deleted')
 
     def on_thread_signal(self, msg):
         # common signal handler, adding +1 to value and prints msg to statusbar
@@ -118,20 +119,20 @@ class XmlListView(MyListView):
         self.bot_layout.addWidget(self.btn_rename)
         self.bot_layout.addWidget(self.btn_convert_selected)
 
-    def on_btn_rename_click(self):
+    @log
+    def on_btn_rename_click(self, checked):
         # renaming all XMLs to pretty format
-        logging.info('renaming xmls START')
         for i in range(self.list_model.rowCount()):
             index = self.list_model.index(i)
             file_path = self.list_model.data(index, QtCore.Qt.DisplayRole)
+            logging.info('renaming %s' % file_path)
             xml = xml_file.XmlFile(file_path)
             new_file_path = xml.pretty_rename()
             self.list_model.setData(index, new_file_path)
-        logging.info('renaming xmls END')
 
-    def on_btn_convert_clicked(self):
+    @log
+    def on_btn_convert_clicked(self, checked):
         # converting selected XMLs to DXFs to same folder and merging it in one file if user wants
-        logging.info('converting xmls START')
         indexes = self.list_view.selectedIndexes()
         if len(indexes):
             # if user wants to merge all dxfs in one file
@@ -152,11 +153,8 @@ class XmlListView(MyListView):
             t.signal.connect(self.on_thread_signal, QtCore.Qt.QueuedConnection)
             t.finished.connect(self.on_thread_finished)
             t.start()
-
-            logging.info('converting xmls END')
         else:
             QtWidgets.QMessageBox.information(self.parent(), 'Ошибка', 'Выберите один или несколько xml из списка!')
-            logging.info('converting xmls: file not selected')
 
 
 class MyDxfListView(MyListView):
@@ -169,9 +167,9 @@ class MyDxfListView(MyListView):
 
         self.bot_layout.addWidget(self.btn_check)
 
-    def on_btn_check_click(self):
+    @log
+    def on_btn_check_click(self, checked):
         # checks selected myDxfs in all XMLs
-        logging.info('checking dxf in xmls START')
         indexes = self.list_view.selectedIndexes()
         if len(indexes):
             my_dxf_file_paths = [self.list_model.data(i, 0) for i in indexes]
@@ -186,10 +184,8 @@ class MyDxfListView(MyListView):
             t.signal.connect(self.on_thread_signal, QtCore.Qt.QueuedConnection)
             t.start()
 
-            logging.info('checking dxf in xmls END')
         else:
             QtWidgets.QMessageBox.information(self.parent(), 'Ошибка', 'Выберите один или несколько dxf из списка!')
-            logging.info('checking dxf in xmls: file not selected')
 
     def on_thread_finished(self, str):
         super().on_thread_finished()

@@ -6,8 +6,10 @@ from PyQt5 import QtWidgets, QtCore
 
 from gui.main_window import MainWindow
 
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(filename)s/%(lineno)d: %(levelname)s: %(message)s')
+
+
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO)
     app = QtWidgets.QApplication(sys.argv)
     app.setStyle('windowsvista')
     main_window = MainWindow()
@@ -18,6 +20,7 @@ if __name__ == '__main__':
     if QtCore.QT_VERSION >= 0x50501:
         def excepthook(type_, value, traceback_):
             traceback.print_exception(type_, value, traceback_)
+            logging.error(traceback_)
             QtCore.qFatal('')
     sys.excepthook = excepthook
 
