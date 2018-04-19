@@ -1,4 +1,5 @@
 import logging
+import os
 
 from PyQt5 import QtWidgets, QtCore
 
@@ -80,10 +81,15 @@ class MyListView(QtWidgets.QWidget):
         else:
             filter_string = 'Чертеж (*.%s)' % self.file_type
 
-        file_names = QtWidgets.QFileDialog(self).getOpenFileNames(self, 'Добавить файлы', '', filter_string)[0]
-        for file in file_names:
-            logging.info('adding %s' % str(file))
-            append_data(self.list_model, file)
+        # get last_path from settings
+        last_path = self.main_window.settings.value('last_paths/%s' % self.file_type)
+        file_names = QtWidgets.QFileDialog(self).getOpenFileNames(self, 'Добавить файлы', last_path, filter_string)[0]
+        if file_names:
+            # updating last_path
+            self.main_window.settings.setValue('last_paths/%s' % self.file_type, os.path.dirname(file_names[0]))
+            for file in file_names:
+                logging.info('adding %s' % str(file))
+                append_data(self.list_model, file)
 
     @log
     def on_btn_delete_click(self, checked):
@@ -137,10 +143,18 @@ class XmlListView(MyListView):
             # if user wants to merge all dxfs in one file
             merge = QtWidgets.QMessageBox().question(self, 'Вопрос', 'Объединять в один файл?',
                                                      buttons=QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No) == QtWidgets.QMessageBox().Yes
+
             if merge:
+                # get last_merged_path from settings
+                last_merged_path = self.main_window.settings.value('last_paths/merged')
                 merged_path = \
-                    QtWidgets.QFileDialog().getSaveFileName(self, directory='merged.dxf', filter='Чертеж (*.dxf)')[0]
+                    QtWidgets.QFileDialog().getSaveFileName(self, directory=last_merged_path, filter='Чертеж (*.dxf)')[
+                        0]
+                if merged_path:
+                    # if merged_path changed - update last_merged_path in settings
+                    self.main_window.settings.setValue('last_paths/merged', merged_path)
             else:
+                # '' means user doesn't want to merge dxfs
                 merged_path = ''
 
             # preparing progressbar
