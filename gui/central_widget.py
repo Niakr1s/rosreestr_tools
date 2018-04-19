@@ -3,6 +3,7 @@ import logging
 from PyQt5 import QtWidgets, QtCore
 
 from gui import my_threads
+from gui.file_list_view import FileListView
 from scripts import xml_file
 from scripts.log import log
 
@@ -31,6 +32,7 @@ class CentralWidget(QtWidgets.QWidget):
 
 class MyListView(QtWidgets.QWidget):
     def __init__(self, file_type, parent=None):
+        """file_type = string 'xml' or 'dxf'"""
         QtWidgets.QWidget.__init__(self, parent)
         self.main_window = self.parent().parent()
         self.file_type = file_type
@@ -38,9 +40,8 @@ class MyListView(QtWidgets.QWidget):
 
         # Creating list view
         self.list_model = QtCore.QStringListModel()
-        self.list_view = QtWidgets.QListView(self)
+        self.list_view = FileListView(self)
         self.list_view.setModel(self.list_model)
-        self.list_view.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
 
         # buttons section
         self.btn_add = QtWidgets.QPushButton('Добавить')
@@ -82,9 +83,7 @@ class MyListView(QtWidgets.QWidget):
         file_names = QtWidgets.QFileDialog(self).getOpenFileNames(self, 'Добавить файлы', '', filter_string)[0]
         for file in file_names:
             logging.info('adding %s' % str(file))
-            length = self.list_model.rowCount()
-            self.list_model.insertRow(length)
-            self.list_model.setData(self.list_model.index(length), file)
+            append_data(self.list_model, file)
 
     @log
     def on_btn_delete_click(self, checked):
@@ -210,3 +209,10 @@ class OutputView(QtWidgets.QWidget):
         box.addWidget(self.output)
 
         self.setLayout(box)
+
+
+def append_data(model, data):
+    # appends data at end of model
+    length = model.rowCount()
+    model.insertRow(length)
+    model.setData(model.index(length), data)
