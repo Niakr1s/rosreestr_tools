@@ -7,7 +7,7 @@ from PyQt5 import QtWidgets, QtCore
 from gui.main_window import MainWindow
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(filename)s/%(lineno)d: %(levelname)s: %(message)s',
-                    filename='log.log', filemode='w')
+                    filename='rosreestr_tools_GUI.log', filemode='w')
 
 
 if __name__ == '__main__':
