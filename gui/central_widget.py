@@ -9,26 +9,27 @@ from scripts import xml_file
 from scripts.log import log
 
 
-class CentralWidget(QtWidgets.QWidget):
+class CentralWidget(QtWidgets.QSplitter):
     def __init__(self, parent=None):
-        QtWidgets.QWidget.__init__(self, parent)
+        super().__init__(parent)
 
         # Left column
         self.xml_view = XmlListView(self)
+        self.xml_view.setMinimumWidth(300)
 
         # Middle column
         self.dxf_view = MyDxfListView(self)
+        self.dxf_view.setMinimumWidth(300)
 
         # Right column
         self.output_view = OutputView(self)
+        self.output_view.setMinimumWidth(300)
 
-        # Creating main layout
-        main_layout = QtWidgets.QHBoxLayout(self)
-        main_layout.addWidget(self.xml_view)  # Left column
-        main_layout.addWidget(self.dxf_view)  # Middle column
-        main_layout.addWidget(self.output_view)  # Right column
+        self.addWidget(self.xml_view)  # Left column
+        self.addWidget(self.dxf_view)  # Middle column
+        self.addWidget(self.output_view)  # Right column
 
-        self.setLayout(main_layout)
+        self.setChildrenCollapsible(False)
 
 
 class MyListView(QtWidgets.QWidget):
@@ -187,13 +188,14 @@ class MyDxfListView(MyListView):
         indexes = self.list_view.selectedIndexes()
         if len(indexes):
             my_dxf_file_paths = [self.list_model.data(i, 0) for i in indexes]
-            xml_file_pathes = self.parent().xml_view.list_model.stringList()
+            xml_file_paths = self.parent().xml_view.list_model.stringList()
+            # xml_file_paths = self.main_window.centralWidget().xml_view.list_model.stringList()
 
             # preparing progressbar
             self.main_window.statusBar().reset_progress_bar(len(indexes))
 
             # starting thread
-            t = my_threads.MyDxfCheckThread(my_dxf_file_paths, xml_file_pathes, self.on_thread_finished, self)
+            t = my_threads.MyDxfCheckThread(my_dxf_file_paths, xml_file_paths, self.on_thread_finished, self)
             t.signal.connect(self.on_thread_signal, QtCore.Qt.QueuedConnection)
             t.start()
 
@@ -214,8 +216,8 @@ class OutputView(QtWidgets.QWidget):
 
         # json output
         self.output = QtWidgets.QPlainTextEdit(self)
-        self.output.setPlainText('Откройте несколько xml и dxf в панелях слева, \
-        выберите один или несколько dxf и нажмите "Проверить вхождения"')
+        self.output.setPlainText(
+            'Откройте несколько xml и dxf в панелях слева, выберите один или несколько dxf и нажмите "Проверить вхождения"')
         self.output.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 
         box = QtWidgets.QVBoxLayout()

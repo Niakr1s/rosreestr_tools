@@ -12,9 +12,6 @@ class MainWindow(QtWidgets.QMainWindow):
         # initialize settings
         self.settings = QtCore.QSettings('settings.ini', QtCore.QSettings.IniFormat)
 
-        # self.resize(1000, 600)
-        self.resize(self.settings.value('main_window/size', QtCore.QSize(1000, 600)))
-        self.move(self.settings.value('main_window/pos', QtCore.QPoint(0, 0)))
         self.setWindowTitle('Rosreestr Tools')
         self.setWindowIcon(QtGui.QIcon(r'static\rt.png'))
 
@@ -25,10 +22,21 @@ class MainWindow(QtWidgets.QMainWindow):
         QtCore.QCoreApplication.setOrganizationName('by Niakr1s')
         QtCore.QCoreApplication.setApplicationName('Rosreest Tools')
 
+        self.restore_state_from_settings()
+
+    def restore_state_from_settings(self):
+        self.resize(self.settings.value('main_window/size', QtCore.QSize(1000, 600)))
+        self.move(self.settings.value('main_window/pos', QtCore.QPoint(400, 200)))
+        try:
+            self.centralWidget().restoreState(self.settings.value('main_window/central_widget_pos'))
+        except Exception:
+            pass
+
     def closeEvent(self, e):
         # saving main window geometry
         self.settings.setValue('main_window/size', self.size())
         self.settings.setValue('main_window/pos', self.pos())
+        self.settings.setValue('main_window/central_widget_pos', self.centralWidget().saveState())
         e.accept()
 
 
