@@ -71,6 +71,9 @@ def inside_polygon(x, y, points):
 
     Reference: http://www.ariel.com.au/a/python-point-int-poly.html
     """
+    # if points not closed immediatly return
+    if points[0] != points[-1]:
+        return False
     n = len(points)
     inside = False
     p1x, p1y = points[0]

@@ -144,7 +144,9 @@ class MyDxfFile:
                         segment1 = (mydxf_point, mydxf_previous_point)
                         segment2 = (xml_point, xml_previous_point)
                         if is_intersect(segment1, segment2):
+                            logging.debug('function is_intersect_check, contur: %s intersects with parcel_name: %s, segment1 = %s, segment2 = %s' % (mydxf_contur, parcel_name, segment1, segment2))
                             XmlFile.check.add(parcel_name)
+                            return
                     xml_previous_point = xml_point
             mydxf_previous_point = mydxf_point
 
@@ -168,6 +170,7 @@ class MyDxfFile:
         if is_equal(flags) & flags[0] == 0 & flags[0] % 2:
             pass
         else:
+            logging.debug('function is_inpolygon_check, contur: %s intersects with parcel_name: %s' % (mydxf_contur, parcel_name))
             XmlFile.check.add(parcel_name)
 
     def circle_intersect_check(self, XmlFile, parcel_name, mydxf_contur):
@@ -178,7 +181,9 @@ class MyDxfFile:
                 xml_previous_point = xml_contur[0]
                 for xml_point in xml_contur:
                     if circle_intersect(mydxf_point, xml_previous_point, xml_point):
+                        logging.debug('function circle_intersect_check, contur: %s intersects with parcel_name: %s' % (mydxf_contur, parcel_name))
                         XmlFile.check.add(parcel_name)
+                        return
                     xml_previous_point = xml_point
 
     def is_XmlFile_inpolygon_check(self, XmlFile, parcel_name, mydxf_contur):
@@ -192,6 +197,7 @@ class MyDxfFile:
                 if not inside_polygon(*xml_point, mydxf_contur):
                     flag = False
             if flag:
+                logging.debug('function is_XmlFile_inpolygon_check, contur: %s intersects with parcel_name: %s, xml_point: %s' % (mydxf_contur, parcel_name, xml_point))
                 XmlFile.check.add(parcel_name)
                 break
 
