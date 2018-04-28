@@ -2,3 +2,6 @@ build/*
 dist/*
 .venv/*
 logs/*
+.idea/*
+*__pycache__*
+.vscode/*

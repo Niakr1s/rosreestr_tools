@@ -2,17 +2,18 @@ import filecmp
 import os
 import unittest
 
-from scripts import settings, actions
+from scripts import actions, settings
 
-settings.BASE_DIR = 'test'  # taking files from 'test' folder
+TEST = 'test'
+settings.BASE_DIR = TEST  # taking files from 'test' folder
 
 
 class Test_actions(unittest.TestCase):
     def test_check_mydxfs(self):
         # testing whole result
-        test = 'test\\formatted.txt'
-        sample = test.replace('test', 'test_sample')
-        mydxf_dir = 'test\\mydxf'
+        test = os.path.abspath(os.path.join(TEST, 'formatted.txt'))
+        sample_dir = test.replace(TEST, 'test_sample')
+        mydxf_dir = os.path.abspath(os.path.join(TEST, 'mydxf'))
 
         # deleting all results files
         for f in os.listdir(mydxf_dir):
@@ -27,7 +28,7 @@ class Test_actions(unittest.TestCase):
             pass
 
         actions.check_mydxfs()  # creating new check results
-        self.assertTrue(filecmp.cmp(test, sample))  # testing
+        self.assertTrue(filecmp.cmp(test, sample_dir))  # testing
 
 
 if __name__ == '__main__':
