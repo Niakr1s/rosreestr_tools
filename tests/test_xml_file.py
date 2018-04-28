@@ -1,10 +1,6 @@
-import filecmp
-import os
 import unittest
 
 from scripts.xml_file import XmlFile
-
-TEST = 'tests\\test'
 
 
 class Test_XmlFile(unittest.TestCase):

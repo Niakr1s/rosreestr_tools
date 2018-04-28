@@ -8,6 +8,7 @@ from scripts.dxf_file import DxfFile
 from scripts.exceptions import NoCoordinates
 from scripts.log import log
 from scripts.settings import Settings
+from scripts.conturs_handling import get_rect
 
 
 class XmlFile:
@@ -36,37 +37,18 @@ class XmlFile:
                     conturs = self.get_block_conturs(item)
                     actions.update(result, {cadastral_number: {'coordinates': conturs,
                                                                'type': remove_namespace(item.tag),
-                                                               'rect': self.get_rect(conturs)
+                                                               'rect': get_rect(conturs)
                                                                }})
                 else:
                     conturs = self.get_parcel_conturs(item)
                     actions.update(result, {cadastral_number: {'coordinates': conturs,
                                                                'type': remove_namespace(item.tag),
-                                                               'rect': self.get_rect(conturs)
+                                                               'rect': get_rect(conturs)
                                                                }})
             except NoCoordinates:
                 pass
                 # result[cadastral_number]['coordinates'] = self.get_parcel_conturs(item)
         # Removing blank keys
-        return result
-
-    @staticmethod
-    def get_rect(conturs):
-        # gets rectangle conturs as dict {'xmin', 'ymin', 'xmax', 'ymax'}
-        xs = []
-        ys = []
-        for contur in conturs:
-            for point in contur:
-                print(point)
-                xs.append(point[0])
-                ys.append(point[1])
-        result = {
-            'xmin': min(xs),
-            'xmax': max(xs),
-            'ymin': min(ys),
-            'ymax': max(ys),
-        }
-        print('get_rect function, result: ', result)
         return result
 
     @staticmethod

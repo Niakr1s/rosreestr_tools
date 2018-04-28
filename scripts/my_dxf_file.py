@@ -8,6 +8,7 @@ import scripts.xml_file
 from scripts.geometry_checks import is_intersect, inside_polygon, circle_intersect
 from scripts.log import log
 from scripts.settings import Settings
+from scripts.conturs_handling import get_rect, rects_can_not_intersect
 
 
 class MyDxfFile:
@@ -70,7 +71,8 @@ class MyDxfFile:
         result = {}
         for name, conturs in self.reversed_coords.items():
             if name in ('LWPOLYLINE, POLYLINE, LINE'):
-                result[name] = [[(y, x) for x, y in contur] for contur in conturs]
+                result[name] = [[(y, x) for x, y in contur]
+                                for contur in conturs]
             elif name in ('CIRCLE'):
                 result[name] = [[(y, x, z) for x, y, z in i] for i in conturs]
             elif name in ('POINT'):
@@ -113,21 +115,32 @@ class MyDxfFile:
             for mydxf_contur in mydxf_conturs:
                 # If it is a line or polyline checking both is_intersect and is_inpolygon
                 if mydxf_name in ('LWPOLYLINE', 'POLYLINE', 'LINE'):
-                    # Breaking cycles if not nessessary
+                    # Breaking cycle if mydxf_contur can't physically be in XmlFile contur
+                    mydxf_rect = get_rect(mydxf_contur)
+                    xmlfile_rect = XmlFile.parcels[parcel_name]['rect']
+                    if rects_can_not_intersect(mydxf_rect, xmlfile_rect):
+                        continue
+
+                    # Actually starting checks
                     if parcel_name not in XmlFile.check:
-                        self.is_intersect_check(XmlFile, parcel_name, mydxf_contur)
+                        self.is_intersect_check(
+                            XmlFile, parcel_name, mydxf_contur)
                     if parcel_name not in XmlFile.check:
-                        self.is_inpolygon_check(XmlFile, parcel_name, mydxf_contur)
+                        self.is_inpolygon_check(
+                            XmlFile, parcel_name, mydxf_contur)
                     # Check, if any contur of Xml file is fully in
                     # closed contur in Mydxf file, add this contur to checks
                     if len(mydxf_contur) > 1 & (mydxf_contur[0] == mydxf_contur[-1]):
-                        self.is_XmlFile_inpolygon_check(XmlFile, parcel_name, mydxf_contur)
+                        self.is_XmlFile_inpolygon_check(
+                            XmlFile, parcel_name, mydxf_contur)
                 elif mydxf_name in ('POINT', 'CIRCLE'):
                     if parcel_name not in XmlFile.check:
-                        self.is_inpolygon_check(XmlFile, parcel_name, mydxf_contur)
+                        self.is_inpolygon_check(
+                            XmlFile, parcel_name, mydxf_contur)
                         if parcel_name not in XmlFile.check:
                             if mydxf_name == 'CIRCLE':
-                                self.circle_intersect_check(XmlFile, parcel_name, mydxf_contur)
+                                self.circle_intersect_check(
+                                    XmlFile, parcel_name, mydxf_contur)
 
     def is_intersect_check(self, XmlFile, parcel_name, mydxf_contur):
         """First check, checking if line or polyline contur
@@ -144,7 +157,8 @@ class MyDxfFile:
                         segment1 = (mydxf_point, mydxf_previous_point)
                         segment2 = (xml_point, xml_previous_point)
                         if is_intersect(segment1, segment2):
-                            logging.debug('function is_intersect_check, contur: %s intersects with parcel_name: %s, segment1 = %s, segment2 = %s' % (mydxf_contur, parcel_name, segment1, segment2))
+                            logging.debug('function is_intersect_check, contur: %s intersects with parcel_name: %s, segment1 = %s, segment2 = %s' % (
+                                mydxf_contur, parcel_name, segment1, segment2))
                             XmlFile.check.add(parcel_name)
                             return
                     xml_previous_point = xml_point
@@ -170,7 +184,8 @@ class MyDxfFile:
         if is_equal(flags) & flags[0] == 0 & flags[0] % 2:
             pass
         else:
-            logging.debug('function is_inpolygon_check, contur: %s intersects with parcel_name: %s' % (mydxf_contur, parcel_name))
+            logging.debug('function is_inpolygon_check, contur: %s intersects with parcel_name: %s' % (
+                mydxf_contur, parcel_name))
             XmlFile.check.add(parcel_name)
 
     def circle_intersect_check(self, XmlFile, parcel_name, mydxf_contur):
@@ -181,7 +196,8 @@ class MyDxfFile:
                 xml_previous_point = xml_contur[0]
                 for xml_point in xml_contur:
                     if circle_intersect(mydxf_point, xml_previous_point, xml_point):
-                        logging.debug('function circle_intersect_check, contur: %s intersects with parcel_name: %s' % (mydxf_contur, parcel_name))
+                        logging.debug('function circle_intersect_check, contur: %s intersects with parcel_name: %s' % (
+                            mydxf_contur, parcel_name))
                         XmlFile.check.add(parcel_name)
                         return
                     xml_previous_point = xml_point
@@ -197,7 +213,8 @@ class MyDxfFile:
                 if not inside_polygon(*xml_point, mydxf_contur):
                     flag = False
             if flag:
-                logging.debug('function is_XmlFile_inpolygon_check, contur: %s intersects with parcel_name: %s, xml_point: %s' % (mydxf_contur, parcel_name, xml_point))
+                logging.debug('function is_XmlFile_inpolygon_check, contur: %s intersects with parcel_name: %s, xml_point: %s' % (
+                    mydxf_contur, parcel_name, xml_point))
                 XmlFile.check.add(parcel_name)
                 break
 
@@ -205,8 +222,10 @@ class MyDxfFile:
     def save_checks_to_file(self, checks):
         """ Saves SORTED check() result to file and prints in console """
         basename = os.path.basename(self.file_path).replace('.dxf', '.txt')
-        output_path = os.path.join(Settings().settings['paths']['mydxf_folder'], basename)
-        logging.info('checks for file %s saved to %s' % (self.file_path, output_path))
+        output_path = os.path.join(
+            Settings().settings['paths']['mydxf_folder'], basename)
+        logging.info('checks for file %s saved to %s' %
+                     (self.file_path, output_path))
         with open(output_path, 'w') as file:
             json.dump(checks, file, indent=' ')
 
