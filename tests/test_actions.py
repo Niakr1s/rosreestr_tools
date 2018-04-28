@@ -4,7 +4,7 @@ import unittest
 
 from scripts import actions, settings
 
-TEST = 'test'
+TEST = 'tests\\test'
 settings.BASE_DIR = TEST  # taking files from 'test' folder
 
 
@@ -12,9 +12,9 @@ class Test_actions(unittest.TestCase):
     def test_check_mydxfs(self):
         # testing whole result
         test = os.path.abspath(os.path.join(TEST, 'formatted.txt'))
-        sample_dir = test.replace(TEST, 'test_sample')
+        sample_dir = test.replace(TEST, 'tests\\test_sample')
         mydxf_dir = os.path.abspath(os.path.join(TEST, 'mydxf'))
-
+        
         # deleting all results files
         for f in os.listdir(mydxf_dir):
             if f.endswith('.txt'):
