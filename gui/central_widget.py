@@ -33,7 +33,7 @@ class CentralWidget(QtWidgets.QSplitter):
 
 
 class MyListView(QtWidgets.QWidget):
-    def __init__(self, file_type, parent=None):
+    def __init__(self, file_type, parent):
         """file_type = string 'xml' or 'dxf'"""
         QtWidgets.QWidget.__init__(self, parent)
         self.main_window = self.parent().parent()
@@ -52,6 +52,10 @@ class MyListView(QtWidgets.QWidget):
         self.btn_delete = QtWidgets.QPushButton('Удалить')
         self.btn_delete.clicked.connect(self.on_btn_delete_click)
 
+        # Label
+        label = QtWidgets.QLabel()
+        label.setText('Поле для %s файлов' % self.file_type)
+
         # Top layout with buttons
         self.top_layout = QtWidgets.QHBoxLayout()
         self.top_layout.addWidget(self.btn_add)
@@ -66,11 +70,17 @@ class MyListView(QtWidgets.QWidget):
 
         # Main layout
         main_layout = QtWidgets.QVBoxLayout()
+        main_layout.addWidget(label)
         main_layout.addLayout(self.top_layout)
         main_layout.addLayout(self.mid_layout)
         main_layout.addLayout(self.bot_layout)
 
         self.setLayout(main_layout)
+
+    @log
+    def keyPressEvent(self, e):
+        if e.key() == QtCore.Qt.Key_Delete:
+            self.on_btn_delete_click(self)
 
     @log
     def on_btn_add_click(self, checked):
