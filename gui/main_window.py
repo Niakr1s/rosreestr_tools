@@ -49,7 +49,7 @@ class StatusBar(QtWidgets.QStatusBar):
         # init progressbar for future use and hide it
         self.addWidget(self.progress_bar, 1)
         self.progress_bar.hide()
-
+        
     def reset_progress_bar(self, maximum):
         # resets progress_bar with maximum value
         self.progress_bar.reset()

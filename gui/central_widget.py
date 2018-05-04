@@ -105,6 +105,8 @@ class MyListView(QtWidgets.QWidget):
         # common signal handler, adding +1 to value and prints msg to statusbar
         self.progress_bar.setFormat(msg)
         self.progress_bar.setValue(self.progress_bar.value() + 1)
+        if self.progress_bar.value() == self.progress_bar.maximum():
+            self.main_window.statusBar().reset_progress_bar(0)
 
     def on_thread_finished(self):
         self.progress_bar.hide()
@@ -149,8 +151,7 @@ class XmlListView(MyListView):
                 # get last_merged_path from settings
                 last_merged_path = self.main_window.settings.value('last_paths/merged')
                 merged_path = \
-                    QtWidgets.QFileDialog().getSaveFileName(self, directory=last_merged_path, filter='Чертеж (*.dxf)')[
-                        0]
+                    QtWidgets.QFileDialog().getSaveFileName(self, directory=last_merged_path, filter='Чертеж (*.dxf)')[0]
                 if merged_path:
                     # if merged_path changed - update last_merged_path in settings
                     self.main_window.settings.setValue('last_paths/merged', merged_path)

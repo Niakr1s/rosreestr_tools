@@ -20,7 +20,7 @@ if __name__ == '__main__':
     if QtCore.QT_VERSION >= 0x50501:
         def excepthook(type_, value, traceback_):
             traceback.print_exception(type_, value, traceback_)
-            logging.error(traceback_)
+            logging.error('Got an exception at main process %s %s' % (type_, value))
             QtCore.qFatal('')
     sys.excepthook = excepthook
 
